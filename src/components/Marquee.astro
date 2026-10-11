@@ -1,0 +1,21 @@
+---
+import { site } from '../data/site';
+const text = `${site.name}  ·  ${site.city}, ${site.country}  ·  `;
+const reps = Array.from({ length: 6 });
+---
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    {[0, 1].map(() => (
+      <div class="set">{reps.map(() => <span class="display">{text}</span>)}</div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .marquee { background: var(--color-accent-orange); color: var(--color-ink); overflow: hidden; padding: var(--space-4) 0; }
+  .track { display: flex; width: max-content; animation: scroll 38s linear infinite; }
+  .set { display: flex; flex-shrink: 0; }
+  .set span { font-size: clamp(1.4rem, 5vw, 2.4rem); white-space: pre; }
+  .marquee:hover .track { animation-play-state: paused; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+</style>

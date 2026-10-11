@@ -1,0 +1,136 @@
+---
+import { nav, site } from '../data/site';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href.split('#')[0]));
+---
+<header class="site-header" data-header>
+  <div class="container bar">
+    <a class="brand" href="/" aria-label={`${site.name} - home`}>
+      <span class="brand__tile">
+        <img src="/brand/chci-logo-trim-240.webp" width="146" height="240"
+             alt="City Harvest Church International logo: flame above a green circle with a house, 'harvest house' beneath" />
+      </span>
+      <span class="brand__text label">{site.short}<span class="brand__sub"> / {site.city}</span></span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Primary">
+      <ul>
+        {nav.filter((n) => n.href !== '/').map((n) => (
+          <li><a href={n.href} class="nav-link" aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-btn>
+      <span class="visually-hidden" data-menu-label>Open menu</span>
+      <span class="menu-btn__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+  </div>
+
+</header>
+
+<div class="menu" id="site-menu" data-menu hidden>
+  <nav aria-label="Mobile">
+    <ul>
+      {nav.map((n, i) => (
+        <li style={`--i:${i}`}>
+          <a href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>
+            <span class="menu__num label">0{i + 1}</span>
+            <span class="menu__text display">{n.label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+  <p class="menu__foot label" style="--i:7">{site.name}<br />{site.city}, {site.country}</p>
+</div>
+
+<style>
+  .site-header {
+    position: fixed; inset: 0 0 auto 0; z-index: 50; height: var(--header-h);
+    transition: background-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), transform 0.5s var(--ease-out);
+    animation: header-in 0.8s var(--ease-out) backwards;
+  }
+  .site-header.is-scrolled { background: rgb(1 58 29 / 0.94); backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgb(255 255 255 / 0.12); }
+  :global(html.menu-open) .site-header { background: var(--color-primary-dark); box-shadow: none; backdrop-filter: none; }
+  @keyframes header-in { from { transform: translateY(-100%); } }
+
+  .bar { height: 100%; display: flex; align-items: center; justify-content: space-between; position: relative; }
+
+  /* Logo "tab" hangs from the header so the artwork stays whole and legible. White field = artwork's own background. */
+  .brand { align-self: flex-start; display: flex; align-items: center; gap: var(--space-3); text-decoration: none; position: relative; z-index: 2; }
+  .brand__tile {
+    display: grid; place-items: center; background: var(--color-white);
+    width: 66px; height: 98px; padding: 6px 5px; align-self: flex-start;
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: 0 10px 24px rgb(0 0 0 / 0.28);
+    transition: transform 0.5s var(--ease-out), height 0.5s var(--ease-out), width 0.5s var(--ease-out);
+    transform-origin: top left;
+  }
+  .brand__tile img { width: 100%; height: 100%; object-fit: contain; }
+  .brand:hover .brand__tile { transform: translateY(4px); }
+  .is-scrolled .brand__tile { height: 84px; width: 56px; }
+  .brand__text { margin-left: var(--space-1); align-self: flex-start; margin-top: calc((var(--header-h) - 1.2em) / 2); }
+  .brand__sub { display: none; opacity: 0.7; }
+
+  .nav-desktop { display: none; }
+  .nav-desktop ul { display: flex; gap: var(--space-5); list-style: none; margin: 0; padding: 0; }
+  .nav-link {
+    position: relative; text-decoration: none; font-family: var(--font-mono); font-size: 0.9rem; padding: var(--space-3) 0; display: inline-block;
+  }
+  .nav-link::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 6px; height: 2px; background: var(--color-accent-orange);
+    transform: scaleX(0); transform-origin: right; transition: transform 0.45s var(--ease-out);
+  }
+  .nav-link:hover::after, .nav-link:focus-visible::after, .nav-link[aria-current='page']::after { transform: scaleX(1); transform-origin: left; }
+
+  .menu-btn {
+    position: relative; z-index: 2; width: 56px; height: 56px; background: none; border: 0; color: inherit; cursor: pointer;
+    display: grid; place-items: center; margin-right: -12px;
+  }
+  .menu-btn__bars { position: relative; width: 30px; height: 20px; }
+  .menu-btn__bars i {
+    position: absolute; left: 0; right: 0; height: 3px; background: currentColor;
+    transition: transform 0.5s var(--ease-out), opacity 0.3s, top 0.5s var(--ease-out), width 0.5s var(--ease-out);
+  }
+  .menu-btn__bars i:nth-child(1) { top: 0; }
+  .menu-btn__bars i:nth-child(2) { top: 8.5px; width: 70%; left: auto; }
+  .menu-btn__bars i:nth-child(3) { top: 17px; }
+  .menu-btn:hover .menu-btn__bars i:nth-child(2) { width: 100%; }
+  .menu-btn[aria-expanded='true'] i:nth-child(1) { top: 8.5px; transform: rotate(45deg); }
+  .menu-btn[aria-expanded='true'] i:nth-child(2) { opacity: 0; }
+  .menu-btn[aria-expanded='true'] i:nth-child(3) { top: 8.5px; transform: rotate(-45deg); }
+
+  /* Full-screen menu: curtain wipe + staggered links */
+  .menu {
+    position: fixed; inset: 0; z-index: 40; background: var(--color-primary-dark);
+    padding: calc(var(--header-h) + 36px) var(--gutter) var(--space-6);
+    display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto;
+    clip-path: inset(0 0 100% 0); transition: clip-path 0.7s var(--ease-in-out), visibility 0s linear 0.7s; visibility: hidden;
+  }
+  .menu[hidden] { display: flex; }
+  :global(html.menu-open) .menu { clip-path: inset(0); visibility: visible; transition: clip-path 0.7s var(--ease-in-out), visibility 0s; }
+  .menu ul { list-style: none; margin: 0; padding: 0; }
+  .menu li { overflow: hidden; border-bottom: 1px solid rgb(255 255 255 / 0.14); }
+  .menu a {
+    display: flex; align-items: baseline; gap: var(--space-4); text-decoration: none; padding: var(--space-3) 0;
+    transform: translateY(110%); transition: transform 0.7s var(--ease-out), color 0.3s;
+    transition-delay: 0s;
+  }
+  :global(html.menu-open) .menu a { transform: none; transition-delay: calc(0.25s + var(--i) * 60ms); }
+  .menu__text { font-size: clamp(2rem, 9vw, 3.4rem); transition: transform 0.4s var(--ease-out), color 0.3s; }
+  .menu a:hover .menu__text, .menu a:focus-visible .menu__text { transform: translateX(10px); color: var(--color-accent-orange); }
+  .menu a[aria-current='page'] .menu__text { color: var(--color-accent-gold); }
+  .menu__num { opacity: 0.55; min-width: 2ch; }
+  .menu__foot { opacity: 0; transform: translateY(12px); transition: opacity 0.5s, transform 0.5s var(--ease-out); margin-top: var(--space-6); color: rgb(255 255 255 / 0.7); }
+  :global(html.menu-open) .menu__foot { opacity: 1; transform: none; transition-delay: 0.7s; }
+
+  @media (min-width: 560px) { .brand__sub { display: inline; } }
+  @media (min-width: 1000px) {
+    :root { --header-h: 76px; }
+    .nav-desktop { display: block; }
+    .menu-btn, .menu { display: none !important; }
+    .brand__tile { width: 74px; height: 110px; }
+    .is-scrolled .brand__tile { width: 62px; height: 92px; }
+  }
+</style>

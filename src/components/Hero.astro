@@ -1,0 +1,121 @@
+---
+import { site } from '../data/site';
+const { hero, primaryCta, secondaryCta } = site;
+---
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__art" aria-hidden="true">
+    {hero.image && <img class="hero__photo" src={hero.image} alt="" fetchpriority="high" />}
+    <div class="hero__block"></div>
+    <div class="hero__orb"></div>
+    <div class="hero__dot"></div>
+    <div class="hero__rays"></div>
+    <div class="hero__scrim"></div>
+  </div>
+
+  <div class="container hero__inner">
+    <p class="label hero__eyebrow">{hero.eyebrow}<span class="hero__cursor">_</span></p>
+
+    <h1 id="hero-title" class="display hero__title">
+      {hero.lines.map((line, i) => (
+        <span class="line"><span class="line__in" style={`--i:${i}`}>{line}</span></span>
+      ))}
+    </h1>
+
+    <div class="hero__actions">
+      <a class="btn btn--primary" href={primaryCta.href} data-magnetic>
+        {primaryCta.label} <span class="btn__arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="link-arrow" href={secondaryCta.href}>{secondaryCta.label}</a>
+    </div>
+  </div>
+
+  <a class="hero__scroll label" href="#welcome" aria-label="Scroll to content">
+    <span>Scroll</span><i aria-hidden="true"></i>
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative; isolation: isolate; overflow: hidden;
+    min-height: 100svh; display: flex; align-items: flex-end;
+    padding: calc(var(--header-h) + 130px) 0 var(--space-9);
+    background: var(--color-primary-dark);
+  }
+
+  /* ---- Original graphic layer (no stock imagery, no copied assets) ---- */
+  .hero__art { position: absolute; inset: 0; z-index: -1; }
+  .hero__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero__scrim {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgb(1 58 29 / 0.55) 0%, rgb(1 58 29 / 0.15) 35%, rgb(1 40 20 / 0.85) 100%),
+      linear-gradient(90deg, rgb(1 40 20 / 0.7) 0%, transparent 70%);
+  }
+  .hero__block {
+    position: absolute; top: 0; right: 8%; width: min(46vw, 560px); height: 66%;
+    background: var(--color-primary); transform-origin: top;
+    animation: block-in 1.1s var(--ease-out) 0.1s both;
+  }
+  .hero__orb {
+    position: absolute; right: -14vw; bottom: -8vw; width: min(90vw, 900px); aspect-ratio: 1; border-radius: 50%;
+    background: var(--color-primary-bright); opacity: 0.55;
+    animation: orb-in 1.4s var(--ease-out) 0.2s both, drift 18s ease-in-out 1.6s infinite alternate;
+  }
+  .hero__dot {
+    position: absolute; top: 24%; right: 14%; width: clamp(34px, 7vw, 84px); aspect-ratio: 1; border-radius: 50%;
+    background: var(--color-accent-orange);
+    animation: pop 0.9s var(--ease-out) 0.7s both, float 7s ease-in-out 1.6s infinite alternate;
+  }
+  /* "Harvest sun" rays: an original geometric burst, kept to the lower right, clear of the headline */
+  .hero__rays {
+    position: absolute; right: -22vw; bottom: 6%; width: min(78vw, 720px); aspect-ratio: 1; border-radius: 50%;
+    background: repeating-conic-gradient(from 0deg, var(--color-accent-gold) 0 5deg, transparent 5deg 22.5deg);
+    -webkit-mask: radial-gradient(circle, transparent 34%, #000 35%, #000 62%, transparent 63%);
+            mask: radial-gradient(circle, transparent 34%, #000 35%, #000 62%, transparent 63%);
+    opacity: 0.9; animation: rays-in 1.2s var(--ease-out) 0.4s both, spin 90s linear 1.6s infinite;
+  }
+
+  @keyframes block-in { from { transform: scaleY(0); } }
+  @keyframes orb-in { from { transform: scale(0.6); opacity: 0; } }
+  @keyframes rays-in { from { opacity: 0; transform: scale(0.7) rotate(-30deg); } }
+  @keyframes pop { from { transform: scale(0); } }
+  @keyframes drift { to { transform: translate(-3vw, -2vw) scale(1.04); } }
+  @keyframes float { to { transform: translateY(18px); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---- Copy ---- */
+  .hero__inner { position: relative; }
+  .hero__eyebrow { color: var(--color-accent-gold); margin-bottom: var(--space-5); animation: fade-up 0.8s var(--ease-out) 0.05s both; }
+  .hero__cursor { margin-left: 2px; animation: blink 1.1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .hero__title { font-size: clamp(2.9rem, 13.5vw, 8.5rem); max-width: 12ch; text-wrap: balance; }
+  .line { display: block; overflow: hidden; padding-block: 0.04em; margin-block: -0.04em; }
+  .line__in { display: block; animation: line-up 0.95s var(--ease-out) calc(0.12s + var(--i) * 0.11s) both; }
+  .line:nth-child(2) .line__in { color: var(--color-accent-gold); }
+  @keyframes line-up { from { transform: translateY(105%); } }
+  @keyframes fade-up { from { opacity: 0; transform: translateY(14px); } }
+
+  .hero__actions {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4) var(--space-6);
+    margin-top: var(--space-7); animation: fade-up 0.9s var(--ease-out) 0.55s both;
+  }
+
+  .hero__scroll {
+    position: absolute; left: var(--gutter); bottom: var(--space-5); display: none; align-items: center; gap: var(--space-3);
+    text-decoration: none; opacity: 0.8;
+  }
+  .hero__scroll i { width: 1px; height: 44px; background: currentColor; transform-origin: top; animation: scroll-line 2s var(--ease-in-out) infinite; }
+  @keyframes scroll-line { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+
+  @media (min-width: 800px) {
+    .hero { padding-bottom: var(--space-10); }
+    .hero__block { right: 14%; height: 78%; }
+    .hero__scroll { display: flex; }
+    .hero__title { max-width: 14ch; }
+    .hero__rays { right: -6vw; bottom: -6%; }
+  }
+  @media (max-height: 560px) and (orientation: landscape) {
+    .hero { min-height: 0; padding-top: calc(var(--header-h) + 110px); }
+  }
+</style>

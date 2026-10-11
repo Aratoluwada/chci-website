@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+# TODO: add Sitemap: line once the production domain is known

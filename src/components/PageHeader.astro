@@ -1,0 +1,27 @@
+---
+const { eyebrow, title, intro } = Astro.props;
+---
+<section class="ph">
+  <div class="container">
+    <p class="label eyebrow">{eyebrow}</p>
+    <h1 class="display title"><span class="line"><span class="in">{title}</span></span></h1>
+    {intro && <p class="intro">{intro}</p>}
+  </div>
+</section>
+
+<style>
+  .ph { padding: calc(var(--header-h) + 150px) 0 var(--space-8); background: var(--color-primary-dark); position: relative; overflow: hidden; }
+  .ph::after {
+    content: ''; position: absolute; right: -12vw; top: -14vw; width: 52vw; aspect-ratio: 1; border-radius: 50%;
+    background: var(--color-primary); animation: grow 1.2s var(--ease-out) both;
+  }
+  .container { position: relative; z-index: 1; }
+  .eyebrow { color: var(--color-accent-gold); margin-bottom: var(--space-4); animation: up 0.8s var(--ease-out) both; }
+  .title { font-size: clamp(2.6rem, 12vw, 7rem); }
+  .line { display: block; overflow: hidden; padding-block: 0.04em; margin-block: -0.04em; }
+  .in { display: block; animation: rise 0.95s var(--ease-out) 0.1s both; }
+  .intro { margin-top: var(--space-5); max-width: 52ch; color: rgb(255 255 255 / 0.85); animation: up 0.9s var(--ease-out) 0.35s both; }
+  @keyframes rise { from { transform: translateY(105%); } }
+  @keyframes up { from { opacity: 0; transform: translateY(14px); } }
+  @keyframes grow { from { transform: scale(0.5); opacity: 0; } }
+</style>

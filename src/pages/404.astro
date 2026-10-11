@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+<Base title="Page not found">
+  <PageHeader eyebrow="Error 404" title="Lost?" intro="That page doesn't exist, but home is just a tap away." />
+  <section style="background:var(--color-surface);padding:var(--space-8) 0">
+    <div class="container"><a class="btn btn--primary" href="/">Back home <span class="btn__arrow" aria-hidden="true">→</span></a></div>
+  </section>
+</Base>
