@@ -7,7 +7,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   <div class="container bar">
     <a class="brand" href="/" aria-label={`${site.name} - home`}>
       <span class="brand__tile">
-        <img src="/brand/chci-logo-clear-240.webp" width="144" height="240"
+        <img src="/brand/chci-logo-clear-480.webp" width="289" height="480"
              alt="City Harvest Church International logo: flame above a green circle with a house, 'harvest house' beneath" />
       </span>
       <span class="brand__text label">{site.short}<span class="brand__sub"> / {site.city}</span></span>
@@ -46,33 +46,29 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 </div>
 
 <style>
+  /* White bar: the logo's own artwork (dark green lettering, white house) sits on the white it was designed for. */
   .site-header {
     position: fixed; inset: 0 0 auto 0; z-index: 50; height: var(--header-h);
-    transition: background-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), transform 0.5s var(--ease-out);
+    background: var(--color-white); color: var(--color-primary-dark);
+    box-shadow: 0 1px 0 rgb(0 0 0 / 0.06);
+    transition: box-shadow 0.4s var(--ease-out);
     animation: header-in 0.8s var(--ease-out) backwards;
   }
-  .site-header.is-scrolled { background: rgb(1 58 29 / 0.94); backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgb(255 255 255 / 0.12); }
-  :global(html.menu-open) .site-header { background: var(--color-primary-dark); box-shadow: none; backdrop-filter: none; }
+  .site-header.is-scrolled { box-shadow: 0 6px 24px rgb(0 0 0 / 0.14); }
+  .site-header :focus-visible { outline-color: var(--color-primary); }
   @keyframes header-in { from { transform: translateY(-100%); } }
 
   .bar { height: 100%; display: flex; align-items: center; justify-content: space-between; position: relative; }
 
-  /* Logo "tab" hangs from the header so the artwork stays whole and legible. White field = artwork's own background. */
-  .brand { align-self: flex-start; display: flex; align-items: center; gap: var(--space-3); text-decoration: none; position: relative; z-index: 2; }
+  .brand { display: flex; align-items: center; gap: var(--space-3); text-decoration: none; color: inherit; position: relative; z-index: 2; }
   .brand__tile {
-    display: grid; place-items: center; width: 60px; height: 100px; align-self: flex-start; padding-top: 6px;
-    transition: transform 0.5s var(--ease-out), height 0.5s var(--ease-out), width 0.5s var(--ease-out);
-    transform-origin: top left;
+    display: block; height: calc(var(--header-h) - 16px); aspect-ratio: 289 / 480;
+    transition: transform 0.5s var(--ease-out);
   }
-  /* Transparent logo: a soft white halo keeps the dark-green wording legible on the dark header. Artwork itself is unchanged. */
-  .brand__tile img {
-    width: 100%; height: 100%; object-fit: contain;
-    filter: drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 5px rgb(255 255 255 / 0.85)) drop-shadow(0 4px 10px rgb(0 0 0 / 0.25));
-  }
-  .brand:hover .brand__tile { transform: translateY(4px); }
-  .is-scrolled .brand__tile { height: 88px; width: 53px; }
-  .brand__text { margin-left: var(--space-1); align-self: flex-start; margin-top: calc((var(--header-h) - 1.2em) / 2); }
-  .brand__sub { display: none; opacity: 0.7; }
+  .brand__tile img { width: 100%; height: 100%; object-fit: contain; }
+  .brand:hover .brand__tile { transform: scale(1.06) rotate(-2deg); }
+  .brand__text { margin-left: var(--space-1); color: var(--color-primary-dark); font-weight: 500; }
+  .brand__sub { display: none; color: var(--color-muted); }
 
   .nav-desktop { display: none; }
   .nav-desktop ul { display: flex; gap: var(--space-5); list-style: none; margin: 0; padding: 0; }
@@ -128,10 +124,8 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 
   @media (min-width: 560px) { .brand__sub { display: inline; } }
   @media (min-width: 1000px) {
-    :root { --header-h: 76px; }
+    :root { --header-h: 92px; }
     .nav-desktop { display: block; }
     .menu-btn, .menu { display: none !important; }
-    .brand__tile { width: 68px; height: 112px; }
-    .is-scrolled .brand__tile { width: 58px; height: 96px; }
   }
 </style>
