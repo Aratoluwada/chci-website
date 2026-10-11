@@ -1,8 +1,20 @@
 // Small, dependency-free interaction layer. Everything degrades gracefully without JS.
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// 0. Split headings into words for the word-by-word reveal
+document.querySelectorAll<HTMLElement>('[data-words]').forEach((el) => {
+  const words = (el.textContent || '').trim().split(/\s+/);
+  el.textContent = '';
+  words.forEach((word, i) => {
+    const outer = document.createElement('span'); outer.className = 'w';
+    const inner = document.createElement('span'); inner.textContent = word; inner.style.setProperty('--i', String(i));
+    outer.appendChild(inner); el.appendChild(outer);
+    if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
+  });
+});
+
 // 1. Scroll reveals
-const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
+const items = document.querySelectorAll<HTMLElement>('[data-reveal], [data-words]');
 if (reduce || !('IntersectionObserver' in window)) {
   items.forEach((el) => el.classList.add('is-in'));
 } else {

@@ -1,0 +1,51 @@
+---
+import DraftTag from './DraftTag.astro';
+import { ministries } from '../data/ministries';
+---
+<section class="min" aria-labelledby="min-h">
+  <div class="container">
+    <div class="head">
+      <p class="label eyebrow" data-reveal>For everyone</p>
+      <h2 id="min-h" class="display title" data-words>Room for the whole family</h2>
+      <p class="label" data-reveal><DraftTag /></p>
+    </div>
+    <ul class="list">
+      {ministries.map((m, i) => (
+        <li data-reveal style={`--d:${i}`}>
+          <div class="row">
+            <span class="idx label">0{i + 1}</span>
+            <h3 class="name display">{m.name}</h3>
+            <p class="blurb">{m.blurb}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .min { background: var(--color-primary); padding: var(--space-9) 0; }
+  .head { margin-bottom: var(--space-7); display: grid; gap: var(--space-3); }
+  .eyebrow { color: var(--color-accent-gold); }
+  .title { font-size: clamp(2.2rem, 9vw, 4.6rem); max-width: 14ch; }
+  .list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgb(255 255 255 / 0.28); }
+  .list li { border-bottom: 1px solid rgb(255 255 255 / 0.28); }
+  .row {
+    position: relative; isolation: isolate; display: grid; gap: var(--space-2); padding: var(--space-5) 0;
+    transition: padding 0.5s var(--ease-out);
+  }
+  .row::before {
+    content: ''; position: absolute; inset: 0 calc(var(--gutter) * -1); z-index: -1; background: var(--color-primary-dark);
+    transform: scaleY(0); transform-origin: bottom; transition: transform 0.5s var(--ease-out);
+  }
+  .row:hover { padding-inline: var(--space-4); }
+  .row:hover::before { transform: scaleY(1); }
+  .idx { color: var(--color-accent-gold); }
+  .name { font-size: clamp(1.8rem, 7vw, 3.4rem); transition: color 0.3s; }
+  .row:hover .name { color: var(--color-accent-gold); }
+  .blurb { max-width: 42ch; color: rgb(255 255 255 / 0.88); }
+  @media (min-width: 800px) {
+    .min { padding: var(--space-10) 0; }
+    .row { grid-template-columns: 56px 1.1fr 1fr; align-items: center; column-gap: var(--space-6); padding: var(--space-6) 0; }
+  }
+</style>

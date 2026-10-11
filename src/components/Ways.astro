@@ -1,0 +1,58 @@
+---
+import DraftTag from './DraftTag.astro';
+// TODO: owner to approve this wording
+const ways = [
+  { n: '01', title: 'Plan your first visit', body: 'Find where we meet and when, so you know what to expect before you arrive.', href: '/visit', cta: 'Visit us' },
+  { n: '02', title: "See what's happening", body: 'Services, programmes and gatherings for every age and stage.', href: '/events', cta: 'Services & events' },
+  { n: '03', title: 'Get in touch', body: 'Have a question before you come? Here are the ways to reach us.', href: '/visit#contact', cta: 'Contact' },
+];
+---
+<section class="ways" aria-labelledby="ways-h">
+  <div class="container">
+    <div class="head">
+      <p class="label eyebrow" data-reveal>Start here</p>
+      <h2 id="ways-h" class="display title" data-words>Find your way in</h2>
+    </div>
+    <ul class="grid">
+      {ways.map((w, i) => (
+        <li data-reveal style={`--d:${i}`}>
+          <a class="card" href={w.href}>
+            <span class="num label">{w.n}</span>
+            <span class="t display">{w.title}</span>
+            <span class="b">{w.body}</span>
+            <span class="go label">{w.cta} <span class="arrow" aria-hidden="true">→</span></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="note label" data-reveal><DraftTag /></p>
+  </div>
+</section>
+
+<style>
+  .ways { background: var(--color-surface); color: var(--color-text); padding: var(--space-9) 0; }
+  .head { margin-bottom: var(--space-7); }
+  .eyebrow { color: var(--color-primary); margin-bottom: var(--space-3); }
+  .title { font-size: clamp(2.2rem, 9vw, 4.6rem); color: var(--color-primary-dark); }
+  .grid { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
+  .card {
+    position: relative; isolation: isolate; overflow: hidden; display: grid; gap: var(--space-3); align-content: start;
+    height: 100%; min-height: 250px; padding: var(--space-6); text-decoration: none; background: var(--color-white);
+    border: 1px solid var(--color-border); color: var(--color-text);
+    transition: color 0.5s var(--ease-out), transform 0.5s var(--ease-out), border-color 0.5s;
+  }
+  .card::before {
+    content: ''; position: absolute; inset: 0; z-index: -1; background: var(--color-primary);
+    transform: translateY(101%); transition: transform 0.6s var(--ease-out);
+  }
+  .card:hover, .card:focus-visible { color: var(--color-white); transform: translateY(-6px); border-color: var(--color-primary); }
+  .card:hover::before, .card:focus-visible::before { transform: translateY(0); }
+  .num { color: var(--color-accent-orange); }
+  .t { font-size: clamp(1.5rem, 5vw, 2rem); line-height: 1; }
+  .b { color: inherit; opacity: 0.8; max-width: 34ch; }
+  .go { margin-top: auto; padding-top: var(--space-4); display: flex; gap: var(--space-2); align-items: center; }
+  .arrow { display: inline-block; transition: transform 0.4s var(--ease-out); }
+  .card:hover .arrow, .card:focus-visible .arrow { transform: translateX(8px); }
+  .note { margin-top: var(--space-5); color: var(--color-muted); }
+  @media (min-width: 800px) { .ways { padding: var(--space-10) 0; } .grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-5); } .card { min-height: 340px; } }
+</style>

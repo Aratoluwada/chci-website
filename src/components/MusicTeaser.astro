@@ -1,0 +1,33 @@
+---
+// Decorative equaliser bars: deterministic heights/speeds so builds are stable.
+const bars = Array.from({ length: 28 }, (_, i) => ({
+  h: 28 + ((i * 37) % 62),
+  d: ((i * 53) % 100) / 100,
+  s: 0.9 + ((i * 29) % 70) / 100,
+}));
+---
+<section class="music" aria-labelledby="music-h">
+  <div class="eq" aria-hidden="true">
+    {bars.map((b) => <i style={`--h:${b.h}%;--dl:-${b.d}s;--sp:${b.s}s`}></i>)}
+  </div>
+  <div class="container inner">
+    <p class="label eyebrow" data-reveal>Music</p>
+    <h2 id="music-h" class="display title" data-words>Songs from our house</h2>
+    <p class="text" data-reveal style="--d:2">Songs written and sung in our church, with lyrics you can read and sing along to.</p>
+    <a class="btn btn--gold" href="/music" data-reveal style="--d:3" data-magnetic>Explore the music <span class="btn__arrow" aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<style>
+  .music { position: relative; overflow: hidden; isolation: isolate; background: var(--color-ink); padding: var(--space-10) 0 calc(var(--space-10) + clamp(110px, 20vw, 200px)); }
+  .eq { position: absolute; inset: auto 0 0 0; height: clamp(110px, 20vw, 200px); z-index: -1; display: flex; align-items: flex-end; gap: clamp(3px, 1vw, 10px); padding-inline: var(--gutter); opacity: 1; }
+  .eq i {
+    flex: 1; height: var(--h); background: linear-gradient(180deg, var(--color-accent-gold), var(--color-accent-orange) 60%, var(--color-primary-bright));
+    transform-origin: bottom; animation: bar var(--sp) ease-in-out var(--dl) infinite alternate; border-radius: 2px 2px 0 0; opacity: 0.55;
+  }
+  @keyframes bar { from { transform: scaleY(0.18); } to { transform: scaleY(1); } }
+  .inner { display: grid; gap: var(--space-5); justify-items: start; position: relative; }
+  .eyebrow { color: var(--color-accent-gold); }
+  .title { font-size: clamp(2.6rem, 11vw, 7rem); max-width: 10ch; }
+  .text { max-width: 36ch; font-size: 1.15rem; color: rgb(255 255 255 / 0.9); }
+</style>

@@ -4,6 +4,9 @@
  * Never fill these with guesses. Search for "TODO" before launch.
  */
 export const site = {
+  /** TRUE while copy is placeholder: shows small dashed "Draft" chips next to unapproved text. Set to false at launch. */
+  draftMode: true,
+
   name: 'City Harvest Church International',
   short: 'CHCI',
   city: 'Abeokuta',
