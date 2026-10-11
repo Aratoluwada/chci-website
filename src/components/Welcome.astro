@@ -1,34 +1,103 @@
 ---
+import { Image } from 'astro:assets';
 import DraftTag from './DraftTag.astro';
 import { site } from '../data/site';
+import { welcomeCards } from '../data/welcome';
+
+// Photos live in src/assets/welcome/. Names are matched against `image` in src/data/welcome.ts.
+const photos = import.meta.glob<{ default: ImageMetadata }>('../assets/welcome/*.{jpg,jpeg,png,webp,avif}', { eager: true });
+const photoFor = (name: string | null) => (name ? photos[`../assets/welcome/${name}`]?.default : undefined);
 ---
 <section class="welcome" aria-labelledby="welcome-h">
-  <div class="container wrap">
-    <p class="label eyebrow" data-reveal>Welcome</p>
-    {/* TODO: owner to approve this welcome statement */}
-    <h2 id="welcome-h" class="display statement" data-words>We're glad you're here. There's a place for you at City Harvest.</h2>
-    <div class="side" data-reveal style="--d:2">
-      {/* TODO: replace with the church's approved introduction */}
-      <p>Whether you're visiting for the first time or looking for a church family, you're welcome at {site.name} in {site.city}.<DraftTag /></p>
-      <a class="link-arrow" href="/about">More about us <span aria-hidden="true">→</span></a>
+  <div class="container">
+    <div class="head">
+      <p class="label eyebrow" data-reveal>Welcome</p>
+      {/* TODO: owner to approve this welcome statement */}
+      <h2 id="welcome-h" class="display statement" data-words>We're glad you're here. There's a place for you at City Harvest.</h2>
+      {/* TODO: replace with the church's approved one-line introduction */}
+      <p class="intro" data-reveal style="--d:2">You're welcome at {site.name} in {site.city}.<DraftTag /></p>
     </div>
+
+    <ul class="cards">
+      {welcomeCards.map((c, i) => {
+        const photo = photoFor(c.image);
+        return (
+          <li data-reveal style={`--d:${i}`}>
+            <a class={`card card--${i + 1}`} href={c.href}>
+              <span class="media" aria-hidden={photo ? undefined : 'true'}>
+                {photo ? (
+                  <Image src={photo} alt={c.alt} widths={[400, 640, 900]} sizes="(min-width: 800px) 33vw, 92vw" loading="lazy" class="photo" />
+                ) : (
+                  <span class="ph" aria-hidden="true">
+                    <i class="ph__a"></i><i class="ph__b"></i>
+                    <span class="ph__num display">0{i + 1}</span>
+                    {site.draftMode && <span class="ph__tag label">Photo goes here</span>}
+                  </span>
+                )}
+              </span>
+              <span class="scrim" aria-hidden="true"></span>
+              <span class="text">
+                <span class="t display">{c.title}</span>
+                <span class="b">{c.body}</span>
+                <span class="go label">{c.cta} <span class="arrow" aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
   </div>
 </section>
 
 <style>
   .welcome { background: var(--color-primary-dark); padding: var(--space-9) 0; position: relative; overflow: hidden; }
   .welcome::before {
-    content: ''; position: absolute; left: -18vw; bottom: -22vw; width: 60vw; aspect-ratio: 1; border-radius: 50%;
-    background: var(--color-primary); opacity: 0.55; pointer-events: none;
+    content: ''; position: absolute; left: -18vw; top: -14vw; width: 52vw; aspect-ratio: 1; border-radius: 50%;
+    background: var(--color-primary); opacity: 0.45; pointer-events: none;
   }
-  .wrap { position: relative; display: grid; gap: var(--space-6); }
+  .container { position: relative; }
+  .head { display: grid; gap: var(--space-4); margin-bottom: var(--space-7); }
   .eyebrow { color: var(--color-accent-gold); }
   .statement { font-size: clamp(2rem, 8.5vw, 5.2rem); line-height: 0.98; max-width: 18ch; text-wrap: balance; }
-  .side { max-width: 46ch; display: grid; gap: var(--space-4); color: rgb(255 255 255 / 0.88); }
-  @media (min-width: 900px) {
+  .intro { color: rgb(255 255 255 / 0.88); max-width: 46ch; }
+
+  .cards { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
+  .card {
+    position: relative; isolation: isolate; display: block; overflow: hidden; text-decoration: none; color: var(--color-white);
+    aspect-ratio: 1 / 1; background: var(--color-primary);
+    transition: transform 0.6s var(--ease-out);
+  }
+  .card:hover, .card:focus-visible { transform: translateY(-8px); }
+  .media, .ph { position: absolute; inset: 0; display: block; }
+  .media :global(.photo) { width: 100%; height: 100%; object-fit: cover; transition: transform 1.1s var(--ease-out); }
+  .card:hover .media :global(.photo), .card:focus-visible .media :global(.photo) { transform: scale(1.08); }
+
+  /* Placeholder panel (shown until a real photo is supplied) */
+  .ph { background: linear-gradient(160deg, var(--color-primary-bright), var(--color-primary) 55%, #013a1d); overflow: hidden; }
+  .ph i { position: absolute; border-radius: 50%; }
+  .ph__a { width: 62%; aspect-ratio: 1; right: -16%; top: -12%; background: rgb(255 255 255 / 0.08); animation: drift 9s ease-in-out infinite alternate; }
+  .ph__b { width: 22%; aspect-ratio: 1; left: 14%; top: 18%; background: var(--color-accent-orange); animation: float 6s ease-in-out infinite alternate; }
+  .card--2 .ph__b { background: var(--color-accent-gold); left: auto; right: 16%; top: 24%; }
+  .card--3 .ph__b { background: var(--color-white); opacity: 0.9; left: 22%; top: 30%; width: 16%; }
+  .ph__num { position: absolute; right: var(--space-4); top: var(--space-3); font-size: clamp(4rem, 14vw, 7rem); color: rgb(255 255 255 / 0.16); }
+  .ph__tag { position: absolute; left: var(--space-4); top: var(--space-4); padding: 1px 8px; border: 1px dashed rgb(255 255 255 / 0.6); font-size: 0.62rem; letter-spacing: 0.12em; opacity: 0.85; }
+  @keyframes drift { to { transform: translate(-6%, 8%) scale(1.06); } }
+  @keyframes float { to { transform: translateY(16px); } }
+
+  .scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, transparent 38%, rgb(1 40 20 / 0.92) 100%); }
+  .text { position: absolute; inset: auto 0 0 0; z-index: 2; display: grid; gap: var(--space-2); padding: var(--space-5); }
+  .t { font-size: clamp(1.6rem, 6vw, 2.1rem); line-height: 1; }
+  .b { max-width: 30ch; color: rgb(255 255 255 / 0.9); }
+  .go { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-2); color: var(--color-accent-gold); }
+  .arrow { display: inline-block; transition: transform 0.4s var(--ease-out); }
+  .card:hover .arrow, .card:focus-visible .arrow { transform: translateX(8px); }
+
+  @media (min-width: 800px) {
     .welcome { padding: var(--space-10) 0; }
-    .wrap { grid-template-columns: 1.6fr 1fr; align-items: end; column-gap: var(--space-8); }
+    .head { grid-template-columns: 1.6fr 1fr; align-items: end; column-gap: var(--space-8); }
     .eyebrow, .statement { grid-column: 1; }
-    .side { grid-column: 2; grid-row: 2; padding-bottom: 0.6em; }
+    .intro { grid-column: 2; grid-row: 2; padding-bottom: 0.6em; }
+    .cards { grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+    .card { aspect-ratio: 4 / 5; }
   }
 </style>

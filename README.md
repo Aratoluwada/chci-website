@@ -24,6 +24,11 @@ While `draftMode` is `true` in `src/data/site.ts`, small dashed "Draft" chips ma
 Home content lives in: `src/data/ministries.ts`, `src/data/events.ts` (empty = friendly empty state),
 and the section components in `src/components/`.
 
+## Adding photos to the Home Welcome cards
+1. Put the photo in `src/assets/welcome/` (portrait 4:5, about 1200 x 1500 px, a real CHCI photo you have permission to use).
+2. In `src/data/welcome.ts`, set that card's `image` to the file name (e.g. `'worship.jpg'`) and write a short `alt` description.
+3. Run the site again. Astro resizes it and serves a small WebP automatically. `image: null` keeps the placeholder panel.
+
 ## Before launch
 Search the repo for `TODO`. Open items: address, service times, contact details, CTA wording, hero copy and
 photo, approved content for About/Leadership/Events/Music, domain (canonical, sitemap), social image.
