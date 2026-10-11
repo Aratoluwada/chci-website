@@ -1,0 +1,28 @@
+---
+---
+<section class="lead" aria-labelledby="lead-h">
+  <div class="rings" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="container inner">
+    <p class="label eyebrow" data-reveal>Leadership</p>
+    {/* TODO: owner to approve this wording; leader names, titles and photos come from the Leadership page */}
+    <h2 id="lead-h" class="display title" data-words>The people who serve here</h2>
+    <p class="text" data-reveal style="--d:2">Meet the leaders who care for our church family.</p>
+    <a class="link-arrow go" href="/leadership" data-reveal style="--d:3">Meet our leaders <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<style>
+  .lead { position: relative; overflow: hidden; background: var(--color-surface); color: var(--color-text); padding: var(--space-9) 0 calc(var(--space-9) + 22vw); }
+  /* phones: rings sit below the copy so they never cross the text */
+  .rings { position: absolute; right: -14vw; bottom: -26vw; width: 62vw; aspect-ratio: 1; }
+  .rings i { position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--color-primary); opacity: 0.35; animation: ring 7s ease-in-out infinite; }
+  .rings i:nth-child(2) { inset: 14%; border-color: var(--color-accent-orange); animation-delay: -2.3s; }
+  .rings i:nth-child(3) { inset: 30%; background: var(--color-primary); opacity: 0.9; border: 0; animation-delay: -4.6s; }
+  @keyframes ring { 0%, 100% { transform: scale(0.94); } 50% { transform: scale(1.04); } }
+  .inner { position: relative; display: grid; gap: var(--space-4); justify-items: start; }
+  .eyebrow { color: var(--color-primary); }
+  .title { font-size: clamp(2.2rem, 9vw, 4.6rem); color: var(--color-primary-dark); max-width: 12ch; }
+  .text { max-width: 34ch; font-size: 1.15rem; color: var(--color-muted); }
+  .go { color: var(--color-primary-dark); }
+  @media (min-width: 800px) { .lead { padding: var(--space-10) 0; } .rings { right: -6vw; bottom: auto; top: 50%; width: min(42vw, 520px); transform: translateY(-50%); } }
+</style>

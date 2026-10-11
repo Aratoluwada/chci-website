@@ -1,0 +1,8 @@
+---
+import { site } from '../data/site';
+---
+{site.draftMode && <span class="draft label" title="Placeholder text: confirm before launch">Draft</span>}
+
+<style>
+  .draft { display: inline-block; margin-left: 0.7em; padding: 1px 8px; border: 1px dashed currentColor; font-size: 0.62rem; opacity: 0.7; vertical-align: middle; letter-spacing: 0.12em; white-space: nowrap; }
+</style>

@@ -1,0 +1,34 @@
+---
+import DraftTag from './DraftTag.astro';
+import { site } from '../data/site';
+---
+<section class="welcome" aria-labelledby="welcome-h">
+  <div class="container wrap">
+    <p class="label eyebrow" data-reveal>Welcome</p>
+    {/* TODO: owner to approve this welcome statement */}
+    <h2 id="welcome-h" class="display statement" data-words>We're glad you're here. There's a place for you at City Harvest.</h2>
+    <div class="side" data-reveal style="--d:2">
+      {/* TODO: replace with the church's approved introduction */}
+      <p>Whether you're visiting for the first time or looking for a church family, you're welcome at {site.name} in {site.city}.<DraftTag /></p>
+      <a class="link-arrow" href="/about">More about us <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .welcome { background: var(--color-primary-dark); padding: var(--space-9) 0; position: relative; overflow: hidden; }
+  .welcome::before {
+    content: ''; position: absolute; left: -18vw; bottom: -22vw; width: 60vw; aspect-ratio: 1; border-radius: 50%;
+    background: var(--color-primary); opacity: 0.55; pointer-events: none;
+  }
+  .wrap { position: relative; display: grid; gap: var(--space-6); }
+  .eyebrow { color: var(--color-accent-gold); }
+  .statement { font-size: clamp(2rem, 8.5vw, 5.2rem); line-height: 0.98; max-width: 18ch; text-wrap: balance; }
+  .side { max-width: 46ch; display: grid; gap: var(--space-4); color: rgb(255 255 255 / 0.88); }
+  @media (min-width: 900px) {
+    .welcome { padding: var(--space-10) 0; }
+    .wrap { grid-template-columns: 1.6fr 1fr; align-items: end; column-gap: var(--space-8); }
+    .eyebrow, .statement { grid-column: 1; }
+    .side { grid-column: 2; grid-row: 2; padding-bottom: 0.6em; }
+  }
+</style>
