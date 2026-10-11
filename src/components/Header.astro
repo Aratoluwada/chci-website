@@ -7,7 +7,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   <div class="container bar">
     <a class="brand" href="/" aria-label={`${site.name} - home`}>
       <span class="brand__tile">
-        <img src="/brand/chci-logo-trim-240.webp" width="146" height="240"
+        <img src="/brand/chci-logo-clear-240.webp" width="144" height="240"
              alt="City Harvest Church International logo: flame above a green circle with a house, 'harvest house' beneath" />
       </span>
       <span class="brand__text label">{site.short}<span class="brand__sub"> / {site.city}</span></span>
@@ -15,7 +15,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 
     <nav class="nav-desktop" aria-label="Primary">
       <ul>
-        {nav.filter((n) => n.href !== '/').map((n) => (
+        {nav.map((n) => (
           <li><a href={n.href} class="nav-link" aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a></li>
         ))}
       </ul>
@@ -60,16 +60,17 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   /* Logo "tab" hangs from the header so the artwork stays whole and legible. White field = artwork's own background. */
   .brand { align-self: flex-start; display: flex; align-items: center; gap: var(--space-3); text-decoration: none; position: relative; z-index: 2; }
   .brand__tile {
-    display: grid; place-items: center; background: var(--color-white);
-    width: 66px; height: 98px; padding: 6px 5px; align-self: flex-start;
-    border-radius: 0 0 var(--radius) var(--radius);
-    box-shadow: 0 10px 24px rgb(0 0 0 / 0.28);
+    display: grid; place-items: center; width: 60px; height: 100px; align-self: flex-start; padding-top: 6px;
     transition: transform 0.5s var(--ease-out), height 0.5s var(--ease-out), width 0.5s var(--ease-out);
     transform-origin: top left;
   }
-  .brand__tile img { width: 100%; height: 100%; object-fit: contain; }
+  /* Transparent logo: a soft white halo keeps the dark-green wording legible on the dark header. Artwork itself is unchanged. */
+  .brand__tile img {
+    width: 100%; height: 100%; object-fit: contain;
+    filter: drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 5px rgb(255 255 255 / 0.85)) drop-shadow(0 4px 10px rgb(0 0 0 / 0.25));
+  }
   .brand:hover .brand__tile { transform: translateY(4px); }
-  .is-scrolled .brand__tile { height: 84px; width: 56px; }
+  .is-scrolled .brand__tile { height: 88px; width: 53px; }
   .brand__text { margin-left: var(--space-1); align-self: flex-start; margin-top: calc((var(--header-h) - 1.2em) / 2); }
   .brand__sub { display: none; opacity: 0.7; }
 
@@ -130,7 +131,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     :root { --header-h: 76px; }
     .nav-desktop { display: block; }
     .menu-btn, .menu { display: none !important; }
-    .brand__tile { width: 74px; height: 110px; }
-    .is-scrolled .brand__tile { width: 62px; height: 92px; }
+    .brand__tile { width: 68px; height: 112px; }
+    .is-scrolled .brand__tile { width: 58px; height: 96px; }
   }
 </style>
