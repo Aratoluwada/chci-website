@@ -1,4 +1,8 @@
 ---
+import { Image } from 'astro:assets';
+import { musicPhoto } from '../data/photos';
+const found = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.{jpg,jpeg,png,webp,avif}', { eager: true });
+const photo = musicPhoto.image ? found[`../assets/photos/${musicPhoto.image}`]?.default : undefined;
 // Decorative equaliser bars: deterministic heights/speeds so builds are stable.
 const bars = Array.from({ length: 28 }, (_, i) => ({
   h: 28 + ((i * 37) % 62),
@@ -11,10 +15,17 @@ const bars = Array.from({ length: 28 }, (_, i) => ({
     {bars.map((b) => <i style={`--h:${b.h}%;--dl:-${b.d}s;--sp:${b.s}s`}></i>)}
   </div>
   <div class="container inner">
-    <p class="label eyebrow" data-reveal>Music</p>
-    <h2 id="music-h" class="display title" data-words>Songs from our house</h2>
-    <p class="text" data-reveal style="--d:2">Songs written and sung in our church, with lyrics you can read and sing along to.</p>
-    <a class="btn btn--gold" href="/music" data-reveal style="--d:3" data-magnetic>Explore the music <span class="btn__arrow" aria-hidden="true">→</span></a>
+    <div class="copy">
+      <p class="label eyebrow" data-reveal>Music</p>
+      <h2 id="music-h" class="display title" data-words>Songs from our house</h2>
+      <p class="text" data-reveal style="--d:2">Songs written and sung in our church, with lyrics you can read and sing along to.</p>
+      <a class="btn btn--gold" href="/music" data-reveal style="--d:3" data-magnetic>Explore the music <span class="btn__arrow" aria-hidden="true">→</span></a>
+    </div>
+    {photo && (
+      <figure class="shot" data-reveal style="--d:2">
+        <Image src={photo} alt={musicPhoto.alt} widths={[360, 560, 760]} sizes="(min-width: 900px) 34vw, 78vw" loading="lazy" />
+      </figure>
+    )}
   </div>
 </section>
 
@@ -26,7 +37,16 @@ const bars = Array.from({ length: 28 }, (_, i) => ({
     transform-origin: bottom; animation: bar var(--sp) ease-in-out var(--dl) infinite alternate; border-radius: 2px 2px 0 0; opacity: 0.55;
   }
   @keyframes bar { from { transform: scaleY(0.18); } to { transform: scaleY(1); } }
-  .inner { display: grid; gap: var(--space-5); justify-items: start; position: relative; }
+  .inner { display: grid; gap: var(--space-7); justify-items: start; position: relative; align-items: center; }
+  .copy { display: grid; gap: var(--space-5); justify-items: start; }
+  .shot { margin: 0; position: relative; width: min(78vw, 340px); aspect-ratio: 4 / 5; justify-self: center; }
+  .shot::before { content: ''; position: absolute; inset: 14px -14px -14px 14px; background: var(--color-accent-orange); z-index: 0; transition: transform 0.6s var(--ease-out); }
+  .shot:hover::before { transform: translate(8px, 8px); }
+  .shot :global(img) { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  @media (min-width: 900px) {
+    .inner { grid-template-columns: 1.2fr 0.8fr; column-gap: var(--space-8); }
+    .shot { width: min(100%, 380px); justify-self: end; margin-right: 14px; }
+  }
   .eyebrow { color: var(--color-accent-gold); }
   .title { font-size: clamp(2.6rem, 11vw, 7rem); max-width: 10ch; }
   .text { max-width: 36ch; font-size: 1.15rem; color: rgb(255 255 255 / 0.9); }
