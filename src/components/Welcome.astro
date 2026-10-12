@@ -50,15 +50,15 @@ const photoFor = (name: string | null) => (name ? photos[`../assets/welcome/${na
 </section>
 
 <style>
-  .welcome { background: var(--color-primary-dark); padding: var(--space-9) 0; position: relative; overflow: hidden; }
+  .welcome { background: var(--color-primary-dark); padding: var(--space-8) 0; position: relative; overflow: hidden; }
   .welcome::before {
     content: ''; position: absolute; left: -18vw; top: -14vw; width: 52vw; aspect-ratio: 1; border-radius: 50%;
     background: var(--color-primary); opacity: 0.45; pointer-events: none;
   }
   .container { position: relative; }
-  .head { display: grid; gap: var(--space-4); margin-bottom: var(--space-7); }
+  .head { display: grid; gap: var(--space-3); margin-bottom: var(--space-5); }
   .eyebrow { color: var(--color-accent-gold); }
-  .statement { font-size: clamp(2rem, 8.5vw, 5.2rem); line-height: 0.98; max-width: 18ch; text-wrap: balance; }
+  .statement { font-size: clamp(1.7rem, 6.4vw, 3.4rem); line-height: 1.02; max-width: none; width: 100%; text-wrap: pretty; }
   .intro { color: rgb(255 255 255 / 0.88); max-width: 46ch; }
 
   .cards { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
@@ -93,11 +93,9 @@ const photoFor = (name: string | null) => (name ? photos[`../assets/welcome/${na
   .card:hover .arrow, .card:focus-visible .arrow { transform: translateX(8px); }
 
   @media (min-width: 800px) {
-    .welcome { padding: var(--space-10) 0; }
-    .head { grid-template-columns: 1.6fr 1fr; align-items: end; column-gap: var(--space-8); }
-    .eyebrow, .statement { grid-column: 1; }
-    .intro { grid-column: 2; grid-row: 2; padding-bottom: 0.6em; }
+    .welcome { padding: var(--space-8) 0; }
+    .statement { font-size: clamp(2.2rem, 3.9vw, 3.6rem); }
     .cards { grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
-    .card { aspect-ratio: 4 / 5; }
+    .card { aspect-ratio: 4 / 4.2; }
   }
 </style>
