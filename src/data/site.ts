@@ -29,7 +29,7 @@ export const site = {
   // TODO: owner to approve hero copy. Concept wording from the brief, not a confirmed slogan.
   hero: {
     eyebrow: 'Welcome to City Harvest',
-    lines: ['Come as', 'you are.', 'Grow in God.'],
+    lines: ['Building a', 'people of', 'godly character.'],
     // TODO: supply an approved CHCI photo, e.g. '/images/hero.jpg'. null = graphic-only hero.
     image: null as string | null,
   },
