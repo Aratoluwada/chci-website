@@ -4,41 +4,49 @@ import { leadershipPhoto } from '../data/photos';
 const photos = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.{jpg,jpeg,png,webp,avif}', { eager: true });
 const photo = leadershipPhoto.image ? photos[`../assets/photos/${leadershipPhoto.image}`]?.default : undefined;
 ---
-<section class="lead" aria-labelledby="lead-h">
+<section class:list={['lead', photo && 'has-photo']} aria-labelledby="lead-h">
+  {photo && (
+    <div class="bg" aria-hidden="true">
+      <Image src={photo} alt="" widths={[640, 1070]} sizes="100vw" loading="lazy" />
+    </div>
+  )}
   <div class="rings" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="container inner">
-    <div class="copy">
     <p class="label eyebrow" data-reveal>Leadership</p>
     {/* TODO: owner to approve this wording; leader names, titles and photos come from the Leadership page */}
     <h2 id="lead-h" class="display title" data-words>The people who serve here</h2>
     <p class="text" data-reveal style="--d:2">Meet the leaders who care for our church family.</p>
     <a class="link-arrow go" href="/leadership" data-reveal style="--d:3">Meet our leaders <span aria-hidden="true">→</span></a>
-    </div>
-    {photo && (
-      <figure class="shot" data-reveal style="--d:2">
-        <Image src={photo} alt={leadershipPhoto.alt} widths={[360, 560, 760]} sizes="(min-width: 900px) 34vw, 80vw" loading="lazy" />
-      </figure>
-    )}
   </div>
 </section>
 
 <style>
-  .lead { position: relative; overflow: hidden; background: var(--color-surface); color: var(--color-text); padding: var(--space-9) 0 calc(var(--space-9) + 22vw); }
+  .lead { position: relative; isolation: isolate; overflow: hidden; background: var(--color-surface); color: var(--color-text); padding: var(--space-9) 0 calc(var(--space-9) + 22vw); }
   /* phones: rings sit below the copy so they never cross the text */
   .rings { position: absolute; right: -14vw; bottom: -26vw; width: 62vw; aspect-ratio: 1; }
   .rings i { position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--color-primary); opacity: 0.35; animation: ring 7s ease-in-out infinite; }
   .rings i:nth-child(2) { inset: 14%; border-color: var(--color-accent-orange); animation-delay: -2.3s; }
   .rings i:nth-child(3) { inset: 30%; background: var(--color-primary); opacity: 0.9; border: 0; animation-delay: -4.6s; }
   @keyframes ring { 0%, 100% { transform: scale(0.94); } 50% { transform: scale(1.04); } }
-  .inner { position: relative; display: grid; gap: var(--space-7); justify-items: start; }
-  .copy { display: grid; gap: var(--space-4); justify-items: start; }
-  .shot { position: relative; margin: 0; width: min(100%, 420px); aspect-ratio: 4 / 4.6; z-index: 1; }
-  .shot::before { content: ''; position: absolute; inset: 0; transform: translate(14px, 14px); background: var(--color-primary); z-index: -1; }
-  .shot :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
+  .inner { position: relative; display: grid; gap: var(--space-4); justify-items: start; }
   .eyebrow { color: var(--color-primary); }
   .title { font-size: clamp(2.2rem, 9vw, 4.6rem); color: var(--color-primary-dark); max-width: 12ch; }
   .text { max-width: 34ch; font-size: 1.15rem; color: var(--color-muted); }
   .go { color: var(--color-primary-dark); }
-  @media (min-width: 900px) { .inner { grid-template-columns: 1.1fr 0.9fr; align-items: center; column-gap: var(--space-8); } .shot { justify-self: end; width: 100%; max-width: 460px; } }
-  @media (min-width: 800px) { .lead { padding: var(--space-9) 0; } .rings { right: -6vw; bottom: auto; top: 50%; width: min(42vw, 520px); transform: translateY(-50%); } }
+
+  /* Photo background with a black filter; text sits on top, photo stays visible */
+  .bg { position: absolute; inset: 0; z-index: -2; }
+  .bg :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; display: block; }
+  .bg::after { content: ''; position: absolute; inset: 0; background: rgb(0 0 0 / 0.62); }
+  @media (min-width: 800px) { .bg::after { background: linear-gradient(90deg, rgb(0 0 0 / 0.78) 0%, rgb(0 0 0 / 0.5) 60%, rgb(0 0 0 / 0.35) 100%); } }
+  .has-photo { color: var(--color-white); }
+  .has-photo .eyebrow { color: var(--color-accent-gold); }
+  .has-photo .title { color: var(--color-white); }
+  .has-photo .text { color: rgb(255 255 255 / 0.9); }
+  .has-photo .go { color: var(--color-accent-gold); }
+  .has-photo .rings { z-index: -1; }
+  .has-photo .rings i { border-color: var(--color-accent-gold); opacity: 0.5; }
+  .has-photo .rings i:nth-child(3) { background: var(--color-accent-orange); opacity: 0.85; }
+
+  @media (min-width: 800px) { .lead { padding: var(--space-10) 0; } .rings { right: -6vw; bottom: auto; top: 50%; width: min(42vw, 520px); transform: translateY(-50%); } }
 </style>
