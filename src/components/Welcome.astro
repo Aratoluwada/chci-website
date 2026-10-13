@@ -58,7 +58,7 @@ const photoFor = (name: string | null) => (name ? photos[`../assets/welcome/${na
   .container { position: relative; }
   .head { display: grid; gap: var(--space-3); margin-bottom: var(--space-5); }
   .eyebrow { color: var(--color-accent-gold); }
-  .statement { font-size: clamp(1.7rem, 6.4vw, 3.4rem); line-height: 1.02; max-width: none; width: 100%; text-wrap: pretty; }
+  .statement { font-stretch: 68%; font-size: clamp(1.8rem, 6.4vw, 3rem); line-height: 0.98; max-width: none; width: 100%; text-wrap: pretty; }
   .intro { color: rgb(255 255 255 / 0.88); max-width: 46ch; }
 
   .cards { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
@@ -86,7 +86,7 @@ const photoFor = (name: string | null) => (name ? photos[`../assets/welcome/${na
 
   .scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, transparent 38%, rgb(1 40 20 / 0.92) 100%); }
   .text { position: absolute; inset: auto 0 0 0; z-index: 2; display: grid; gap: var(--space-2); padding: var(--space-5); }
-  .t { font-size: clamp(1.6rem, 6vw, 2.1rem); line-height: 1; }
+  .t { font-stretch: 68%; font-size: clamp(1.7rem, 6vw, 2.3rem); line-height: 0.95; }
   .b { max-width: 30ch; color: rgb(255 255 255 / 0.9); }
   .go { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-2); color: var(--color-accent-gold); }
   .arrow { display: inline-block; transition: transform 0.4s var(--ease-out); }
@@ -94,7 +94,7 @@ const photoFor = (name: string | null) => (name ? photos[`../assets/welcome/${na
 
   @media (min-width: 800px) {
     .welcome { padding: var(--space-8) 0; }
-    .statement { font-size: clamp(2.2rem, 3.9vw, 3.6rem); }
+    .statement { font-size: clamp(2rem, 3.2vw, 3.2rem); }
     .cards { grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
     .card { aspect-ratio: 4 / 4.2; }
   }
