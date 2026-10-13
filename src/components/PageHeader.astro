@@ -17,7 +17,7 @@ const { eyebrow, title, intro } = Astro.props;
   }
   .container { position: relative; z-index: 1; }
   .eyebrow { color: var(--color-accent-gold); margin-bottom: var(--space-4); animation: up 0.8s var(--ease-out) both; }
-  .title { font-size: clamp(2.6rem, 12vw, 7rem); }
+  .title { font-stretch: 68%; line-height: 0.95; font-size: clamp(2.4rem, 9vw, 4.6rem); }
   .line { display: block; overflow: hidden; padding-block: 0.04em; margin-block: -0.04em; }
   .in { display: block; animation: rise 0.95s var(--ease-out) 0.1s both; }
   .intro { margin-top: var(--space-5); max-width: 52ch; color: rgb(255 255 255 / 0.85); animation: up 0.9s var(--ease-out) 0.35s both; }
