@@ -10,43 +10,34 @@ const photo = leadershipPhoto.image ? photos[`../assets/photos/${leadershipPhoto
       <Image src={photo} alt="" widths={[640, 1070]} sizes="100vw" loading="lazy" />
     </div>
   )}
-  <div class="rings" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="container inner">
     <p class="label eyebrow" data-reveal>Leadership</p>
     {/* TODO: owner to approve this wording; leader names, titles and photos come from the Leadership page */}
     <h2 id="lead-h" class="display title" data-words>The people who serve here</h2>
     <p class="text" data-reveal style="--d:2">Meet the leaders who care for our church family.</p>
-    <a class="link-arrow go" href="/leadership" data-reveal style="--d:3">Meet our leaders <span aria-hidden="true">→</span></a>
+    <a class="btn btn--primary pill" href="/leadership" data-reveal style="--d:3">Meet our leaders <span class="btn__arrow" aria-hidden="true">→</span></a>
   </div>
 </section>
 
 <style>
-  .lead { position: relative; isolation: isolate; overflow: hidden; background: var(--color-surface); color: var(--color-text); padding: var(--space-9) 0 var(--space-8); min-height: min(78svh, 620px); display: flex; align-items: flex-end; }
-  /* phones: rings sit below the copy so they never cross the text */
-  .rings { position: absolute; right: -14vw; bottom: -26vw; width: 62vw; aspect-ratio: 1; }
-  .rings i { position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--color-primary); opacity: 0.35; animation: ring 7s ease-in-out infinite; }
-  .rings i:nth-child(2) { inset: 14%; border-color: var(--color-accent-orange); animation-delay: -2.3s; }
-  .rings i:nth-child(3) { inset: 30%; background: var(--color-primary); opacity: 0.9; border: 0; animation-delay: -4.6s; }
-  @keyframes ring { 0%, 100% { transform: scale(0.94); } 50% { transform: scale(1.04); } }
+  .lead { position: relative; isolation: isolate; overflow: hidden; background: var(--color-surface); color: var(--color-text); padding: var(--space-9) 0 var(--space-8); min-height: min(88svh, 720px); display: flex; align-items: flex-end; }
   .inner { position: relative; width: 100%; display: grid; gap: var(--space-4); justify-items: start; }
   .eyebrow { color: var(--color-primary); }
-  .title { font-size: clamp(1.7rem, 6vw, 3rem); color: var(--color-primary-dark); max-width: 20ch; }
+  .title { font-stretch: 68%; line-height: 0.95; font-size: clamp(2.4rem, 9vw, 4.6rem); color: var(--color-primary-dark); max-width: 20ch; }
   .text { max-width: 34ch; font-size: 1.15rem; color: var(--color-muted); }
   .go { color: var(--color-primary-dark); }
 
   /* Photo background with a black filter; text sits on top, photo stays visible */
   .bg { position: absolute; inset: 0; z-index: -2; }
   .bg :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; display: block; }
-  .bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgb(0 0 0 / 0.88) 0%, rgb(0 0 0 / 0.6) 45%, rgb(0 0 0 / 0.12) 100%); }
-  @media (min-width: 800px) { .bg::after { background: linear-gradient(0deg, rgb(0 0 0 / 0.9) 0%, rgb(0 0 0 / 0.62) 40%, rgb(0 0 0 / 0.08) 100%); } }
+  .bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgb(0 0 0 / 0.9) 0%, rgb(0 0 0 / 0.68) 50%, rgb(0 0 0 / 0.5) 100%); }
+  @media (min-width: 800px) { .bg::after { background: linear-gradient(0deg, rgb(0 0 0 / 0.9) 0%, rgb(0 0 0 / 0.66) 50%, rgb(0 0 0 / 0.5) 100%); } }
   .has-photo { color: var(--color-white); }
   .has-photo .eyebrow { color: var(--color-accent-gold); }
   .has-photo .title { color: var(--color-white); }
   .has-photo .text { color: rgb(255 255 255 / 0.9); }
+  .pill { border-radius: 999px; padding-inline: var(--space-6); }
   .has-photo .go { color: var(--color-accent-gold); }
-  .has-photo .rings { z-index: -1; }
-  .has-photo .rings i { border-color: var(--color-accent-gold); opacity: 0.5; }
-  .has-photo .rings i:nth-child(3) { background: var(--color-accent-orange); opacity: 0.85; }
 
-  @media (min-width: 800px) { .lead { padding: var(--space-9) 0; } .rings { right: -6vw; bottom: auto; top: 50%; width: min(42vw, 520px); transform: translateY(-50%); } }
+  @media (min-width: 800px) { .lead { padding: var(--space-9) 0; } }
 </style>
