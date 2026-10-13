@@ -30,8 +30,9 @@ export const site = {
   hero: {
     eyebrow: 'Welcome to City Harvest',
     lines: ['Building a', 'people of', 'godly character.'],
-    // TODO: supply an approved CHCI photo, e.g. '/images/hero.jpg'. null = graphic-only hero.
-    image: null as string | null,
+    // File name inside src/assets/hero/. null = graphic-only hero.
+    image: 'hero.jpg' as string | null,
+    imageAlt: '',
   },
 };
 

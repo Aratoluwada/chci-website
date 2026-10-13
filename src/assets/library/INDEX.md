@@ -29,3 +29,7 @@ and `src/data/welcome.ts`). I have not guessed anyone's name: add names and role
 ## Used on the site now
 - Welcome cards: `src/assets/welcome/` (worship, grow, belong), cropped to remove event overlays.
 - Music section: `src/assets/photos/music-keys.jpg`.
+- Hero: `src/assets/hero/hero.jpg` (crop of free2worship-crowd-2019), set in `src/data/site.ts`.
+- Leadership page: `src/assets/photos/leadership-five.jpg` (crop of five-people-standing-ordination-2025). Names and roles still needed.
+- Visit Us page: `src/assets/photos/visit-congregation.jpg` (crop of congregation-day4-2019).
+The originals above stay in this library untouched. Owner confirmed permission for all photos, including those with minors.

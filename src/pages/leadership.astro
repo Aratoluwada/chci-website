@@ -1,14 +1,28 @@
 ---
 import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
 import PageHeader from '../components/PageHeader.astro';
+import DraftTag from '../components/DraftTag.astro';
+import { leadershipPhoto } from '../data/photos';
+
+const photos = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.{jpg,jpeg,png,webp,avif}', { eager: true });
+const photo = leadershipPhoto.image ? photos[`../assets/photos/${leadershipPhoto.image}`]?.default : undefined;
 ---
 <Base title="Leadership">
   <PageHeader eyebrow="Our leaders" title="Leadership" />
   <section class="empty">
-    <div class="container" data-reveal>
+    <div class="container wrap">
+      {photo && (
+        <figure class="shot" data-reveal>
+          <Image src={photo} alt={leadershipPhoto.alt} widths={[400, 640, 900]} sizes="(min-width: 900px) 40vw, 92vw" loading="eager" />
+          <figcaption class="label">Names and roles to be added <DraftTag /></figcaption>
+        </figure>
+      )}
+      <div data-reveal>
       {/* TODO: replace this empty state with approved content (leadership) */}
       <p class="label tag">Coming soon</p>
       <p class="msg">Approved names, roles and biographies will appear here.</p>
+      </div>
     </div>
   </section>
 </Base>
@@ -17,4 +31,9 @@ import PageHeader from '../components/PageHeader.astro';
   .empty { background: var(--color-surface); color: var(--color-text); padding: var(--space-9) 0; }
   .tag { color: var(--color-primary); margin-bottom: var(--space-3); }
   .msg { font-size: clamp(1.2rem, 4vw, 1.8rem); font-weight: 600; max-width: 32ch; line-height: 1.3; }
+  .wrap { display: grid; gap: var(--space-6); align-items: start; }
+  .shot { margin: 0; max-width: 460px; }
+  .shot :global(img) { width: 100%; height: auto; display: block; }
+  .shot figcaption { margin-top: var(--space-3); color: var(--color-primary); }
+  @media (min-width: 900px) { .wrap { grid-template-columns: minmax(0, 0.8fr) 1fr; gap: var(--space-8); } }
 </style>
