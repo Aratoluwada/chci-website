@@ -8,3 +8,15 @@ export const musicPhoto: { image: string | null; alt: string } = {
   image: 'music-keys.jpg',
   alt: 'A keyboardist playing during a worship service',
 };
+
+// Leadership page. Names and roles are NOT filled in: the owner must supply them.
+export const leadershipPhoto: { image: string | null; alt: string } = {
+  image: 'leadership-five.jpg',
+  alt: 'Five church members standing together on the platform at an ordination service',
+};
+
+// Visit Us page.
+export const visitPhoto: { image: string | null; alt: string } = {
+  image: 'visit-congregation.jpg',
+  alt: 'Members of the congregation seated and listening during a service',
+};
