@@ -1,8 +1,13 @@
 ---
 import { site } from '../data/site';
+import { Image } from 'astro:assets';
+import { visitPhoto } from '../data/photos';
+const photos = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.{jpg,jpeg,png,webp,avif}', { eager: true });
+const photo = visitPhoto.image ? photos[`../assets/photos/${visitPhoto.image}`]?.default : undefined;
 ---
 <section class="visit" aria-labelledby="visit-h">
   <div class="container inner">
+    <div class="copy">
     <p class="label eyebrow" data-reveal>Visit us</p>
     {/* TODO: owner to approve this closing line */}
     <h2 id="visit-h" class="display title" data-words>We'd love to meet you.</h2>
@@ -11,13 +16,23 @@ import { site } from '../data/site';
       <a class="btn btn--ink" href={site.primaryCta.href} data-magnetic>{site.primaryCta.label} <span class="btn__arrow" aria-hidden="true">→</span></a>
       <a class="link-arrow" href={site.secondaryCta.href}>{site.secondaryCta.label}</a>
     </div>
+    </div>
+    {photo && (
+      <figure class="shot" data-reveal style="--d:2">
+        <Image src={photo} alt={visitPhoto.alt} widths={[400, 640, 900]} sizes="(min-width: 900px) 42vw, 92vw" loading="lazy" />
+      </figure>
+    )}
   </div>
   <span class="burst" aria-hidden="true"></span>
 </section>
 
 <style>
   .visit { position: relative; overflow: hidden; isolation: isolate; background: var(--color-accent-orange); color: var(--color-ink); padding: var(--space-10) 0; }
-  .inner { display: grid; gap: var(--space-5); justify-items: start; position: relative; }
+  .inner { display: grid; gap: var(--space-7); justify-items: start; position: relative; }
+  .copy { display: grid; gap: var(--space-5); justify-items: start; }
+  .shot { position: relative; margin: 0; width: 100%; aspect-ratio: 3 / 2; }
+  .shot::before { content: ''; position: absolute; inset: 0; transform: translate(14px, 14px); background: var(--color-ink); }
+  .shot :global(img) { position: relative; width: 100%; height: 100%; object-fit: cover; display: block; }
   .eyebrow { font-weight: 500; }
   .title { font-size: clamp(2.6rem, 12vw, 8rem); max-width: 11ch; }
   .where { font-weight: 600; font-size: 1.2rem; }
@@ -29,5 +44,6 @@ import { site } from '../data/site';
     -webkit-mask: radial-gradient(circle, transparent 28%, #000 29%); mask: radial-gradient(circle, transparent 28%, #000 29%);
     animation: spin 80s linear infinite; opacity: 0.9;
   }
+  @media (min-width: 900px) { .inner { grid-template-columns: 1fr 1fr; align-items: center; column-gap: var(--space-8); } .visit { padding: var(--space-9) 0; } .title { font-size: clamp(3rem, 6.2vw, 5.6rem); max-width: 9ch; } }
   @keyframes spin { to { transform: rotate(360deg); } }
 </style>
