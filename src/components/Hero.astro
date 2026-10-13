@@ -26,7 +26,7 @@ const photo = hero.image ? heroPhotos[`../assets/hero/${hero.image}`]?.default :
     </h1>
 
     <div class="hero__actions">
-      <a class="btn btn--primary" href={primaryCta.href} data-magnetic>
+      <a class="btn btn--primary pill" href={primaryCta.href} data-magnetic>
         {primaryCta.label} <span class="btn__arrow" aria-hidden="true">→</span>
       </a>
       <a class="link-arrow" href={secondaryCta.href}>{secondaryCta.label}</a>
@@ -56,6 +56,9 @@ const photo = hero.image ? heroPhotos[`../assets/hero/${hero.image}`]?.default :
       linear-gradient(90deg, rgb(1 40 20 / 0.7) 0%, transparent 70%);
   }
   /* With a real photo, let it show: drop the big flat shapes, keep the rays and dot. */
+  .pill { border-radius: 999px; padding-inline: var(--space-6); }
+  .has-photo { padding-bottom: var(--space-8); }
+  .has-photo .hero__scroll { left: auto; right: var(--gutter); }
   .has-photo .hero__block, .has-photo .hero__orb, .has-photo .hero__rays, .has-photo .hero__dot { display: none; }
   .has-photo .hero__scrim {
     background:
@@ -120,6 +123,7 @@ const photo = hero.image ? heroPhotos[`../assets/hero/${hero.image}`]?.default :
 
   @media (min-width: 800px) {
     .hero { padding-bottom: var(--space-10); }
+    .has-photo { padding-bottom: var(--space-8); }
     .hero__block { right: 14%; height: 78%; }
     .hero__scroll { display: flex; }
     .hero__title { max-width: 18ch; }
