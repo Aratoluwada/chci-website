@@ -46,39 +46,39 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 </div>
 
 <style>
-  /* White bar: the logo's own artwork (dark green lettering, white house) sits on the white it was designed for. */
+  /* Black bar. The logo sits on a small white tile so its dark lettering stays readable. */
   .site-header {
     position: fixed; inset: 0 0 auto 0; z-index: 50; height: var(--header-h);
-    background: var(--color-white); color: var(--color-primary-dark);
-    box-shadow: 0 1px 0 rgb(0 0 0 / 0.06);
+    background: #000; color: var(--color-white);
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.1);
     transition: box-shadow 0.4s var(--ease-out);
     animation: header-in 0.8s var(--ease-out) backwards;
   }
-  .site-header.is-scrolled { box-shadow: 0 6px 24px rgb(0 0 0 / 0.14); }
-  .site-header :focus-visible { outline-color: var(--color-primary); }
+  .site-header.is-scrolled { box-shadow: 0 1px 0 rgb(255 255 255 / 0.14), 0 8px 24px rgb(0 0 0 / 0.5); }
   @keyframes header-in { from { transform: translateY(-100%); } }
 
   .bar { height: 100%; display: flex; align-items: center; justify-content: space-between; position: relative; }
 
   .brand { display: flex; align-items: center; gap: var(--space-3); text-decoration: none; color: inherit; position: relative; z-index: 2; }
   .brand__tile {
-    display: block; height: calc(var(--header-h) - 16px); aspect-ratio: 289 / 480;
+    display: block; height: calc(var(--header-h) - 22px); padding: 4px 7px; background: var(--color-white); border-radius: 8px;
     transition: transform 0.5s var(--ease-out);
   }
-  .brand__tile img { width: 100%; height: 100%; object-fit: contain; }
+  .brand__tile img { width: auto; height: 100%; object-fit: contain; }
   .brand:hover .brand__tile { transform: scale(1.06) rotate(-2deg); }
-  .brand__text { margin-left: var(--space-1); color: var(--color-primary-dark); font-weight: 500; }
-  .brand__sub { display: none; color: var(--color-muted); }
+  .brand__text { margin-left: var(--space-1); color: var(--color-white); }
+  .brand__sub { display: none; color: rgb(255 255 255 / 0.55); }
 
   .nav-desktop { display: none; }
   .nav-desktop ul { display: flex; gap: var(--space-5); list-style: none; margin: 0; padding: 0; }
   .nav-link {
-    position: relative; text-decoration: none; font-family: var(--font-mono); font-size: 0.9rem; padding: var(--space-3) 0; display: inline-block;
+    position: relative; text-decoration: none; font-family: var(--font-body); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgb(255 255 255 / 0.78); padding: var(--space-3) 0; display: inline-block; transition: color 0.3s;
   }
   .nav-link::after {
-    content: ''; position: absolute; left: 0; right: 0; bottom: 6px; height: 2px; background: var(--color-accent-orange);
+    content: ''; position: absolute; left: 0; right: 0; bottom: 6px; height: 2px; background: var(--color-primary-bright);
     transform: scaleX(0); transform-origin: right; transition: transform 0.45s var(--ease-out);
   }
+  .nav-link:hover, .nav-link:focus-visible, .nav-link[aria-current='page'] { color: var(--color-white); }
   .nav-link:hover::after, .nav-link:focus-visible::after, .nav-link[aria-current='page']::after { transform: scaleX(1); transform-origin: left; }
 
   .menu-btn {
@@ -100,7 +100,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 
   /* Full-screen menu: curtain wipe + staggered links */
   .menu {
-    position: fixed; inset: 0; z-index: 40; background: var(--color-primary-dark);
+    position: fixed; inset: 0; z-index: 40; background: #000;
     padding: calc(var(--header-h) + 36px) var(--gutter) var(--space-6);
     display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto;
     clip-path: inset(0 0 100% 0); transition: clip-path 0.7s var(--ease-in-out), visibility 0s linear 0.7s; visibility: hidden;
@@ -124,8 +124,9 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 
   @media (min-width: 560px) { .brand__sub { display: inline; } }
   @media (min-width: 1000px) {
-    :root { --header-h: 92px; }
-    .nav-desktop { display: block; }
+    :root { --header-h: 80px; }
+    .nav-desktop { display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+    .nav-desktop ul { gap: var(--space-6); }
     .menu-btn, .menu { display: none !important; }
   }
 </style>
