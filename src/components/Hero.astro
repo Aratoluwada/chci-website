@@ -56,7 +56,7 @@ const photo = hero.image ? heroPhotos[`../assets/hero/${hero.image}`]?.default :
       linear-gradient(90deg, rgb(1 40 20 / 0.7) 0%, transparent 70%);
   }
   /* With a real photo, let it show: drop the big flat shapes, keep the rays and dot. */
-  .pill { border-radius: 999px; padding-inline: var(--space-6); }
+  .pill { padding-inline: var(--space-6); }
   .has-photo { padding-bottom: var(--space-8); }
   .has-photo .hero__scroll { left: auto; right: var(--gutter); }
   .has-photo .hero__block, .has-photo .hero__orb, .has-photo .hero__rays, .has-photo .hero__dot { display: none; }

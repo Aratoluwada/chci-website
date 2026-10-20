@@ -24,7 +24,7 @@ import { ministries } from '../data/ministries';
 </section>
 
 <style>
-  .min { background: var(--color-primary); padding: var(--space-9) 0; }
+  .min { background: #121212; padding: var(--space-9) 0; }
   .head { margin-bottom: var(--space-7); display: grid; gap: var(--space-3); }
   .eyebrow { color: var(--color-accent-gold); }
   .title { font-stretch: 68%; line-height: 0.95; font-size: clamp(2rem, 7vw, 3.6rem); max-width: 14ch; }
@@ -35,7 +35,7 @@ import { ministries } from '../data/ministries';
     transition: padding 0.5s var(--ease-out);
   }
   .row::before {
-    content: ''; position: absolute; inset: 0 calc(var(--gutter) * -1); z-index: -1; background: var(--color-primary-dark);
+    content: ''; position: absolute; inset: 0 calc(var(--gutter) * -1); z-index: -1; background: var(--color-primary);
     transform: scaleY(0); transform-origin: bottom; transition: transform 0.5s var(--ease-out);
   }
   .row:hover { padding-inline: var(--space-4); }

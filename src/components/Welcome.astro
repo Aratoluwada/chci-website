@@ -51,7 +51,8 @@ const photoFor = (name: string | null) => (name ? photos[`../assets/welcome/${na
 
 <style>
   .welcome { background: var(--color-primary-dark); padding: var(--space-8) 0; position: relative; overflow: hidden; }
-  .welcome::before {
+  .welcome::before { display: none;
+   /* (decorative circle removed) */
     content: ''; position: absolute; left: -18vw; top: -14vw; width: 52vw; aspect-ratio: 1; border-radius: 50%;
     background: var(--color-primary); opacity: 0.45; pointer-events: none;
   }
@@ -65,7 +66,7 @@ const photoFor = (name: string | null) => (name ? photos[`../assets/welcome/${na
   .card {
     position: relative; isolation: isolate; display: block; overflow: hidden; text-decoration: none; color: var(--color-white);
     aspect-ratio: 1 / 1; background: var(--color-primary);
-    transition: transform 0.6s var(--ease-out);
+    transition: transform 0.6s var(--ease-out); border-radius: 10px;
   }
   .card:hover, .card:focus-visible { transform: translateY(-8px); }
   .media, .ph { position: absolute; inset: 0; display: block; }
@@ -73,7 +74,7 @@ const photoFor = (name: string | null) => (name ? photos[`../assets/welcome/${na
   .card:hover .media :global(.photo), .card:focus-visible .media :global(.photo) { transform: scale(1.08); }
 
   /* Placeholder panel (shown until a real photo is supplied) */
-  .ph { background: linear-gradient(160deg, var(--color-primary-bright), var(--color-primary) 55%, #013a1d); overflow: hidden; }
+  .ph { background: linear-gradient(160deg, var(--color-primary-bright), var(--color-primary) 55%, #0a0a0a); overflow: hidden; }
   .ph i { position: absolute; border-radius: 50%; }
   .ph__a { width: 62%; aspect-ratio: 1; right: -16%; top: -12%; background: rgb(255 255 255 / 0.08); animation: drift 9s ease-in-out infinite alternate; }
   .ph__b { width: 22%; aspect-ratio: 1; left: 14%; top: 18%; background: var(--color-accent-orange); animation: float 6s ease-in-out infinite alternate; }
@@ -84,7 +85,7 @@ const photoFor = (name: string | null) => (name ? photos[`../assets/welcome/${na
   @keyframes drift { to { transform: translate(-6%, 8%) scale(1.06); } }
   @keyframes float { to { transform: translateY(16px); } }
 
-  .scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, transparent 38%, rgb(1 40 20 / 0.92) 100%); }
+  .scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, transparent 38%, rgb(0 0 0 / 0.9) 100%); }
   .text { position: absolute; inset: auto 0 0 0; z-index: 2; display: grid; gap: var(--space-2); padding: var(--space-5); }
   .t { font-stretch: 68%; font-size: clamp(1.7rem, 6vw, 2.3rem); line-height: 0.95; }
   .b { max-width: 30ch; color: rgb(255 255 255 / 0.9); }
