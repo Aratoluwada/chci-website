@@ -19,11 +19,11 @@ const items = [
 </section>
 
 <style>
-  .strip { background: #121212; color: var(--color-white); }
+  .strip { background: var(--color-white); color: var(--color-text); }
   .grid { display: grid; }
-  .cell { padding: var(--space-6) 0; border-bottom: 1px solid rgb(255 255 255 / 0.14); position: relative; }
+  .cell { padding: var(--space-5) 0; border-bottom: 1px solid var(--color-border); position: relative; }
   .cell:last-child { border-bottom: 0; }
-  .k { color: var(--color-accent-gold); margin-bottom: var(--space-2); }
+  .k { color: var(--color-primary); margin-bottom: var(--space-2); }
   .v { font-size: clamp(1.25rem, 4.4vw, 1.75rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }
   .cell::before {
     content: ''; position: absolute; left: 0; top: 0; height: 3px; width: 56px; background: var(--color-primary-bright);
@@ -32,7 +32,7 @@ const items = [
   .cell:hover::before { width: 100%; }
   @media (min-width: 800px) {
     .grid { grid-template-columns: repeat(3, 1fr); }
-    .cell { padding: var(--space-7) var(--space-6) var(--space-7) 0; border-bottom: 0; border-right: 1px solid rgb(255 255 255 / 0.14); }
+    .cell { padding: var(--space-6) var(--space-6) var(--space-6) 0; border-bottom: 0; border-right: 1px solid var(--color-border); }
     .cell + .cell { padding-left: var(--space-6); }
     .cell:last-child { border-right: 0; }
   }

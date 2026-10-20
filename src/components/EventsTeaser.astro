@@ -40,8 +40,8 @@ const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-NG',
 </section>
 
 <style>
-  .ev { background: var(--color-surface-alt); color: var(--color-text); padding: var(--space-9) 0; }
-  .head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-6); }
+  .ev { background: var(--color-surface-alt); color: var(--color-text); padding: var(--space-7) 0; }
+  .head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-5); }
   .eyebrow { color: var(--color-primary); margin-bottom: var(--space-3); }
   .title { font-stretch: 68%; line-height: 0.95; font-size: clamp(2rem, 7vw, 3.6rem); color: var(--color-primary-dark); }
   .all { color: var(--color-primary-dark); }
@@ -55,5 +55,5 @@ const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-NG',
   .empty p { font-size: 1.1rem; }
   .dot { flex: none; width: 14px; height: 14px; border-radius: 50%; background: var(--color-primary-bright); animation: pulse 2.2s ease-in-out infinite; }
   @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgb(11 122 62 / 0.5); } 50% { box-shadow: 0 0 0 12px rgb(11 122 62 / 0); } }
-  @media (min-width: 800px) { .ev { padding: var(--space-10) 0; } .cards { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 800px) { .ev { padding: var(--space-7) 0; } .cards { grid-template-columns: repeat(3, 1fr); } }
 </style>
