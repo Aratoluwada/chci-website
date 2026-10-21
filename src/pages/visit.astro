@@ -6,6 +6,15 @@ import { site } from '../data/site';
 <Base title="Visit Us">
   <PageHeader eyebrow="Plan your visit" title="Visit Us" />
   <span id="contact"></span>
+  {site.address && (
+    <section class="where" id="where" aria-labelledby="where-h">
+      <div class="container">
+        <p class="label tag" data-reveal>Where we meet</p>
+        <h2 id="where-h" class="display w-title" data-reveal>{site.venue ?? 'Find us'}</h2>
+        <address class="addr" data-reveal style="--d:1">{site.address}</address>
+      </div>
+    </section>
+  )}
   {site.serviceTimes && (
     <section class="times" id="times" aria-labelledby="times-h">
       <div class="container">
@@ -23,7 +32,7 @@ import { site } from '../data/site';
     <div class="container" data-reveal>
       {/* TODO: replace this empty state with approved content (visit) */}
       <p class="label tag">Coming soon</p>
-      <p class="msg">Address, map and contact details will appear here once verified.</p>
+      <p class="msg">Map and contact details will appear here once verified.</p>
     </div>
   </section>
 </Base>
@@ -39,4 +48,7 @@ import { site } from '../data/site';
   .day { font-size: clamp(1.6rem, 5vw, 2.2rem); color: var(--color-primary); }
   .time { font-size: 1.25rem; font-weight: 600; }
   @media (min-width: 800px) { .slots { grid-template-columns: repeat(2, 1fr); } }
+  .where { background: var(--color-surface); color: var(--color-text); padding: var(--space-7) 0 0; }
+  .w-title { font-size: clamp(2rem, 7vw, 3.4rem); margin-bottom: var(--space-3); }
+  .addr { font-style: normal; font-size: 1.25rem; font-weight: 600; max-width: 34ch; line-height: 1.4; }
 </style>
