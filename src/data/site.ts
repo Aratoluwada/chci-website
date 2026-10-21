@@ -24,7 +24,7 @@ export const site = {
   phone: null as string | null,
   whatsapp: null as string | null,
   email: null as string | null,
-  social: { instagram: null, facebook: null, youtube: null } as Record<string, string | null>,
+  social: { instagram: null, facebook: 'https://www.facebook.com/Cityharvesthouse', youtube: 'https://youtube.com/@peacetoluwade8321' } as Record<string, string | null>,
 
   // TODO: owner to choose final primary CTA wording ("Plan Your Visit" is a placeholder)
   primaryCta: { label: 'Plan Your Visit', href: '/visit' },
