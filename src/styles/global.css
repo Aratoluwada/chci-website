@@ -16,7 +16,7 @@
   --color-border: #d9d8d0;
   --color-focus: #fe8605;
 
-  --font-display: 'Anton', 'Arial Narrow', Impact, sans-serif;
+  --font-display: 'Archivo Variable', 'Arial Black', Impact, sans-serif;
   --font-body: 'Archivo Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'Archivo Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
@@ -57,8 +57,8 @@ h1, h2, h3, p { margin: 0; }
 
 /* ===== Type helpers ===== */
 .display {
-  font-family: var(--font-display); font-weight: 400; text-transform: uppercase;
-  line-height: 1; letter-spacing: 0.01em;
+  font-family: var(--font-display); font-weight: 900; font-stretch: 68%; text-transform: uppercase;
+  line-height: 0.98; letter-spacing: 0; word-spacing: 0.14em;
 }
 .label {
   font-family: var(--font-body); font-weight: 700; font-size: 0.75rem;
