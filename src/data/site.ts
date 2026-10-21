@@ -22,7 +22,7 @@ export const site = {
   ] as { day: string; time: string }[] | null,
   // TODO: CONFIRM public phone / WhatsApp / email / socials
   phone: null as string | null,
-  whatsapp: null as string | null,
+  whatsapp: '+2347033059736' as string | null,
   email: null as string | null,
   social: { instagram: null, facebook: 'https://www.facebook.com/Cityharvesthouse', youtube: 'https://youtube.com/@peacetoluwade8321' } as Record<string, string | null>,
 
