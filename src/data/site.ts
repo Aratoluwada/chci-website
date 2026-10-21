@@ -12,8 +12,9 @@ export const site = {
   city: 'Abeokuta',
   country: 'Nigeria',
 
-  // TODO: CONFIRM street address + verified map pin
-  address: null as string | null,
+  // Confirmed by the owner (Oct 2026). TODO: verified map pin
+  venue: 'Transformation Center',
+  address: '1, Somorin-Kemta Road, Somorin, Obantoko, Abeokuta, Nigeria' as string | null,
   // Confirmed by the owner (Oct 2026)
   serviceTimes: [
     { day: 'Sunday', time: '9:00 AM – 11:30 AM' },

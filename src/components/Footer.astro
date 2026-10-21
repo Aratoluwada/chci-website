@@ -19,7 +19,7 @@ const year = new Date().getFullYear();
     <div data-reveal style="--d:2">
       <p class="label head">Visit</p>
       {/* TODO: CONFIRM ADDRESS and CONTACT before launch */}
-      <p>{site.address ?? 'Address to be announced'}</p>
+      <p>{site.venue && <strong>{site.venue}<br /></strong>}{site.address ?? 'Address to be announced'}</p>
       {site.serviceTimes
         ? site.serviceTimes.map((t) => <p><strong>{t.day}</strong> {t.time}</p>)
         : <p>Service times to be announced</p>}
