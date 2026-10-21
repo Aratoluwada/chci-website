@@ -3,7 +3,7 @@ import { site } from '../data/site';
 // TODO: values below render "To be announced" until the church supplies verified details.
 const items = [
   { k: 'Where', v: site.address ?? `${site.city}, ${site.country}`, todo: !site.address && 'TODO: CONFIRM STREET ADDRESS' },
-  { k: 'When', v: site.serviceTimes ?? 'Service times to be announced', todo: !site.serviceTimes && 'TODO: CONFIRM SERVICE TIME' },
+  { k: 'When', v: site.serviceTimes ? site.serviceTimes.map((t) => `${t.day} ${t.time}`).join(' · ') : 'Service times to be announced', todo: !site.serviceTimes && 'TODO: CONFIRM SERVICE TIME' },
   { k: 'Say hello', v: site.phone ?? site.email ?? 'Contact details to be announced', todo: !(site.phone || site.email) && 'TODO: ADD APPROVED CONTACT' },
 ];
 ---
