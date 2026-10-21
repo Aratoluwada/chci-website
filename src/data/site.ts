@@ -14,8 +14,11 @@ export const site = {
 
   // TODO: CONFIRM street address + verified map pin
   address: null as string | null,
-  // TODO: CONFIRM regular service days and times
-  serviceTimes: null as string | null,
+  // Confirmed by the owner (Oct 2026)
+  serviceTimes: [
+    { day: 'Sunday', time: '9:00 AM – 11:30 AM' },
+    { day: 'Wednesday', time: '5:30 PM – 7:00 PM' },
+  ] as { day: string; time: string }[] | null,
   // TODO: CONFIRM public phone / WhatsApp / email / socials
   phone: null as string | null,
   whatsapp: null as string | null,
