@@ -3,43 +3,41 @@ import { nav, site } from '../data/site';
 const year = new Date().getFullYear();
 ---
 <footer class="footer">
-  <div class="container inner">
-    <div class="brand" data-reveal>
-      <div class="logo"><img src="/brand/chci-logo-clear-480.webp" width="289" height="480" loading="lazy"
-        alt="City Harvest Church International logo: flame above a green circle with a house, 'harvest house' beneath" /></div>
-      <p class="display name">{site.name}</p>
-      <p class="label loc">{site.city}, {site.country}</p>
-    </div>
-
+  <div class="container top">
+    <a class="brand" href="/" data-reveal aria-label={`${site.name} - home`}>
+      <img src="/brand/chci-logo-clear-480.webp" width="289" height="480" loading="lazy"
+        alt="City Harvest Church International logo: flame above a green circle with a house, 'harvest house' beneath" />
+      <span class="display name">{site.name}</span>
+    </a>
     <nav aria-label="Footer" data-reveal style="--d:1">
-      <p class="label head">Explore</p>
-      <ul>{nav.map((n) => <li><a class="link-arrow" href={n.href}>{n.label}</a></li>)}</ul>
+      <ul>{nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
     </nav>
-
-    <div data-reveal style="--d:2">
-      <p class="label head">Visit</p>
-      {/* TODO: CONFIRM ADDRESS and CONTACT before launch */}
-      <p>{site.venue && <strong>{site.venue}<br /></strong>}{site.address ?? 'Address to be announced'}</p>
-      {site.serviceTimes
-        ? site.serviceTimes.map((t) => <p><strong>{t.day}</strong> {t.time}</p>)
-        : <p>Service times to be announced</p>}
-    </div>
   </div>
-  <div class="container legal label"><span>© {year} {site.name}</span></div>
+
+  <div class="container info" data-reveal style="--d:2">
+    {/* TODO: CONFIRM CONTACT details before launch */}
+    <p>{site.venue ? `${site.venue}, ` : ''}{site.address ?? `${site.city}, ${site.country}`}</p>
+    {site.serviceTimes && <p>{site.serviceTimes.map((t) => `${t.day} ${t.time}`).join('  ·  ')}</p>}
+  </div>
+
+  <div class="container legal label">
+    <span>© {year} {site.name}</span>
+    <span>Built by <a href="https://tagstudio.tech" target="_blank" rel="noopener noreferrer">TAG Studio</a></span>
+  </div>
 </footer>
 
 <style>
   .footer { background: var(--color-green-deep); padding-top: var(--space-7); border-top: 1px solid rgb(255 255 255 / 0.1); }
-  .inner { display: grid; gap: var(--space-6); padding-bottom: var(--space-6); }
-  .logo { width: 64px; margin-bottom: var(--space-3); }
-  .name { font-size: clamp(1.3rem, 4.5vw, 1.7rem); max-width: 24ch; }
-  .loc { margin-top: var(--space-2); color: var(--color-accent-gold); }
-  .head { color: var(--color-accent-gold); margin-bottom: var(--space-2); }
-  ul { display: flex; flex-wrap: wrap; gap: 0 var(--space-5); }
-  .link-arrow { min-height: 34px; }
-  .logo img { width: 100%; height: auto; filter: drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 5px rgb(255 255 255 / 0.85)); }
-  ul { list-style: none; margin: 0; padding: 0; }
-  p + p { margin-top: var(--space-2); }
-  .legal { border-top: 1px solid rgb(255 255 255 / 0.16); padding-block: var(--space-4); color: rgb(255 255 255 / 0.65); }
-  @media (min-width: 900px) { .inner { grid-template-columns: 1.4fr 1fr 1fr; } }
+  .top { display: grid; gap: var(--space-5); align-items: center; padding-bottom: var(--space-5); }
+  .brand { display: flex; align-items: center; gap: var(--space-4); text-decoration: none; }
+  .brand img { width: 44px; height: auto; filter: drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 5px rgb(255 255 255 / 0.85)); }
+  .name { font-size: clamp(1.1rem, 4vw, 1.4rem); max-width: 22ch; line-height: 1.05; }
+  nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
+  nav a { display: inline-block; padding: var(--space-2) 0; text-decoration: none; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgb(255 255 255 / 0.85); transition: color 0.3s; }
+  nav a:hover, nav a:focus-visible { color: var(--color-accent-gold); }
+  .info { display: grid; gap: var(--space-1); padding-block: var(--space-4); border-top: 1px solid rgb(255 255 255 / 0.14); color: rgb(255 255 255 / 0.8); font-size: 0.95rem; }
+  .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2) var(--space-5); border-top: 1px solid rgb(255 255 255 / 0.14); padding-block: var(--space-4); color: rgb(255 255 255 / 0.65); }
+  .legal a { color: var(--color-accent-gold); text-decoration: underline; text-underline-offset: 3px; }
+  .legal a:hover, .legal a:focus-visible { color: var(--color-white); }
+  @media (min-width: 900px) { .top { grid-template-columns: 1fr auto; } .info { grid-auto-flow: column; justify-content: space-between; } }
 </style>
