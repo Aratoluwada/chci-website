@@ -5,7 +5,7 @@
   --color-primary-dark: #0a0a0a;   /* near-black page colour (new look) */
   --color-green-deep: #013a1d;     /* deep forest, for gradients */
   --color-ink: #0a0a0a;
-  --color-accent-gold: #fee905;    /* logo flame yellow */
+  --color-accent-gold: #8be3a4;    /* light mint green (replaces the old yellow accent) */
   --color-accent-orange: #fe8605;  /* logo flame orange */
   --color-accent-flame: #fd3705;   /* logo flame red-orange */
   --color-white: #ffffff;
@@ -14,7 +14,7 @@
   --color-text: #141a17;
   --color-muted: #55605a;
   --color-border: #d9d8d0;
-  --color-focus: #fee905;
+  --color-focus: #fe8605;
 
   --font-display: 'Anton', 'Arial Narrow', Impact, sans-serif;
   --font-body: 'Archivo Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
