@@ -1,20 +1,57 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
+import EventCard from '../components/EventCard.astro';
+import { events } from '../data/events';
+import { site } from '../data/site';
+const upcoming = events
+  .filter((e) => new Date((e.endDate ?? e.date) + 'T23:59:59') >= new Date())
+  .sort((a, b) => a.date.localeCompare(b.date));
 ---
 <Base title="Services & Events">
   <PageHeader eyebrow="Join us" title="Services & Events" />
-  <section class="empty">
-    <div class="container" data-reveal>
-      {/* TODO: replace this empty state with approved content (events) */}
-      <p class="label tag">Coming soon</p>
-      <p class="msg">Service times and upcoming programmes will appear here once confirmed.</p>
+
+  <section class="upcoming" aria-labelledby="up-h">
+    <div class="container">
+      <p class="label tag" data-reveal>Coming up</p>
+      <h2 id="up-h" class="display h" data-reveal>Upcoming programmes</h2>
+      {upcoming.length > 0 ? (
+        <ul class="list">
+          {upcoming.map((e, i) => <li data-reveal style={`--d:${i}`}><EventCard event={e} detail solo /></li>)}
+        </ul>
+      ) : (
+        <p class="msg" data-reveal>No upcoming programmes are listed right now. Check back soon.</p>
+      )}
     </div>
   </section>
+
+  {site.serviceTimes && (
+    <section class="regular" aria-labelledby="reg-h">
+      <div class="container">
+        <p class="label tag" data-reveal>Every week</p>
+        <h2 id="reg-h" class="display h" data-reveal>Regular services</h2>
+        <ul class="slots">
+          {site.serviceTimes.map((t, i) => (
+            <li data-reveal style={`--d:${i + 1}`}><span class="day display">{t.day}</span><span class="time">{t.time}</span></li>
+          ))}
+        </ul>
+        <p class="where" data-reveal>{site.venue ? `${site.venue}, ` : ''}{site.address}</p>
+      </div>
+    </section>
+  )}
 </Base>
 
 <style>
-  .empty { background: var(--color-surface); color: var(--color-text); padding: var(--space-9) 0; }
-  .tag { color: var(--color-primary); margin-bottom: var(--space-3); }
-  .msg { font-size: clamp(1.2rem, 4vw, 1.8rem); font-weight: 600; max-width: 32ch; line-height: 1.3; }
+  .upcoming { background: var(--color-surface-alt); color: var(--color-text); padding: var(--space-7) 0; }
+  .regular { background: var(--color-white); color: var(--color-text); padding: var(--space-7) 0; }
+  .tag { color: var(--color-primary); margin-bottom: var(--space-2); }
+  .h { font-size: clamp(2rem, 7vw, 3.4rem); margin-bottom: var(--space-5); }
+  .list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-5); }
+  .msg { font-size: 1.2rem; font-weight: 600; }
+  .slots { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
+  .slots li { display: grid; gap: var(--space-1); padding: var(--space-5); border-left: 6px solid var(--color-primary-bright); background: var(--color-surface); border-radius: 0 10px 10px 0; }
+  .day { font-size: clamp(1.6rem, 5vw, 2.2rem); color: var(--color-primary); }
+  .time { font-size: 1.25rem; font-weight: 600; }
+  .where { margin-top: var(--space-5); color: var(--color-muted); }
+  @media (min-width: 800px) { .slots { grid-template-columns: repeat(2, 1fr); } }
 </style>

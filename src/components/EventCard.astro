@@ -1,0 +1,54 @@
+---
+import type { EventItem } from '../data/events';
+const { event: e, detail = false, solo = false } = Astro.props as { event: EventItem; detail?: boolean; solo?: boolean };
+const d = (iso: string) => new Date(iso + 'T12:00:00');
+const mon = (iso: string) => d(iso).toLocaleDateString('en-NG', { month: 'short' }).toUpperCase();
+const wk = (iso: string) => d(iso).toLocaleDateString('en-NG', { weekday: 'long' });
+const start = d(e.date);
+const end = e.endDate ? d(e.endDate) : null;
+const dateBig = end
+  ? (mon(e.date) === mon(e.endDate!) ? `${start.getDate()}–${end.getDate()} ${mon(e.date)}` : `${start.getDate()} ${mon(e.date)} – ${end.getDate()} ${mon(e.endDate!)}`)
+  : `${start.getDate()} ${mon(e.date)}`;
+const dateLong = end ? `${wk(e.date)} ${start.getDate()} ${mon(e.date)} to ${wk(e.endDate!)} ${end.getDate()} ${mon(e.endDate!)}` : `${wk(e.date)} ${start.getDate()} ${mon(e.date)}`;
+---
+<article class:list={['card', solo && 'solo']}>
+  <div class="when">
+    <p class="date display">{dateBig}</p>
+    <p class="long label">{dateLong}</p>
+  </div>
+  <div class="body">
+    <h3 class="name display">{e.title}</h3>
+    {e.theme && <p class="theme"><span class="label">Theme</span> {e.theme}</p>}
+    {e.sessions && (
+      <ul class="sessions">
+        {e.sessions.map((s) => <li><span class="label">{s.label}</span> <strong>{s.time}</strong></li>)}
+      </ul>
+    )}
+    {e.time && !e.sessions && <p class="meta">{e.time}</p>}
+    {(e.location || e.address) && <p class="meta"><strong>{e.location}</strong>{e.location && e.address ? ', ' : ''}{e.address}</p>}
+    {detail && (e.hosts || e.guest) && (
+      <p class="people">
+        {e.hosts && <span><span class="label">Hosts</span> {e.hosts.join(' &amp; ').replace('&amp;', '&')}</span>}
+        {e.guest && <span><span class="label">Guest minister</span> {e.guest}</span>}
+      </p>
+    )}
+    {e.description && <p class="desc">{e.description}</p>}
+  </div>
+</article>
+
+<style>
+  .card { background: var(--color-white); color: var(--color-text); border-top: 4px solid var(--color-primary-bright); border-radius: 10px; padding: var(--space-6); display: grid; gap: var(--space-4); height: 100%; }
+  .date { font-size: clamp(2.2rem, 8vw, 3.4rem); color: var(--color-primary); }
+  .long { color: var(--color-muted); margin-top: var(--space-1); }
+  .name { font-size: clamp(1.5rem, 5vw, 2.2rem); line-height: 1; }
+  .body { display: grid; gap: var(--space-2); align-content: start; }
+  .label { color: var(--color-primary); margin-right: var(--space-2); }
+  .theme { font-size: 1.15rem; font-weight: 700; }
+  .sessions { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-5); }
+  .meta { color: var(--color-muted); }
+  .meta strong { color: var(--color-text); }
+  .people { display: grid; gap: var(--space-1); margin-top: var(--space-2); }
+  @media (min-width: 800px) {
+    .solo { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); align-items: center; column-gap: var(--space-8); padding: var(--space-7); }
+  }
+</style>
