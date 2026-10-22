@@ -5,9 +5,9 @@ import EventCard from '../components/EventCard.astro';
 import { events } from '../data/events';
 import { site } from '../data/site';
 import { Image } from 'astro:assets';
-import { eventsHeaderPhoto, servicesPhoto } from '../data/photos';
+import { eventsHeaderPhoto, servicesPhotos } from '../data/photos';
 const imgs = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.{jpg,jpeg,png,webp,avif}', { eager: true });
-const svcImg = servicesPhoto.image ? imgs[`../assets/photos/${servicesPhoto.image}`]?.default : undefined;
+const svcImg = (i: number) => { const n = servicesPhotos[i]?.image; return n ? imgs[`../assets/photos/${n}`]?.default : undefined; };
 const upcoming = events
   .filter((e) => new Date((e.endDate ?? e.date) + 'T23:59:59') >= new Date())
   .sort((a, b) => a.date.localeCompare(b.date));
@@ -29,43 +29,32 @@ const upcoming = events
     </div>
   </section>
 
-  {site.serviceTimes && (
-    <section class:list={['regular', svcImg && 'has-photo']} aria-labelledby="reg-h">
-      {svcImg && <div class="bg" aria-hidden="true"><Image src={svcImg} alt="" widths={[640, 1070]} sizes="100vw" loading="lazy" /></div>}
+  {site.serviceTimes?.map((t, i) => (
+    <section class:list={['svc', svcImg(i) && 'has-photo']} aria-labelledby={`svc-h-${i}`}>
+      {svcImg(i) && <div class="bg" aria-hidden="true"><Image src={svcImg(i)!} alt="" widths={[640, 1070]} sizes="100vw" loading="lazy" /></div>}
       <div class="container inner">
-        <p class="label tag" data-reveal>Every week</p>
-        <h2 id="reg-h" class="display h" data-reveal>Regular services</h2>
-        <ul class="slots">
-          {site.serviceTimes.map((t, i) => (
-            <li data-reveal style={`--d:${i + 1}`}><span class="day display">{t.day}</span><span class="time">{t.time}</span></li>
-          ))}
-        </ul>
-        <p class="where" data-reveal>{site.venue ? `${site.venue}, ` : ''}{site.address}</p>
+        <p class="label tag" data-reveal>Every {t.day}</p>
+        <h2 id={`svc-h-${i}`} class="display h" data-reveal>{t.name}</h2>
+        <p class="time display" data-reveal style="--d:1">{t.time}</p>
+        <p class="where" data-reveal style="--d:2">{site.venue ? `${site.venue}, ` : ''}{site.address}</p>
       </div>
     </section>
-  )}
+  ))}
 </Base>
 
 <style>
   .upcoming { background: var(--color-surface-alt); color: var(--color-text); padding: var(--space-7) 0; }
-  .regular { background: var(--color-white); color: var(--color-text); padding: var(--space-7) 0; }
   .tag { color: var(--color-primary); margin-bottom: var(--space-2); }
   .h { font-size: clamp(2rem, 7vw, 3.4rem); margin-bottom: var(--space-5); }
   .list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-5); }
   .msg { font-size: 1.2rem; font-weight: 600; }
-  .slots { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
-  .slots li { display: grid; gap: var(--space-1); padding: var(--space-5); border-left: 6px solid var(--color-primary-bright); background: var(--color-surface); border-radius: 0 10px 10px 0; }
-  .day { font-size: clamp(1.6rem, 5vw, 2.2rem); color: var(--color-primary); }
-  .time { font-size: 1.25rem; font-weight: 600; }
-  .where { margin-top: var(--space-5); color: var(--color-muted); }
-  @media (min-width: 800px) { .slots { grid-template-columns: repeat(2, 1fr); } }
-  .regular { position: relative; isolation: isolate; overflow: hidden; }
+  .svc { position: relative; isolation: isolate; overflow: hidden; background: var(--color-primary-dark); color: var(--color-white); padding: var(--space-8) 0; min-height: 60svh; display: flex; align-items: flex-end; }
+  .inner { position: relative; width: 100%; }
+  .svc .h { margin-bottom: var(--space-3); }
+  .time { font-size: clamp(1.6rem, 5vw, 2.4rem); color: var(--color-accent-gold); }
+  .where { margin-top: var(--space-4); color: rgb(255 255 255 / 0.85); max-width: 44ch; }
+  .svc .tag { color: var(--color-accent-gold); }
   .bg { position: absolute; inset: 0; z-index: -1; }
   .bg :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
   .bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgb(0 0 0 / 0.9) 0%, rgb(0 0 0 / 0.7) 55%, rgb(0 0 0 / 0.58) 100%); }
-  .has-photo { color: var(--color-white); background: var(--color-primary-dark); }
-  .has-photo .tag { color: var(--color-accent-gold); }
-  .has-photo .day { color: var(--color-accent-gold); }
-  .has-photo .slots li { background: rgb(0 0 0 / 0.5); border-left-color: var(--color-primary-bright); backdrop-filter: blur(6px); }
-  .has-photo .where { color: rgb(255 255 255 / 0.8); }
 </style>
