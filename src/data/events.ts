@@ -15,6 +15,7 @@ export interface EventItem {
   guest?: string;
   description?: string;
   link?: string;      // only tested/approved links
+  linkLabel?: string; // button text for the link
 }
 
 export const events: EventItem[] = [
@@ -32,5 +33,7 @@ export const events: EventItem[] = [
     address: '1, Somorin-Kemta Road, Somorin, Obantoko, Abeokuta',
     hosts: ['Rev. Peace Toluwade', 'Pastor Joy Toluwade'],
     guest: 'Rev. Tunde Amosun',
+    link: 'https://campmeeting-2026-gamma.vercel.app', // owner-supplied event site (checked live)
+    linkLabel: "I'm attending",
   },
 ];
