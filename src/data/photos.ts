@@ -20,3 +20,13 @@ export const visitPhoto: { image: string | null; alt: string } = {
   image: 'visit-congregation.jpg',
   alt: 'Members of the congregation seated and listening during a service',
 };
+
+// Services & Events page: header photo and the Regular services background.
+export const eventsHeaderPhoto: { image: string | null; alt: string } = {
+  image: 'events-header.jpg',
+  alt: 'Young people gathered around a worship leader during a service',
+};
+export const servicesPhoto: { image: string | null; alt: string } = {
+  image: 'services-prayer.jpg',
+  alt: 'Worshippers standing in prayer during a service',
+};
