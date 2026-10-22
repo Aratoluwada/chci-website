@@ -16,9 +16,9 @@
   --color-border: #d9d8d0;
   --color-focus: #fe8605;
 
-  --font-display: 'Archivo Variable', 'Arial Black', Impact, sans-serif;
-  --font-body: 'Archivo Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'Archivo Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Red Hat Display Variable', 'Arial Black', Impact, sans-serif;
+  --font-body: 'Red Hat Display Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Red Hat Display Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px;
   --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 80px; --space-10: 112px;
@@ -57,8 +57,8 @@ h1, h2, h3, p { margin: 0; }
 
 /* ===== Type helpers ===== */
 .display {
-  font-family: var(--font-display); font-weight: 900; font-stretch: 68%; text-transform: uppercase;
-  line-height: 0.98; letter-spacing: 0; word-spacing: 0.14em;
+  font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+  line-height: 0.98; letter-spacing: 0; word-spacing: 0.04em;
 }
 .label {
   font-family: var(--font-body); font-weight: 700; font-size: 0.75rem;
