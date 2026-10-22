@@ -21,12 +21,12 @@ export const visitPhoto: { image: string | null; alt: string } = {
   alt: 'Members of the congregation seated and listening during a service',
 };
 
-// Services & Events page: header photo and the Regular services background.
+// Services & Events page: header photo and one background per regular service (Sunday first, then Wednesday).
 export const eventsHeaderPhoto: { image: string | null; alt: string } = {
   image: 'events-header.jpg',
   alt: 'Young people gathered around a worship leader during a service',
 };
-export const servicesPhoto: { image: string | null; alt: string } = {
-  image: 'services-prayer.jpg',
-  alt: 'Worshippers standing in prayer during a service',
-};
+export const servicesPhotos: { image: string | null; alt: string }[] = [
+  { image: 'services-sunday.jpg', alt: 'Worshippers standing in prayer during a service' },
+  { image: 'services-wednesday.jpg', alt: 'A minister praying into a microphone' },
+];

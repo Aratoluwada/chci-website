@@ -17,9 +17,9 @@ export const site = {
   address: '1, Somorin-Kemta Road, Somorin, Obantoko, Abeokuta, Nigeria' as string | null,
   // Confirmed by the owner (Oct 2026)
   serviceTimes: [
-    { day: 'Sunday', time: '9:00 AM – 11:30 AM' },
-    { day: 'Wednesday', time: '5:30 PM – 7:00 PM' },
-  ] as { day: string; time: string }[] | null,
+    { day: 'Sunday', name: 'Sunday Service', time: '9:00 AM – 11:30 AM' },
+    { day: 'Wednesday', name: 'Building Capacity Service', time: '5:30 PM – 7:00 PM' },
+  ] as { day: string; name: string; time: string }[] | null,
   // TODO: CONFIRM public phone / WhatsApp / email / socials
   phone: null as string | null,
   whatsapp: '+2347033059736' as string | null,
