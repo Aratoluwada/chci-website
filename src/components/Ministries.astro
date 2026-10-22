@@ -1,13 +1,11 @@
 ---
-import DraftTag from './DraftTag.astro';
 import { ministries } from '../data/ministries';
 ---
 <section class="min" aria-labelledby="min-h">
   <div class="container">
     <div class="head">
       <p class="label eyebrow" data-reveal>For everyone</p>
-      <h2 id="min-h" class="display title" data-words>Room for the whole family</h2>
-      <p class="label" data-reveal><DraftTag /></p>
+      <h2 id="min-h" class="display title" data-words>Who we are</h2>
     </div>
     <ul class="list">
       {ministries.map((m, i) => (

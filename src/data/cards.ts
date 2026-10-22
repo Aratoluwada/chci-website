@@ -5,15 +5,14 @@
  */
 export interface PhotoCard { image: string; alt: string; title: string; note: string }
 
-// Leadership: names/roles are NOT known. Photos are stand-ins.
+// Leadership: names and roles supplied by the church. Photos should be confirmed.
 export const leaderCards: PhotoCard[] = [
-  { image: 'leader-1.jpg', alt: 'A woman in a red jacket speaking at a podium', title: 'Name to be added', note: 'Role' },
-  { image: 'leader-2.jpg', alt: 'A man in a grey outfit with a headset microphone, fist raised', title: 'Name to be added', note: 'Role' },
-  { image: 'leader-3.jpg', alt: 'A woman in a white shirt and patterned skirt speaking into a microphone', title: 'Name to be added', note: 'Role' },
+  { image: 'leader-2.jpg', alt: 'Rev Peace Toluwade, Senior Pastor', title: 'Rev Peace Toluwade', note: 'Senior Pastor' },
+  { image: 'leader-1.jpg', alt: 'Pastor Joy Toluwade, Associate Pastor', title: 'Pastor Joy Toluwade', note: 'Associate Pastor' },
 ];
 
-// Music: song titles are NOT known. Photos are stand-ins.
+// Music: song titles supplied by the church. Lyrics to be added. Photos are stand-ins.
 export const songCards: PhotoCard[] = [
-  { image: 'song-1.jpg', alt: 'Women singing in matching purple prints', title: 'Song title', note: 'Lyrics coming soon' },
-  { image: 'song-2.jpg', alt: 'A keyboardist playing during a service', title: 'Song title', note: 'Lyrics coming soon' },
+  { image: 'song-1.jpg', alt: 'Women singing in matching purple prints', title: 'Gbani Gbani', note: 'See lyrics' },
+  { image: 'song-2.jpg', alt: 'A keyboardist playing during a service', title: "I'm Born Again", note: 'See lyrics' },
 ];
