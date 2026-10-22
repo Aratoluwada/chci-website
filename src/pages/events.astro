@@ -15,6 +15,18 @@ const upcoming = events
 <Base title="Services & Events">
   <PageHeader eyebrow="Join us" title="Services & Events" image={eventsHeaderPhoto.image} alt={eventsHeaderPhoto.alt} />
 
+  {site.serviceTimes?.map((t, i) => (
+    <section class:list={['svc', svcImg(i) && 'has-photo']} aria-labelledby={`svc-h-${i}`}>
+      {svcImg(i) && <div class="bg" aria-hidden="true"><Image src={svcImg(i)!} alt="" widths={[640, 1070]} sizes="100vw" loading="lazy" /></div>}
+      <div class="container inner">
+        <p class="label tag" data-reveal>Every {t.day}</p>
+        <h2 id={`svc-h-${i}`} class="display h" data-reveal>{t.name}</h2>
+        <p class="time display" data-reveal style="--d:1">{t.time}</p>
+        <p class="where" data-reveal style="--d:2">{site.venue ? `${site.venue}, ` : ''}{site.address}</p>
+      </div>
+    </section>
+  ))}
+
   <section class="upcoming" aria-labelledby="up-h">
     <div class="container">
       <p class="label tag" data-reveal>Coming up</p>
@@ -29,17 +41,6 @@ const upcoming = events
     </div>
   </section>
 
-  {site.serviceTimes?.map((t, i) => (
-    <section class:list={['svc', svcImg(i) && 'has-photo']} aria-labelledby={`svc-h-${i}`}>
-      {svcImg(i) && <div class="bg" aria-hidden="true"><Image src={svcImg(i)!} alt="" widths={[640, 1070]} sizes="100vw" loading="lazy" /></div>}
-      <div class="container inner">
-        <p class="label tag" data-reveal>Every {t.day}</p>
-        <h2 id={`svc-h-${i}`} class="display h" data-reveal>{t.name}</h2>
-        <p class="time display" data-reveal style="--d:1">{t.time}</p>
-        <p class="where" data-reveal style="--d:2">{site.venue ? `${site.venue}, ` : ''}{site.address}</p>
-      </div>
-    </section>
-  ))}
 </Base>
 
 <style>
