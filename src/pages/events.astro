@@ -15,6 +15,16 @@ const upcoming = events
 <Base title="Services & Events">
   <PageHeader eyebrow="Join us" title="Services & Events" image={eventsHeaderPhoto.image} alt={eventsHeaderPhoto.alt} />
 
+  {site.serviceTimes && (
+    <section class="intro" aria-labelledby="intro-h">
+      <div class="container intro__in">
+        <p class="label tag" data-reveal>Every week</p>
+        <h2 id="intro-h" class="display h" data-reveal>Our weekly services</h2>
+        <p class="lead" data-reveal style="--d:1">We gather twice a week, on Sunday and on Wednesday. Here is when and where to find us. Everyone is welcome.</p>
+      </div>
+    </section>
+  )}
+
   {site.serviceTimes?.map((t, i) => (
     <section class:list={['svc', svcImg(i) && 'has-photo']} aria-labelledby={`svc-h-${i}`}>
       {svcImg(i) && <div class="bg" aria-hidden="true"><Image src={svcImg(i)!} alt="" widths={[640, 1070]} sizes="100vw" loading="lazy" /></div>}
@@ -45,6 +55,9 @@ const upcoming = events
 
 <style>
   .upcoming { background: var(--color-surface-alt); color: var(--color-text); padding: var(--space-7) 0; }
+  .intro { background: var(--color-white); color: var(--color-text); padding: var(--space-7) 0; }
+  .intro .h { margin-bottom: var(--space-3); }
+  .lead { max-width: 46ch; font-size: 1.2rem; color: var(--color-muted); }
   .tag { color: var(--color-primary); margin-bottom: var(--space-2); }
   .h { font-size: clamp(2rem, 7vw, 3.4rem); margin-bottom: var(--space-5); }
   .list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-5); }
