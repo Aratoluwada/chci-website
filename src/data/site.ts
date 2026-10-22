@@ -5,7 +5,7 @@
  */
 export const site = {
   /** TRUE while copy is placeholder: shows small dashed "Draft" chips next to unapproved text. Set to false at launch. */
-  draftMode: true,
+  draftMode: false,
 
   name: 'City Harvest Church International',
   short: 'CHCI',

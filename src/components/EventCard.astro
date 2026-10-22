@@ -3,13 +3,13 @@ import type { EventItem } from '../data/events';
 const { event: e, detail = false, solo = false } = Astro.props as { event: EventItem; detail?: boolean; solo?: boolean };
 const d = (iso: string) => new Date(iso + 'T12:00:00');
 const mon = (iso: string) => d(iso).toLocaleDateString('en-NG', { month: 'short' }).toUpperCase();
-const wk = (iso: string) => d(iso).toLocaleDateString('en-NG', { weekday: 'long' });
+const wk = (iso: string) => d(iso).toLocaleDateString('en-NG', { weekday: 'short' });
 const start = d(e.date);
 const end = e.endDate ? d(e.endDate) : null;
 const dateBig = end
   ? (mon(e.date) === mon(e.endDate!) ? `${start.getDate()}–${end.getDate()} ${mon(e.date)}` : `${start.getDate()} ${mon(e.date)} – ${end.getDate()} ${mon(e.endDate!)}`)
   : `${start.getDate()} ${mon(e.date)}`;
-const dateLong = end ? `${wk(e.date)} ${start.getDate()} ${mon(e.date)} to ${wk(e.endDate!)} ${end.getDate()} ${mon(e.endDate!)}` : `${wk(e.date)} ${start.getDate()} ${mon(e.date)}`;
+const dateLong = end ? `${wk(e.date)} ${start.getDate()} – ${wk(e.endDate!)} ${end.getDate()} ${mon(e.endDate!)}` : `${wk(e.date)} ${start.getDate()} ${mon(e.date)}`;
 ---
 <article class:list={['card', solo && 'solo']}>
   <div class="when">
@@ -21,7 +21,7 @@ const dateLong = end ? `${wk(e.date)} ${start.getDate()} ${mon(e.date)} to ${wk(
     {e.theme && <p class="theme"><span class="label">Theme</span> {e.theme}</p>}
     {e.sessions && (
       <ul class="sessions">
-        {e.sessions.map((s) => <li><span class="label">{s.label}</span> <strong>{s.time}</strong></li>)}
+        {e.sessions.map((s) => <li><span class="label">{s.label}</span><strong>{s.time}</strong></li>)}
       </ul>
     )}
     {e.time && !e.sessions && <p class="meta">{e.time}</p>}
@@ -45,10 +45,14 @@ const dateLong = end ? `${wk(e.date)} ${start.getDate()} ${mon(e.date)} to ${wk(
   .body { display: grid; gap: var(--space-2); align-content: start; }
   .label { color: var(--color-primary); margin-right: var(--space-2); }
   .theme { font-size: 1.15rem; font-weight: 700; }
-  .sessions { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-5); }
+  .sessions { list-style: none; margin: var(--space-2) 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2); }
+  .sessions li { background: var(--color-surface-alt); border-radius: 8px; padding: var(--space-3); display: grid; gap: 2px; }
+  .sessions .label { margin: 0; font-size: 0.62rem; }
+  .sessions strong { font-size: 0.95rem; line-height: 1.2; }
   .meta { color: var(--color-muted); }
   .meta strong { color: var(--color-text); }
   .go { justify-self: start; margin-top: var(--space-3); }
+  @media (max-width: 599px) { .card { padding: var(--space-5); } .go { justify-self: stretch; justify-content: center; } .meta { font-size: 0.95rem; } }
   .people { display: grid; gap: var(--space-1); margin-top: var(--space-2); }
   @media (min-width: 800px) {
     .solo { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); align-items: center; column-gap: var(--space-8); padding: var(--space-7); }

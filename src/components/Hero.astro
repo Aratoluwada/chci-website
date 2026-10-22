@@ -114,6 +114,8 @@ const photo = hero.image ? heroPhotos[`../assets/hero/${hero.image}`]?.default :
     margin-top: var(--space-6); animation: fade-up 0.9s var(--ease-out) 0.55s both;
   }
 
+  @media (max-width: 599px) { .hero__actions { flex-direction: column; align-items: stretch; } .hero__actions :global(.btn), .hero__actions :global(.link-arrow) { justify-content: center; text-align: center; } }
+
   .hero__scroll {
     position: absolute; left: var(--gutter); bottom: var(--space-5); display: none; align-items: center; gap: var(--space-3);
     text-decoration: none; opacity: 0.8;

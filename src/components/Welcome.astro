@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import DraftTag from './DraftTag.astro';
 import { site } from '../data/site';
 import { welcomeCards } from '../data/welcome';
 
@@ -15,7 +14,7 @@ const photoFor = (name: string | null) => (name ? photos[`../assets/welcome/${na
       {/* TODO: owner to approve this welcome statement */}
       <h2 id="welcome-h" class="display statement" data-words>We're glad you're here. There's a place for you at City Harvest.</h2>
       {/* TODO: replace with the church's approved one-line introduction */}
-      <p class="intro" data-reveal style="--d:2">You're welcome at {site.name} in {site.city}.<DraftTag /></p>
+      <p class="intro" data-reveal style="--d:2">You're welcome at {site.name} in {site.city}.</p>
     </div>
 
     <ul class="cards">
