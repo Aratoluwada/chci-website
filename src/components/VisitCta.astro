@@ -2,6 +2,8 @@
 import { Image } from 'astro:assets';
 import { site } from '../data/site';
 import { visitPhoto } from '../data/photos';
+const maps = site.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((site.venue ? site.venue + ', ' : '') + site.address)}` : null;
+const wa = site.whatsapp ? `https://wa.me/${String(site.whatsapp).replace(/\D/g, '')}` : null;
 const photos = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.{jpg,jpeg,png,webp,avif}', { eager: true });
 const photo = visitPhoto.image ? photos[`../assets/photos/${visitPhoto.image}`]?.default : undefined;
 ---
@@ -12,14 +14,37 @@ const photo = visitPhoto.image ? photos[`../assets/photos/${visitPhoto.image}`]?
     </div>
   )}
   <div class="container inner">
+    <div class="copy">
     <p class="label eyebrow" data-reveal>Visit us</p>
     {/* TODO: owner to approve this closing line */}
     <h2 id="visit-h" class="display title" data-words>We'd love to meet you.</h2>
-    <p class="where" data-reveal style="--d:2">{site.venue ? `${site.venue}, ` : ''}{site.address ?? `${site.city}, ${site.country}`}</p>
     <div class="actions" data-reveal style="--d:3">
       <a class="btn btn--primary pill" href={site.primaryCta.href} data-magnetic>{site.primaryCta.label} <span class="btn__arrow" aria-hidden="true">→</span></a>
       <a class="link-arrow" href={site.secondaryCta.href}>{site.secondaryCta.label}</a>
     </div>
+    </div>
+    <ul class="info" data-reveal style="--d:3">
+      {site.serviceTimes && (
+        <li class="tile">
+          <span class="label k">Service times</span>
+          {site.serviceTimes.map((t) => <span class="v"><strong>{t.day}</strong> {t.time}</span>)}
+        </li>
+      )}
+      {site.address && (
+        <li class="tile">
+          <span class="label k">Where</span>
+          <span class="v"><strong>{site.venue}</strong> {site.address}</span>
+          {maps && <a class="tile__go" href={maps} target="_blank" rel="noopener noreferrer">Get directions →</a>}
+        </li>
+      )}
+      {wa && (
+        <li class="tile">
+          <span class="label k">Say hello</span>
+          <span class="v">Chat with us on WhatsApp</span>
+          <a class="tile__go" href={wa} target="_blank" rel="noopener noreferrer">Message us →</a>
+        </li>
+      )}
+    </ul>
   </div>
 </section>
 
@@ -31,6 +56,14 @@ const photo = visitPhoto.image ? photos[`../assets/photos/${visitPhoto.image}`]?
   .visit::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgb(0 0 0 / 0.9) 0%, rgb(0 0 0 / 0.66) 50%, rgb(0 0 0 / 0.5) 100%); }
   @media (prefers-reduced-motion: no-preference) { .bg :global(img) { animation: slow-zoom 24s ease-in-out infinite alternate; } }
   @keyframes slow-zoom { to { transform: scale(1.08); } }
+  .copy { display: grid; gap: var(--space-4); justify-items: start; }
+  .info { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); width: 100%; }
+  .tile { display: grid; gap: var(--space-1); align-content: start; padding: var(--space-4) var(--space-5); border-radius: 12px; background: rgb(0 0 0 / 0.55); border: 1px solid rgb(255 255 255 / 0.18); backdrop-filter: blur(6px); }
+  .tile .k { color: var(--color-accent-gold); }
+  .tile .v { font-size: 0.98rem; line-height: 1.45; }
+  .tile__go { margin-top: var(--space-2); color: var(--color-accent-gold); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; }
+  .tile__go:hover, .tile__go:focus-visible { color: var(--color-white); }
+  @media (min-width: 900px) { .info { grid-template-columns: repeat(3, 1fr); } }
   .inner { width: 100%; display: grid; gap: var(--space-5); justify-items: start; position: relative; }
   .eyebrow { font-weight: 500; color: var(--color-accent-gold); }
   .title { font-stretch: 68%; line-height: 0.95; font-size: clamp(2rem, 7vw, 3.6rem); max-width: 20ch; color: var(--color-white); }

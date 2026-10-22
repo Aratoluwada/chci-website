@@ -1,6 +1,10 @@
 ---
 import { Image } from 'astro:assets';
 import { leadershipPhoto } from '../data/photos';
+import { leaderCards } from '../data/cards';
+import DraftTag from './DraftTag.astro';
+const cardImgs = import.meta.glob<{ default: ImageMetadata }>('../assets/cards/*.{jpg,jpeg,png,webp,avif}', { eager: true });
+const cardImg = (n: string) => cardImgs[`../assets/cards/${n}`]?.default;
 const photos = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.{jpg,jpeg,png,webp,avif}', { eager: true });
 const photo = leadershipPhoto.image ? photos[`../assets/photos/${leadershipPhoto.image}`]?.default : undefined;
 ---
@@ -11,11 +15,21 @@ const photo = leadershipPhoto.image ? photos[`../assets/photos/${leadershipPhoto
     </div>
   )}
   <div class="container inner">
+    <div class="copy">
     <p class="label eyebrow" data-reveal>Leadership</p>
     {/* TODO: owner to approve this wording; leader names, titles and photos come from the Leadership page */}
     <h2 id="lead-h" class="display title" data-words>The people who serve here</h2>
     <p class="text" data-reveal style="--d:2">Meet the leaders who care for our church family.</p>
     <a class="btn btn--primary pill" href="/leadership" data-reveal style="--d:3">Meet our leaders <span class="btn__arrow" aria-hidden="true">→</span></a>
+    </div>
+    <ul class="people" data-reveal style="--d:3" aria-label="Leaders (placeholders)">
+      {leaderCards.map((c) => (
+        <li class="person">
+          {cardImg(c.image) && <Image src={cardImg(c.image)} alt={c.alt} widths={[240, 400]} sizes="(min-width: 900px) 14vw, 60vw" class="person__img" loading="lazy" />}
+          <span class="person__t"><strong>{c.title}</strong><span class="label">{c.note}</span></span>
+        </li>
+      ))}
+    </ul>
   </div>
 </section>
 
@@ -32,6 +46,14 @@ const photo = leadershipPhoto.image ? photos[`../assets/photos/${leadershipPhoto
   .bg :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; display: block; }
   .bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgb(0 0 0 / 0.9) 0%, rgb(0 0 0 / 0.68) 50%, rgb(0 0 0 / 0.5) 100%); }
   @media (min-width: 800px) { .bg::after { background: linear-gradient(0deg, rgb(0 0 0 / 0.9) 0%, rgb(0 0 0 / 0.66) 50%, rgb(0 0 0 / 0.5) 100%); } }
+  .inner { gap: var(--space-5); }
+  .copy { display: grid; gap: var(--space-4); justify-items: start; }
+  .people { list-style: none; margin: 0; padding: 0 0 var(--space-2); width: 100%; display: flex; gap: var(--space-4); overflow-x: auto; scroll-snap-type: x mandatory; }
+  .person { flex: 0 0 min(62vw, 230px); scroll-snap-align: start; border-radius: 12px; overflow: hidden; background: rgb(0 0 0 / 0.55); border: 1px solid rgb(255 255 255 / 0.18); backdrop-filter: blur(6px); display: grid; }
+  .person :global(.person__img) { width: 100%; aspect-ratio: 4 / 4.4; object-fit: cover; object-position: 50% 25%; }
+  .person__t { display: grid; gap: 2px; padding: var(--space-3) var(--space-4); }
+  .person__t .label { font-size: 0.62rem; color: rgb(255 255 255 / 0.65); }
+  @media (min-width: 900px) { .inner { grid-template-columns: 1fr auto; align-items: end; column-gap: var(--space-8); } .people { width: auto; overflow: visible; } .person { flex: 0 0 190px; } }
   .has-photo { color: var(--color-white); }
   .has-photo .eyebrow { color: var(--color-accent-gold); }
   .has-photo .title { color: var(--color-white); }
