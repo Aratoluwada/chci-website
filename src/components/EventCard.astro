@@ -33,6 +33,7 @@ const dateLong = end ? `${wk(e.date)} ${start.getDate()} ${mon(e.date)} to ${wk(
       </p>
     )}
     {e.description && <p class="desc">{e.description}</p>}
+    {e.link && <a class="btn btn--primary go" href={e.link} target="_blank" rel="noopener noreferrer">{e.linkLabel ?? 'Event website'} <span class="btn__arrow" aria-hidden="true">→</span></a>}
   </div>
 </article>
 
@@ -47,6 +48,7 @@ const dateLong = end ? `${wk(e.date)} ${start.getDate()} ${mon(e.date)} to ${wk(
   .sessions { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-5); }
   .meta { color: var(--color-muted); }
   .meta strong { color: var(--color-text); }
+  .go { justify-self: start; margin-top: var(--space-3); }
   .people { display: grid; gap: var(--space-1); margin-top: var(--space-2); }
   @media (min-width: 800px) {
     .solo { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); align-items: center; column-gap: var(--space-8); padding: var(--space-7); }
