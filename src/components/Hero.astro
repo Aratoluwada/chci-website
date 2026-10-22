@@ -102,7 +102,7 @@ const photo = hero.image ? heroPhotos[`../assets/hero/${hero.image}`]?.default :
   .hero__cursor { margin-left: 2px; animation: blink 1.1s steps(1) infinite; }
   @keyframes blink { 50% { opacity: 0; } }
 
-  .hero__title { font-stretch: 68%; line-height: 0.95; font-size: clamp(2.8rem, 11vw, 6.2rem); max-width: 18ch; text-wrap: balance; }
+  .hero__title { line-height: 0.95; font-size: clamp(2.8rem, 11vw, 6.2rem); max-width: 18ch; text-wrap: balance; }
   .line { display: block; overflow: hidden; padding-block: 0.04em; margin-block: -0.04em; }
   .line__in { display: block; animation: line-up 0.95s var(--ease-out) calc(0.12s + var(--i) * 0.11s) both; }
   .line:nth-child(2) .line__in { color: var(--color-accent-gold); }
