@@ -34,6 +34,6 @@ export const events: EventItem[] = [
     hosts: ['Rev. Peace Toluwade', 'Pastor Joy Toluwade'],
     guest: 'Rev. Tunde Amosun',
     link: 'https://campmeeting-2026-gamma.vercel.app', // owner-supplied event site (checked live)
-    linkLabel: "I'm attending",
+    linkLabel: "See more details",
   },
 ];
