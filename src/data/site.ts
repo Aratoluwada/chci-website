@@ -27,12 +27,12 @@ export const site = {
   social: { instagram: null, facebook: 'https://www.facebook.com/Cityharvesthouse', youtube: 'https://youtube.com/@peacetoluwade8321' } as Record<string, string | null>,
 
   // TODO: owner to choose final primary CTA wording ("Plan Your Visit" is a placeholder)
-  primaryCta: { label: 'Plan Your Visit', href: '/visit' },
+  primaryCta: { label: 'Visit Us', href: '/visit' },
   secondaryCta: { label: 'Service Times', href: '/visit#times' },
 
   // TODO: owner to approve hero copy. Concept wording from the brief, not a confirmed slogan.
   hero: {
-    eyebrow: 'Welcome to City Harvest',
+    eyebrow: 'Welcome to City Harvest Church',
     lines: ['Building a', 'people of', 'godly character.'],
     // File name inside src/assets/hero/. null = graphic-only hero.
     image: 'hero.jpg' as string | null,
