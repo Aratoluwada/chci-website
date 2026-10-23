@@ -2,8 +2,6 @@
 import { Image } from 'astro:assets';
 import { site } from '../data/site';
 import { visitPhoto } from '../data/photos';
-const maps = site.mapLink ? site.mapLink : site.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((site.venue ? site.venue + ', ' : '') + site.address)}` : null;
-const wa = site.whatsapp ? `https://wa.me/${String(site.whatsapp).replace(/\D/g, '')}` : null;
 const photos = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.{jpg,jpeg,png,webp,avif}', { eager: true });
 const photo = visitPhoto.image ? photos[`../assets/photos/${visitPhoto.image}`]?.default : undefined;
 ---
@@ -34,16 +32,14 @@ const photo = visitPhoto.image ? photos[`../assets/photos/${visitPhoto.image}`]?
         <li class="tile">
           <span class="label k">Where</span>
           <span class="v"><strong>{site.venue}</strong> {site.address}</span>
-          {maps && <a class="tile__go" href={maps} target="_blank" rel="noopener noreferrer">Get directions →</a>}
+          <a class="tile__go" href="/visit#where">Get directions →</a>
         </li>
       )}
-      {wa && (
-        <li class="tile">
-          <span class="label k">Say hello</span>
-          <span class="v">Chat with us on WhatsApp</span>
-          <a class="tile__go" href={wa} target="_blank" rel="noopener noreferrer">Message us →</a>
-        </li>
-      )}
+      <li class="tile">
+        <span class="label k">Say hello</span>
+        <span class="v">Send us a message and we will reply.</span>
+        <a class="tile__go" href="/visit#contact">Message us →</a>
+      </li>
     </ul>
   </div>
 </section>
