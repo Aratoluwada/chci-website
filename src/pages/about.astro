@@ -49,7 +49,7 @@ const storyPics = [
       <p class="label tag" data-reveal>Our core values</p>
       <h2 id="values-h" class="display h" data-reveal>{site.slogan}</h2>
       <figure class="verse" data-reveal style="--d:1">
-        <blockquote>“{verse}”</blockquote>
+        <blockquote><span class="q q--sm" aria-hidden="true">“</span>{verse}<span class="q q--sm" aria-hidden="true">”</span></blockquote>
         <figcaption class="label">Matthew 5:13 (KJV)</figcaption>
       </figure>
       <p class="values__p" data-reveal style="--d:2">Our values spell <strong>FLAVOUR</strong>.</p>
@@ -148,10 +148,12 @@ const storyPics = [
   .mission { background: var(--color-green-deep); color: var(--color-white); }
   .mission .tag { color: var(--color-accent-gold); }
   .mission__in { display: grid; gap: var(--space-5); }
-  .statement { position: relative; }
-  .q { font-size: 2.8em; line-height: 0; color: var(--color-accent-gold); font-weight: 900; vertical-align: -0.38em; }
-  .q--open { margin-right: 0.08em; }
-  .q--close { margin-left: 0.05em; }
+  /* Classic curly double quotes: the opening pair looks like "66" and the closing pair like "99". A serif font is used for the marks only. */
+  .q { font-family: Georgia, 'Times New Roman', Times, serif; font-weight: 700; line-height: 0; color: var(--color-accent-gold); }
+  .statement .q { font-size: 2.6em; vertical-align: -0.32em; }
+  .q--open { margin-right: 0.1em; }
+  .q--close { margin-left: 0.08em; }
+  .q--sm { font-size: 1.9em; vertical-align: -0.3em; color: var(--color-primary); }
   .statement { margin: 0; font-size: clamp(1.7rem, 5.6vw, 3.1rem); line-height: 1.05; max-width: 24ch; text-transform: none; text-wrap: balance; }
 
   .story { background: var(--color-surface); color: var(--color-text); }
