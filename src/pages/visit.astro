@@ -2,7 +2,16 @@
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { site } from '../data/site';
-import { visitHeaderPhoto } from '../data/photos';
+import { Image } from 'astro:assets';
+import { visitHeaderPhoto, servicesPhotos } from '../data/photos';
+const imgs = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.{jpg,jpeg,png,webp,avif}', { eager: true });
+const img = (n?: string | null) => (n ? imgs[`../assets/photos/${n}`]?.default : undefined);
+// Photo boxes: file names live in src/assets/photos/. Captions are general, not church facts.
+const tiles = [
+  { file: 'visit-congregation.jpg', alt: 'The congregation seated and listening during a service', cap: 'Come as you are' },
+  { file: 'events-header.jpg', alt: 'Young people gathered around a worship leader', cap: 'Worship together' },
+  { file: 'services-sunday.jpg', alt: 'Worshippers standing in prayer', cap: 'Pray with us' },
+];
 const wa = site.whatsapp ? `https://wa.me/${String(site.whatsapp).replace(/\D/g, '')}` : null;
 const directions = site.mapLink ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address ?? '')}`;
 ---
@@ -27,12 +36,25 @@ const directions = site.mapLink ?? `https://www.google.com/maps/search/?api=1&qu
         </div>
       </div>
       {site.mapEmbed && (
-        <div class="map" data-reveal style="--d:2">
+        <div class="container mapwrap" data-reveal style="--d:2">
+        <div class="map">
           <iframe id="map-frame" title={`Map showing ${site.venue ?? 'the church'}`} src={site.mapEmbed} data-base={site.mapEmbed} loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
         </div>
       )}
     </section>
   )}
+
+  <section class="tiles" aria-label="Photos from our services">
+    <div class="container tiles__in">
+      {tiles.map((t, i) => (
+        <figure class="tile" data-reveal style={`--d:${i}`}>
+          {img(t.file) && <Image src={img(t.file)!} alt={t.alt} widths={[400, 700]} sizes="(min-width: 800px) 30vw, 92vw" loading="lazy" />}
+          <figcaption class="label">{t.cap}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
 
   {site.serviceTimes && (
     <section class="times" id="times" aria-labelledby="times-h">
@@ -41,7 +63,7 @@ const directions = site.mapLink ?? `https://www.google.com/maps/search/?api=1&qu
         <h2 id="times-h" class="display t-title" data-reveal>Service times</h2>
         <ul class="slots">
           {site.serviceTimes.map((t, i) => (
-            <li data-reveal style={`--d:${i + 1}`}><span class="name label">{t.name}</span><span class="day display">{t.day}</span><span class="time">{t.time}</span></li>
+            <li class:list={['slot', img(servicesPhotos[i]?.image) && 'has-photo']} data-reveal style={`--d:${i + 1}`}>{img(servicesPhotos[i]?.image) && <Image src={img(servicesPhotos[i]?.image)!} alt="" widths={[500, 900]} sizes="(min-width: 800px) 45vw, 92vw" class="slot__img" loading="lazy" />}<span class="name label">{t.name}</span><span class="day display">{t.day}</span><span class="time">{t.time}</span></li>
           ))}
         </ul>
       </div>
@@ -129,8 +151,22 @@ const directions = site.mapLink ?? `https://www.google.com/maps/search/?api=1&qu
   .view:focus-visible { outline: 3px solid var(--color-accent-orange); outline-offset: -3px; }
   .w-title { font-size: clamp(2rem, 7vw, 3.4rem); }
   .addr { font-style: normal; font-size: 1.25rem; font-weight: 600; max-width: 30ch; line-height: 1.4; }
-  .map { width: 100%; height: 360px; background: var(--color-surface-alt); }
+  .mapwrap { padding-bottom: var(--space-7); }
+  .map { width: 100%; height: 360px; background: var(--color-surface-alt); border-radius: 14px; overflow: hidden; border: 1px solid var(--color-border); }
   @media (min-width: 900px) { .map { height: 520px; } }
+  .tiles { background: var(--color-surface-alt); padding: var(--space-6) 0; }
+  .tiles__in { display: grid; gap: var(--space-4); }
+  .tile { position: relative; margin: 0; border-radius: 14px; overflow: hidden; aspect-ratio: 16 / 10; background: var(--color-primary-dark); }
+  .tile :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgb(0 0 0 / 0.78) 0%, rgb(0 0 0 / 0) 60%); }
+  .tile figcaption { position: absolute; left: var(--space-4); bottom: var(--space-4); z-index: 1; color: var(--color-white); font-size: 0.85rem; }
+  @media (min-width: 800px) { .tiles__in { grid-template-columns: repeat(3, 1fr); } .tile { aspect-ratio: 4 / 3; } }
+  .slot { position: relative; isolation: isolate; overflow: hidden; }
+  .slot.has-photo { background: var(--color-primary-dark); color: var(--color-white); min-height: 200px; align-content: end; }
+  .slot :global(.slot__img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  .slot.has-photo::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgb(0 0 0 / 0.88) 0%, rgb(0 0 0 / 0.55) 100%); }
+  .slot.has-photo .name { color: rgb(255 255 255 / 0.75); }
+  .slot.has-photo .day { color: var(--color-accent-gold); }
   .map iframe { width: 100%; height: 100%; border: 0; display: block; }
   .times { background: var(--color-white); color: var(--color-text); padding: var(--space-7) 0; }
   .t-title { font-size: clamp(2rem, 7vw, 3.4rem); margin-bottom: var(--space-4); }
