@@ -58,12 +58,14 @@ export const sow = [
 ];
 
 // Core values: FLAVOUR, from Matthew 5:13 ("You are the salt of the earth"). The words match the scrolling band on the Home page.
+// PHOTOS: each value has its own background photo. To change one, put the picture in `src/assets/photos/`
+// and set its file name in `image` below. These are stand-ins taken from the photo library.
 export const flavour = [
-  { letter: 'F', word: 'Faith' },
-  { letter: 'L', word: 'Love' },
-  { letter: 'A', word: 'Abilities' },
-  { letter: 'V', word: 'Virtue' },
-  { letter: 'O', word: 'Optimism' },
-  { letter: 'U', word: 'Unity' },
-  { letter: 'R', word: 'Righteousness' },
+  { letter: 'F', word: 'Faith', image: 'services-sunday.jpg', alt: 'Worshippers standing in prayer' },
+  { letter: 'L', word: 'Love', image: 'visit-congregation.jpg', alt: 'The congregation seated during a service' },
+  { letter: 'A', word: 'Abilities', image: 'music-keys.jpg', alt: 'A keyboardist playing during worship' },
+  { letter: 'V', word: 'Virtue', image: 'leadership-five.jpg', alt: 'Five church members standing together' },
+  { letter: 'O', word: 'Optimism', image: 'events-header.jpg', alt: 'Young people gathered around a worship leader' },
+  { letter: 'U', word: 'Unity', image: 'services-sunday.jpg', alt: 'Worshippers standing in prayer' },
+  { letter: 'R', word: 'Righteousness', image: 'services-wednesday.jpg', alt: 'A minister praying into a microphone' },
 ];

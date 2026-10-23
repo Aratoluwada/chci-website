@@ -50,7 +50,8 @@ const storyPics = [
       <p class="values__p" data-reveal style="--d:1">Our values spell <strong>FLAVOUR</strong>, drawn from Matthew 5:13.</p>
       <ul class="flavour">
         {flavour.map((f, i) => (
-          <li data-reveal style={`--d:${Math.min(i, 4)}`}>
+          <li class="fl" tabindex="0" data-reveal style={`--d:${Math.min(i, 4)}`}>
+            {img(f.image) && <Image src={img(f.image)!} alt="" widths={[500, 900]} sizes="(min-width: 900px) 25vw, 92vw" class="fl__img" loading="lazy" />}
             <span class="l display" aria-hidden="true">{f.letter}</span>
             <span class="w">{f.word}</span>
           </li>
@@ -159,12 +160,24 @@ const storyPics = [
 
   .values { background: var(--color-white); color: var(--color-text); }
   .values__p { margin: 0 0 var(--space-5); font-size: 1.15rem; color: var(--color-muted); }
-  .flavour { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); grid-template-columns: repeat(2, 1fr); }
-  .flavour li { background: var(--color-green-deep); color: var(--color-white); border-radius: 12px; padding: var(--space-4) var(--space-5); display: grid; gap: var(--space-1); align-content: end; min-height: 130px; }
-  .flavour .l { font-size: clamp(2.6rem, 9vw, 3.6rem); line-height: 0.9; color: var(--color-accent-gold); }
-  .flavour .w { font-weight: 800; font-size: 1.05rem; letter-spacing: 0.04em; text-transform: uppercase; }
-  @media (min-width: 640px) { .flavour { grid-template-columns: repeat(4, 1fr); } }
-  @media (min-width: 1100px) { .flavour { grid-template-columns: repeat(7, 1fr); } .flavour li { padding: var(--space-4) var(--space-3); } .flavour .w { font-size: 0.74rem; letter-spacing: 0; } }
+  .flavour { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+  .fl { position: relative; isolation: isolate; overflow: hidden; border-radius: 12px; background: var(--color-green-deep); color: var(--color-white); min-height: 104px; padding: var(--space-4) var(--space-5); display: flex; align-items: center; gap: var(--space-5); }
+  .fl :global(.fl__img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transition: transform 0.6s var(--ease-out); }
+  .fl::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(0 20 10 / 0.88) 0%, rgb(0 0 0 / 0.55) 100%); }
+  .fl .l { font-size: 3.6rem; line-height: 0.9; color: var(--color-accent-gold); flex: 0 0 2.8rem; }
+  .fl .w { font-weight: 800; font-size: 1.25rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  .fl:focus-visible { outline: 3px solid var(--color-accent-orange); outline-offset: 2px; }
+  @media (min-width: 900px) {
+    /* Desktop: seven tall panels side by side. The one you point at opens wider. */
+    .flavour { display: flex; gap: var(--space-2); height: 440px; }
+    .fl { flex: 1 1 0; min-width: 0; min-height: 0; flex-direction: column; align-items: flex-start; justify-content: space-between; padding: var(--space-5) var(--space-4); transition: flex-grow 0.5s var(--ease-out); }
+    .fl::before { background: linear-gradient(0deg, rgb(0 20 10 / 0.9) 0%, rgb(0 0 0 / 0.45) 100%); }
+    .fl .l { font-size: clamp(3.4rem, 6vw, 5.4rem); flex: none; }
+    .fl .w { font-size: 0.8rem; letter-spacing: 0.02em; }
+    .fl:hover, .fl:focus-visible { flex-grow: 2.6; }
+    .fl:hover :global(.fl__img), .fl:focus-visible :global(.fl__img) { transform: scale(1.06); }
+  }
+  @media (prefers-reduced-motion: reduce) { .fl, .fl :global(.fl__img) { transition: none; } }
 
   .tools { background: var(--color-surface-alt); color: var(--color-text); }
   .toolgrid { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
