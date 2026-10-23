@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import { site } from '../data/site';
 import { visitPhoto } from '../data/photos';
-const maps = site.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((site.venue ? site.venue + ', ' : '') + site.address)}` : null;
+const maps = site.mapLink ? site.mapLink : site.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((site.venue ? site.venue + ', ' : '') + site.address)}` : null;
 const wa = site.whatsapp ? `https://wa.me/${String(site.whatsapp).replace(/\D/g, '')}` : null;
 const photos = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.{jpg,jpeg,png,webp,avif}', { eager: true });
 const photo = visitPhoto.image ? photos[`../assets/photos/${visitPhoto.image}`]?.default : undefined;

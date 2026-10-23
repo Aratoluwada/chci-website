@@ -2,19 +2,31 @@
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { site } from '../data/site';
+import { visitHeaderPhoto } from '../data/photos';
+const wa = site.whatsapp ? `https://wa.me/${String(site.whatsapp).replace(/\D/g, '')}` : null;
+const directions = site.mapLink ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address ?? '')}`;
 ---
-<Base title="Visit Us">
-  <PageHeader eyebrow="Plan your visit" title="Visit Us" />
-  <span id="contact"></span>
+<Base title="Visit Us" description="Find City Harvest Church International in Abeokuta: where we meet, service times, a map, and a way to send us a message.">
+  <PageHeader eyebrow="Plan your visit" title="Visit Us" intro="Come as you are. Here is where we meet, when we meet, and how to reach us." image={visitHeaderPhoto.image} alt={visitHeaderPhoto.alt} />
+
   {site.address && (
     <section class="where" id="where" aria-labelledby="where-h">
-      <div class="container">
-        <p class="label tag" data-reveal>Where we meet</p>
-        <h2 id="where-h" class="display w-title" data-reveal>{site.venue ?? 'Find us'}</h2>
-        <address class="addr" data-reveal style="--d:1">{site.address}</address>
+      <div class="container grid">
+        <div class="where__copy">
+          <p class="label tag" data-reveal>Where we meet</p>
+          <h2 id="where-h" class="display w-title" data-reveal>{site.venue ?? 'Find us'}</h2>
+          <address class="addr" data-reveal style="--d:1">{site.address}</address>
+          <a class="btn btn--primary" href={directions} target="_blank" rel="noopener noreferrer" data-reveal style="--d:2">Get directions <span class="btn__arrow" aria-hidden="true">→</span></a>
+        </div>
+        {site.mapEmbed && (
+          <div class="map" data-reveal style="--d:2">
+            <iframe title={`Map showing ${site.venue ?? 'the church'}`} src={site.mapEmbed} loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          </div>
+        )}
       </div>
     </section>
   )}
+
   {site.serviceTimes && (
     <section class="times" id="times" aria-labelledby="times-h">
       <div class="container">
@@ -22,33 +34,102 @@ import { site } from '../data/site';
         <h2 id="times-h" class="display t-title" data-reveal>Service times</h2>
         <ul class="slots">
           {site.serviceTimes.map((t, i) => (
-            <li data-reveal style={`--d:${i + 1}`}><span class="day display">{t.day}</span><span class="time">{t.time}</span></li>
+            <li data-reveal style={`--d:${i + 1}`}><span class="name label">{t.name}</span><span class="day display">{t.day}</span><span class="time">{t.time}</span></li>
           ))}
         </ul>
       </div>
     </section>
   )}
-  <section class="empty">
-    <div class="container" data-reveal>
-      {/* TODO: replace this empty state with approved content (visit) */}
-      <p class="label tag">Coming soon</p>
-      <p class="msg">Map and contact details will appear here once verified.</p>
+
+  <section class="contact" id="contact" aria-labelledby="contact-h">
+    <div class="container grid">
+      <div class="contact__copy">
+        <p class="label tag" data-reveal>Contact</p>
+        <h2 id="contact-h" class="display t-title" data-reveal>Send us a message</h2>
+        <p class="lead" data-reveal style="--d:1">Have a question, a prayer request or a note for the church? Write to us and we will reply.</p>
+        {wa && <a class="btn btn--primary" href={wa} target="_blank" rel="noopener noreferrer" data-reveal style="--d:2">Chat on WhatsApp <span class="btn__arrow" aria-hidden="true">→</span></a>}
+      </div>
+      <form id="contact-form" class="form" method="post" novalidate data-endpoint={site.contactFormUrl ?? ''} data-reveal style="--d:2">
+        <div class="row">
+          <label for="f-name">Your name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="row">
+          <label for="f-email">Your email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="row">
+          <label for="f-msg">Your message</label>
+          <textarea id="f-msg" name="message" rows="6" required></textarea>
+        </div>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="trap" aria-hidden="true" />
+        <button class="btn btn--primary send" type="submit">Send message <span class="btn__arrow" aria-hidden="true">→</span></button>
+        <p id="form-status" class="status" role="status" aria-live="polite"></p>
+        {/* TODO: set contactFormUrl in src/data/site.ts so messages reach the church's inbox. */}
+      </form>
     </div>
   </section>
 </Base>
 
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const status = document.getElementById('form-status')!;
+  const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+  const say = (t: string, ok = false) => { status.textContent = t; status.className = 'status ' + (ok ? 'ok' : 'bad'); };
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    if (!String(data.get('name')).trim() || !String(data.get('message')).trim() || !/^\S+@\S+\.\S+$/.test(String(data.get('email')))) {
+      say('Please fill in your name, a valid email and your message.'); return;
+    }
+    if (data.get('_gotcha')) return;
+    const url = form.dataset.endpoint;
+    if (!url) { say('Messaging is not switched on yet. Please use WhatsApp for now.'); return; }
+    btn.disabled = true; say('Sending…', true);
+    try {
+      const r = await fetch(url, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      if (!r.ok) throw new Error(String(r.status));
+      form.reset(); say('Thank you. Your message has been sent.', true);
+    } catch { say('Your message could not be sent. Please try again or use WhatsApp.'); }
+    finally { btn.disabled = false; }
+  });
+</script>
+
 <style>
-  .empty { background: var(--color-surface); color: var(--color-text); padding: var(--space-9) 0; }
   .tag { color: var(--color-primary); margin-bottom: var(--space-3); }
-  .msg { font-size: clamp(1.2rem, 4vw, 1.8rem); font-weight: 600; max-width: 32ch; line-height: 1.3; }
-  .times { background: var(--color-white); color: var(--color-text); padding: var(--space-8) 0 var(--space-6); }
-  .t-title { font-size: clamp(2rem, 7vw, 3.4rem); color: var(--color-text); margin-bottom: var(--space-5); }
+  .grid > * { min-width: 0; }
+  .grid { display: grid; gap: var(--space-6); align-items: start; }
+  @media (min-width: 900px) { .grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); column-gap: var(--space-8); } }
+  .where { background: var(--color-surface); color: var(--color-text); padding: var(--space-7) 0; }
+  .where__copy { display: grid; gap: var(--space-3); justify-items: start; }
+  .w-title { font-size: clamp(2rem, 7vw, 3.4rem); }
+  .addr { font-style: normal; font-size: 1.25rem; font-weight: 600; max-width: 30ch; line-height: 1.4; }
+  .map { border-radius: 12px; overflow: hidden; border: 1px solid var(--color-border); background: var(--color-surface-alt); height: 320px; min-width: 0; }
+  @media (min-width: 900px) { .map { height: 400px; } }
+  .map iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .times { background: var(--color-white); color: var(--color-text); padding: var(--space-7) 0; }
+  .t-title { font-size: clamp(2rem, 7vw, 3.4rem); margin-bottom: var(--space-4); }
   .slots { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
   .slots li { display: grid; gap: var(--space-1); padding: var(--space-5); border-left: 6px solid var(--color-primary-bright); background: var(--color-surface); border-radius: 0 10px 10px 0; }
+  .name { color: var(--color-muted); }
   .day { font-size: clamp(1.6rem, 5vw, 2.2rem); color: var(--color-primary); }
   .time { font-size: 1.25rem; font-weight: 600; }
   @media (min-width: 800px) { .slots { grid-template-columns: repeat(2, 1fr); } }
-  .where { background: var(--color-surface); color: var(--color-text); padding: var(--space-7) 0 0; }
-  .w-title { font-size: clamp(2rem, 7vw, 3.4rem); margin-bottom: var(--space-3); }
-  .addr { font-style: normal; font-size: 1.25rem; font-weight: 600; max-width: 34ch; line-height: 1.4; }
+  .contact { background: var(--color-primary-dark); color: var(--color-white); padding: var(--space-8) 0; }
+  .contact .tag { color: var(--color-accent-gold); }
+  .contact .t-title { margin-bottom: var(--space-3); }
+  .contact__copy { display: grid; gap: var(--space-3); justify-items: start; }
+  .lead { color: rgb(255 255 255 / 0.85); font-size: 1.15rem; max-width: 40ch; }
+  .form { display: grid; gap: var(--space-4); background: var(--color-white); color: var(--color-text); padding: var(--space-6); border-radius: 12px; }
+  .row { display: grid; gap: var(--space-2); }
+  .row label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-primary); }
+  input, textarea { width: 100%; font: inherit; font-size: 1.05rem; padding: 14px 16px; border: 2px solid var(--color-border); border-radius: 10px; background: var(--color-white); color: var(--color-text); }
+  textarea { resize: vertical; min-height: 140px; }
+  input:focus-visible, textarea:focus-visible { outline: 3px solid var(--color-accent-orange); outline-offset: 2px; border-color: var(--color-primary-bright); }
+  .trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .send { justify-self: start; }
+  .send:disabled { opacity: 0.6; }
+  .status { min-height: 1.4em; font-weight: 600; }
+  .status.ok { color: var(--color-primary); }
+  .status.bad { color: #b42318; }
 </style>

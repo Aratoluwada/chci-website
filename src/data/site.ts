@@ -16,6 +16,12 @@ export const site = {
   venue: 'Transformation Center',
   address: '1, Somorin-Kemta Road, Somorin, Obantoko, Abeokuta, Nigeria' as string | null,
   // Confirmed by the owner (Oct 2026)
+  // Google Maps: the church's own link (opens the app or site) and the embedded map for the Visit Us page.
+  mapLink: 'https://maps.app.goo.gl/xjAxmCw4TM96L3Li8',
+  mapEmbed: 'https://www.google.com/maps?q=City+Harvest+Church+International,+Transformation+Centre,+Shomorin+Street,+Abeokuta,+Ogun+State&output=embed',
+  // Contact form: paste the form link from a form service such as Formspree (https://formspree.io), which sends each
+  // message to the church's inbox. Leave null until then: the form shows but tells visitors it cannot send yet.
+  contactFormUrl: null as string | null,
   serviceTimes: [
     { day: 'Sunday', name: 'Sunday Service', time: '9:00 AM – 11:30 AM' },
     { day: 'Wednesday', name: 'Building Capacity Service', time: '5:30 PM – 7:00 PM' },
