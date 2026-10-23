@@ -35,7 +35,7 @@ export const site = {
   // The church's slogan. Used in the footer, the search description and the About page.
   slogan: 'Adding flavour to your world',
 
-  // TODO: owner to choose final primary CTA wording ("Plan Your Visit" is a placeholder)
+  // TODO: owner to choose final primary CTA wording
   primaryCta: { label: 'Visit Us', href: '/visit' },
   secondaryCta: { label: 'Service Times', href: '/visit#times' },
 

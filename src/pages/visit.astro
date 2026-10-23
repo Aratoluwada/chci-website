@@ -16,7 +16,7 @@ const wa = site.whatsapp ? `https://wa.me/${String(site.whatsapp).replace(/\D/g,
 const directions = site.mapLink ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address ?? '')}`;
 ---
 <Base title="Visit Us" description="Find City Harvest Church International in Abeokuta: where we meet, service times, a map, and a way to send us a message.">
-  <PageHeader eyebrow="Plan your visit" title="Visit Us" intro="Come as you are. Here is where we meet, when we meet, and how to reach us." image={visitHeaderPhoto.image} alt={visitHeaderPhoto.alt} />
+  <PageHeader eyebrow="Come and see" title="Visit Us" intro="Come as you are. Here is where we meet, when we meet, and how to reach us." image={visitHeaderPhoto.image} alt={visitHeaderPhoto.alt} />
 
   {site.address && (
     <section class="where" id="where" aria-labelledby="where-h">
