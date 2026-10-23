@@ -29,7 +29,8 @@ const storyPics = [
       <p class="label tag" data-reveal>Our story</p>
       <h2 id="story-h" class="display h" data-reveal>How City Harvest began</h2>
       <div class="story__grid">
-      <ol class="timeline">
+      <div class="story__text">
+      <ol class="timeline is-collapsed" id="story-list">
         {story.map((s, i) => (
           <li data-reveal style={`--d:${Math.min(i, 3)}`}>
             <span class="when label">{s.when}</span>
@@ -37,6 +38,8 @@ const storyPics = [
           </li>
         ))}
       </ol>
+      <button type="button" class="morebtn" data-target="story-list" data-more="Read the full story" data-less="Show less" aria-expanded="false" aria-controls="story-list">Read the full story</button>
+      </div>
       <div class="story__pics" aria-hidden="false">
         {storyPics.map((p) => img(p.file) && <Image src={img(p.file)!} alt={p.alt} widths={[500, 800]} sizes="30vw" class="pic" loading="lazy" />)}
       </div>
@@ -91,7 +94,8 @@ const storyPics = [
         <h2 id="lead-h" class="display h" data-reveal>Who leads the church</h2>
       </div>
       <div>
-        <p class="lead__p" data-reveal style="--d:1">{leadership}</p>
+        <p class="lead__p is-collapsed" id="lead-text" data-reveal style="--d:1">{leadership}</p>
+        <button type="button" class="morebtn morebtn--lead" data-target="lead-text" data-more="Read more" data-less="Show less" aria-expanded="false" aria-controls="lead-text">Read more</button>
         <a class="btn btn--primary" href="/leadership" data-reveal style="--d:2">Meet our pastors <span class="btn__arrow" aria-hidden="true">→</span></a>
       </div>
     </div>
@@ -118,7 +122,7 @@ const storyPics = [
       <p class="label tag" data-reveal>Foundation classes</p>
       <h2 id="sow-h" class="display h" data-reveal>School of Wisdom</h2>
       <p class="sow__intro" data-reveal style="--d:1">New members begin with the School of Wisdom (S.O.W.), {sow.length} classes that lay the foundations of the Christian faith.</p>
-      <ul class="sowgrid">
+      <ul class="sowgrid is-collapsed" id="sow-list">
         {sow.map((c) => (
           <li class="course">
             <span class="code label">{c.code}</span>
@@ -127,6 +131,7 @@ const storyPics = [
           </li>
         ))}
       </ul>
+      <button type="button" class="morebtn" data-target="sow-list" data-more={`Show all ${sow.length} classes`} data-less="Show fewer classes" aria-expanded="false" aria-controls="sow-list">Show all {sow.length} classes</button>
     </div>
   </section>
 
@@ -138,6 +143,20 @@ const storyPics = [
     </div>
   </section>
 </Base>
+
+<script>
+  // "Read more" buttons: long blocks start short and open on request. Without JavaScript everything is shown.
+  document.querySelectorAll<HTMLButtonElement>('.morebtn').forEach((btn) => {
+    const target = document.getElementById(btn.dataset.target!);
+    if (!target) return;
+    btn.addEventListener('click', () => {
+      const open = target.classList.toggle('is-collapsed') === false;
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open ? btn.dataset.less! : btn.dataset.more!;
+      if (!open) target.closest('section')?.scrollIntoView({ block: 'start' });
+    });
+  });
+</script>
 
 <style>
   .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -158,6 +177,17 @@ const storyPics = [
 
   .story { background: var(--color-surface); color: var(--color-text); }
   .story__pics { display: none; }
+  .story__text { min-width: 0; display: grid; gap: var(--space-5); justify-items: start; }
+  .morebtn { display: none; font: inherit; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 13px 20px; border-radius: 8px; cursor: pointer; background: transparent; color: var(--color-primary); border: 2px solid var(--color-primary-bright); margin-top: var(--space-4); }
+  .morebtn:hover { background: var(--color-primary-bright); color: var(--color-white); }
+  .morebtn:focus-visible { outline: 3px solid var(--color-accent-orange); outline-offset: 2px; }
+  .story__text .morebtn { margin-top: 0; }
+  :global(.js) .morebtn { display: inline-flex; }
+  :global(.js) .timeline.is-collapsed > li:nth-child(n + 4) { display: none; }
+  :global(.js) .sowgrid.is-collapsed > li:nth-child(n + 7) { display: none; }
+  @media (max-width: 639px) { :global(.js) .sowgrid.is-collapsed > li:nth-child(n + 5) { display: none; } }
+  :global(.js) .lead__p.is-collapsed { display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+  .story, .sow, .lead { scroll-margin-top: var(--header-h); }
   @media (min-width: 900px) {
     .story__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr); column-gap: var(--space-8); align-items: start; }
     .story__pics { display: grid; gap: var(--space-4); position: sticky; top: calc(var(--header-h) + var(--space-5)); }
