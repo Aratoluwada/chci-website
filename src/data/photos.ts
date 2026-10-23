@@ -30,3 +30,11 @@ export const servicesPhotos: { image: string | null; alt: string }[] = [
   { image: 'services-sunday.jpg', alt: 'Worshippers standing in prayer during a service' },
   { image: 'services-wednesday.jpg', alt: 'A minister praying into a microphone' },
 ];
+
+// Visit Us page header: the church building. This is a PLACEHOLDER picture.
+// To replace it: put your photo in `src/assets/photos/` (landscape, at least 1600 px wide) and set the file name here,
+// or simply overwrite `src/assets/photos/visit-building.jpg` with your photo using the same name.
+export const visitHeaderPhoto: { image: string | null; alt: string } = {
+  image: 'visit-building.jpg',
+  alt: 'The church building, Transformation Center, Abeokuta',
+};
