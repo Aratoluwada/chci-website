@@ -9,7 +9,7 @@ import { site } from '../data/site';
 
 const { title, description } = Astro.props;
 const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | ${site.city}, ${site.country}`;
-const desc = description ?? `${site.name} (${site.short}) in ${site.city}, ${site.country}. Find out who we are, when we meet, and how to visit.`;
+const desc = description ?? `${site.name} (${site.short}) in ${site.city}, ${site.country}. ${site.slogan}. Find out who we are, when we meet, and how to visit.`;
 ---
 <!doctype html>
 <html lang="en">

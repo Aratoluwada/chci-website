@@ -5,9 +5,6 @@
 export const missionStatement =
   'Building a people of godly character with victory mentality, who influence their society and bring others to the same experience.';
 
-export const mission =
-  'City Harvest Church exists to bring humanity to God through the gospel of our Lord Jesus Christ, and to make sure that when people have turned to God through the new birth in Christ Jesus, they continue to abide in Him by walking in the Spirit and producing fruits of godliness in character and charisma. We also exist to help them take their rightful place in society as ambassadors of God’s Kingdom, and to spread the gospel to win souls into that Kingdom.';
-
 // A true sequence, so it is shown as a timeline. The first service date comes from the class notes (see note below).
 // NOTE FOR THE CHURCH: the notes give both "October 26, 2005" and "Sunday 26th October, 2003" for the first service.
 // 26 October 2003 was a Sunday, so 2003 is used here. Please confirm.
@@ -37,16 +34,6 @@ export const joinSteps = [
   { t: 'Serve in a ministry unit', d: 'After the foundation classes, begin to serve in any of the ministry units in church.' },
 ];
 
-export const expectations = [
-  'Believe the basic doctrines of the Bible, as well as our preferences.',
-  'Submit to the leadership of the church (Heb. 13:7).',
-  'Be consistent and faithful in attending weekly and special services (Heb. 10:25).',
-  'See yourself as a significant part of the church (1 Cor. 12:13-20).',
-  'Understand the mission of the church and run with it (Matt. 6:22, Gen. 11:6).',
-  'Use your gifts and talents to minister in the church (1 Pet. 4:10).',
-  'Be an ambassador of Christ, and of the church, to the outside world (2 Cor. 3:2-3; 5:18-19).',
-];
-
 // School of Wisdom: the foundation classes. Code, title and purpose are from the class notes.
 export const sow = [
   { code: 'SOW 101', title: 'A New Creation I', purpose: 'To understand the new birth and realize your new identity in Christ.' },
@@ -68,4 +55,15 @@ export const sow = [
   { code: 'SOW 117', title: 'Understanding the Church II', purpose: 'To learn about belonging to a local assembly.' },
   { code: 'SOW 118', title: 'Understanding City Harvest Church International I', purpose: 'To learn about the history and mission of the church.' },
   { code: 'SOW 119', title: 'Understanding City Harvest Church International II', purpose: 'To learn about the mission achievement tools, leadership and membership of the church.' },
+];
+
+// Core values: FLAVOUR, from Matthew 5:13 ("You are the salt of the earth"). The words match the scrolling band on the Home page.
+export const flavour = [
+  { letter: 'F', word: 'Faith' },
+  { letter: 'L', word: 'Love' },
+  { letter: 'A', word: 'Abilities' },
+  { letter: 'V', word: 'Virtue' },
+  { letter: 'O', word: 'Optimism' },
+  { letter: 'U', word: 'Unity' },
+  { letter: 'R', word: 'Righteousness' },
 ];
