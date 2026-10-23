@@ -32,6 +32,9 @@ export const site = {
   email: null as string | null,
   social: { instagram: null, facebook: 'https://www.facebook.com/Cityharvesthouse', youtube: 'https://youtube.com/@peacetoluwade8321' } as Record<string, string | null>,
 
+  // The church's slogan. Used in the footer, the search description and the About page.
+  slogan: 'Adding flavour to your world',
+
   // TODO: owner to choose final primary CTA wording ("Plan Your Visit" is a placeholder)
   primaryCta: { label: 'Visit Us', href: '/visit' },
   secondaryCta: { label: 'Service Times', href: '/visit#times' },

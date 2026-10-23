@@ -14,7 +14,7 @@ const socials = [
     <a class="brand" href="/" data-reveal aria-label={`${site.name} - home`}>
       <img src="/brand/chci-logo-clear-480.webp" width="289" height="480" loading="lazy"
         alt="City Harvest Church International logo: flame above a green circle with a house, 'harvest house' beneath" />
-      <span class="display name">{site.name}</span>
+      <span class="bt"><span class="display name">{site.name}</span><span class="slogan">{site.slogan}</span></span>
     </a>
     <nav aria-label="Footer" data-reveal style="--d:1">
       <ul>{nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
@@ -45,6 +45,8 @@ const socials = [
   .top { display: grid; gap: var(--space-5); align-items: center; padding-bottom: var(--space-5); }
   .brand { display: flex; align-items: center; gap: var(--space-4); text-decoration: none; }
   .brand img { width: 44px; height: auto; filter: drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 5px rgb(255 255 255 / 0.85)); }
+  .bt { display: grid; gap: 6px; }
+  .slogan { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-gold); }
   .name { font-size: clamp(1.1rem, 4vw, 1.4rem); max-width: 22ch; line-height: 1.05; }
   nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
   nav a { display: inline-block; padding: var(--space-2) 0; text-decoration: none; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgb(255 255 255 / 0.85); transition: color 0.3s; }
