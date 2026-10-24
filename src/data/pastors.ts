@@ -25,7 +25,7 @@ export const pastors: Pastor[] = [
   ] },
   { name: 'Pastor Adeyinka Akinsanya', role: 'Associate Pastor', image: 'adeyinka-akinsanya.webp', alt: 'Pastor Adeyinka Akinsanya (placeholder photo)', bio: [
     'Pastor Adeyinka Akinsanya is an Associate Pastor at City Harvest Church International, Abeokuta. He is a minister of the gospel and also a businessman.',
-    'He has served as a minister in the church for several years and is also a drama minister. He was ordained into the office of Pastor in 2025.',
+    'He has served as a minister in the church for several years and is also a drama minister. He was ordained into the office of Pastor in 2025. He is married with children.',
   ] },
   { name: 'Pastor Adepeju Sijuwade', role: 'Associate Pastor', image: 'adepeju-sijuwade.webp', alt: 'Pastor Adepeju Sijuwade (placeholder photo)', bio: bioPlaceholder },
   { name: 'Pastor Omotola Arawomo', role: 'Associate Pastor', image: 'omotola-arawomo.webp', alt: 'Pastor Omotola Arawomo (placeholder photo)', bio: [
