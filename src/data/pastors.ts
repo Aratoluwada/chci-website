@@ -15,7 +15,10 @@ export interface Pastor { name: string; role: string; image: string; alt: string
 const bioPlaceholder = ['A short biography will be added here.', 'A second paragraph about their calling and ministry will follow.'];
 
 export const pastors: Pastor[] = [
-  { name: 'Rev Peace Toluwade', role: 'Senior Pastor', image: 'peace-toluwade.webp', alt: 'Rev Peace Toluwade', bio: bioPlaceholder },
+  { name: 'Rev Peace Toluwade', role: 'Senior Pastor', image: 'peace-toluwade.webp', alt: 'Rev Peace Toluwade', bio: [
+    'Rev. Peace Toluwade is the Senior Pastor of City Harvest Church International, Abeokuta. He has been in ministry for over 27 years.',
+    'He has a passion for reaching out to young people and guiding them. He has been married to Pastor Joy Toluwade for 24 years, and they have three children.',
+  ] },
   { name: 'Pastor Joy Toluwade', role: 'Associate Pastor', image: 'joy-toluwade.webp', alt: 'Pastor Joy Toluwade', bio: bioPlaceholder },
   { name: 'Pastor Adeyinka Akinsanya', role: 'Associate Pastor', image: 'adeyinka-akinsanya.webp', alt: 'Pastor Adeyinka Akinsanya (placeholder photo)', bio: bioPlaceholder },
   { name: 'Pastor Adepeju Sijuwade', role: 'Pastor', image: 'adepeju-sijuwade.webp', alt: 'Pastor Adepeju Sijuwade (placeholder photo)', bio: bioPlaceholder },
