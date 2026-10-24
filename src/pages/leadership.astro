@@ -6,59 +6,66 @@ import { pastors } from '../data/pastors';
 import { leadershipPhoto } from '../data/photos';
 const imgs = import.meta.glob<{ default: ImageMetadata }>('../assets/pastors/*.{jpg,jpeg,png,webp,avif}', { eager: true });
 const img = (n: string) => imgs[`../assets/pastors/${n}`]?.default;
-const featured = pastors.filter((p) => p.featured);
-const others = pastors.filter((p) => !p.featured);
 ---
 <Base title="Leadership" description="Meet the pastors of City Harvest Church International in Abeokuta.">
-  <PageHeader eyebrow="Our leaders" title="Meet our pastors" intro="The pastors who care for our church family." image={leadershipPhoto.image} alt={leadershipPhoto.alt} />
+  <PageHeader eyebrow="Our leadership" title="Meet our pastors" intro="The pastors who care for our church family." image={leadershipPhoto.image} alt={leadershipPhoto.alt} />
 
-  <section class="pastors" aria-labelledby="pastors-h">
-    <div class="container">
-      <h2 id="pastors-h" class="visually-hidden">Our pastors</h2>
-      <ul class="row row--feat">
-        {featured.map((p, i) => (
-          <li class="card" data-reveal style={`--d:${i}`}>
-            {img(p.image) && <Image src={img(p.image)!} alt={p.alt} widths={[480, 800]} sizes="(min-width: 800px) 45vw, 92vw" class="card__img" loading={i === 0 ? 'eager' : 'lazy'} />}
-            <div class="card__t">
-              <h3 class="display">{p.name}</h3>
-              <p class="label role">{p.role}</p>
-              <p class="bio">{p.bio}</p>
-            </div>
-          </li>
-        ))}
-      </ul>
-      {others.length > 0 && (
-        <ul class="row row--more">
-          {others.map((p, i) => (
-            <li class="card" data-reveal style={`--d:${i}`}>
-              {img(p.image) && <Image src={img(p.image)!} alt={p.alt} widths={[400, 640]} sizes="(min-width: 800px) 30vw, 92vw" class="card__img" loading="lazy" />}
-              <div class="card__t">
-                <h3 class="display">{p.name}</h3>
-                <p class="label role">{p.role}</p>
-                <p class="bio">{p.bio}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+  <section class="intro" aria-labelledby="intro-h">
+    <div class="container intro__in">
+      <p class="label tag" data-reveal>The people behind CHCI</p>
+      <h2 id="intro-h" class="display h" data-reveal>Called to care for the church family.</h2>
+      <p class="intro__p" data-reveal style="--d:1">Every local assembly has one main under-shepherd who reports directly to Jesus and leads the church. Alongside our lead pastor, other pastors, equally called and anointed by the Holy Spirit, stand in various offices.</p>
+    </div>
+  </section>
+
+  {pastors.map((p, i) => (
+    <section class:list={['profile', i % 2 === 1 && 'profile--alt']} aria-labelledby={`p-${i}`}>
+      <div class="container profile__in">
+        <div class="profile__pic" data-reveal>
+          {img(p.image) && <Image src={img(p.image)!} alt={p.alt} widths={[480, 800]} sizes="(min-width: 900px) 40vw, 92vw" class="pic" loading={i === 0 ? 'eager' : 'lazy'} />}
+        </div>
+        <div class="profile__t">
+          <p class="label role" data-reveal>{p.role}</p>
+          <h2 id={`p-${i}`} class="display name" data-reveal style="--d:1">{p.name}</h2>
+          {p.bio.map((para, k) => <p class="bio" data-reveal style={`--d:${Math.min(k + 2, 4)}`}>{para}</p>)}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="cta" aria-labelledby="cta-h">
+    <div class="container cta__in">
+      <h2 id="cta-h" class="display" data-reveal>Come and meet us.</h2>
+      <p data-reveal style="--d:1">Join us on Sunday or Wednesday, or send us a message and we will reply.</p>
+      <a class="btn btn--gold" href="/visit#contact" data-reveal style="--d:2">Get in touch <span class="btn__arrow" aria-hidden="true">→</span></a>
     </div>
   </section>
 </Base>
 
 <style>
-  .pastors { background: var(--color-surface); color: var(--color-text); padding: var(--space-7) 0 var(--space-9); }
-  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .row { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-5); }
-  .row + .row { margin-top: var(--space-5); }
-  .card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: 14px; overflow: hidden; display: grid; align-content: start; min-width: 0; }
-  .card :global(.card__img) { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; display: block; }
-  .card__t { padding: var(--space-5); display: grid; gap: var(--space-2); }
-  .card__t h3 { font-size: clamp(1.4rem, 4vw, 1.9rem); line-height: 1; color: var(--color-text); }
+  .tag { color: var(--color-primary); margin-bottom: var(--space-3); }
+  .h { font-size: clamp(2rem, 7vw, 3.4rem); margin-bottom: var(--space-4); max-width: 20ch; }
+  .intro { background: var(--color-white); color: var(--color-text); padding: var(--space-7) 0; }
+  .intro__p { max-width: 62ch; font-size: 1.15rem; line-height: 1.6; color: var(--color-muted); margin: 0; }
+
+  .profile { background: var(--color-surface); color: var(--color-text); padding: var(--space-6) 0; }
+  .profile--alt { background: var(--color-white); }
+  .profile__in { display: grid; gap: var(--space-5); align-items: center; }
+  .profile__pic { border-radius: 14px; overflow: hidden; background: var(--color-primary-dark); }
+  .profile__pic :global(.pic) { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; display: block; }
+  .profile__t { display: grid; gap: var(--space-3); align-content: center; }
   .role { color: var(--color-primary); }
-  .bio { margin: var(--space-2) 0 0; color: var(--color-muted); line-height: 1.55; }
-  .row--feat .card__t h3 { font-size: clamp(1.7rem, 5vw, 2.4rem); }
-  @media (min-width: 800px) {
-    .row--feat { grid-template-columns: repeat(2, 1fr); }
-    .row--more { grid-template-columns: repeat(3, 1fr); }
+  .name { font-size: clamp(2rem, 6vw, 3.2rem); line-height: 0.98; }
+  .bio { margin: 0; max-width: 56ch; font-size: 1.1rem; line-height: 1.6; color: var(--color-muted); }
+  @media (min-width: 900px) {
+    .profile { padding: var(--space-8) 0; }
+    .profile__in { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); column-gap: var(--space-9); }
+    .profile--alt .profile__in { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); }
+    .profile--alt .profile__pic { order: 2; }
   }
+
+  .cta { background: var(--color-primary-dark); color: var(--color-white); padding: var(--space-8) 0; }
+  .cta__in { display: grid; gap: var(--space-4); justify-items: start; }
+  .cta h2 { font-size: clamp(2rem, 7vw, 3.4rem); }
+  .cta p { margin: 0; color: rgb(255 255 255 / 0.85); font-size: 1.15rem; max-width: 46ch; }
 </style>
