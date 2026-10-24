@@ -21,6 +21,9 @@ export const pastors: Pastor[] = [
   ] },
   { name: 'Pastor Joy Toluwade', role: 'Associate Pastor', image: 'joy-toluwade.webp', alt: 'Pastor Joy Toluwade', bio: bioPlaceholder },
   { name: 'Pastor Adeyinka Akinsanya', role: 'Associate Pastor', image: 'adeyinka-akinsanya.webp', alt: 'Pastor Adeyinka Akinsanya (placeholder photo)', bio: bioPlaceholder },
-  { name: 'Pastor Adepeju Sijuwade', role: 'Pastor', image: 'adepeju-sijuwade.webp', alt: 'Pastor Adepeju Sijuwade (placeholder photo)', bio: bioPlaceholder },
-  { name: 'Pastor Omotola Arawomo', role: 'Pastor', image: 'omotola-arawomo.webp', alt: 'Pastor Omotola Arawomo (placeholder photo)', bio: bioPlaceholder },
+  { name: 'Pastor Adepeju Sijuwade', role: 'Associate Pastor', image: 'adepeju-sijuwade.webp', alt: 'Pastor Adepeju Sijuwade (placeholder photo)', bio: bioPlaceholder },
+  { name: 'Pastor Omotola Arawomo', role: 'Associate Pastor', image: 'omotola-arawomo.webp', alt: 'Pastor Omotola Arawomo (placeholder photo)', bio: [
+    'Mr. Omotola Arawomo is a legal professional with a career of nearly two decades in both the Nigerian Judiciary and private legal practice. He is Chairman of the Judicial Research Officers of Ogun State and Vice Chairman of the Ogun State Judiciary Sports Committee, and he is a chartered Mediator with the Institute of Chartered Mediators and Conciliators (ICMC).',
+    'He is an ordained Associate Pastor of City Harvest Church International, Abeokuta. He is married with children, and he loves reading, writing, self-development, quality relationships, healthy synergy and strategic networking.',
+  ] },
 ];
