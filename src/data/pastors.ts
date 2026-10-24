@@ -15,9 +15,15 @@ export interface Pastor { name: string; role: string; image: string; alt: string
 const bioPlaceholder = ['A short biography will be added here.', 'A second paragraph about their calling and ministry will follow.'];
 
 export const pastors: Pastor[] = [
-  { name: 'Rev Peace Toluwade', role: 'Senior Pastor', image: 'peace-toluwade.webp', alt: 'Rev Peace Toluwade', bio: bioPlaceholder },
+  { name: 'Rev Peace Toluwade', role: 'Senior Pastor', image: 'peace-toluwade.webp', alt: 'Rev Peace Toluwade', bio: [
+    'Rev. Peace Toluwade is the Senior Pastor of City Harvest Church International, Abeokuta. He has been in ministry for over 27 years.',
+    'He has a passion for reaching out to young people and guiding them. He has been married to Pastor Joy Toluwade for 24 years, and they have three children.',
+  ] },
   { name: 'Pastor Joy Toluwade', role: 'Associate Pastor', image: 'joy-toluwade.webp', alt: 'Pastor Joy Toluwade', bio: bioPlaceholder },
   { name: 'Pastor Adeyinka Akinsanya', role: 'Associate Pastor', image: 'adeyinka-akinsanya.webp', alt: 'Pastor Adeyinka Akinsanya (placeholder photo)', bio: bioPlaceholder },
-  { name: 'Pastor Adepeju Sijuwade', role: 'Pastor', image: 'adepeju-sijuwade.webp', alt: 'Pastor Adepeju Sijuwade (placeholder photo)', bio: bioPlaceholder },
-  { name: 'Pastor Omotola Arawomo', role: 'Pastor', image: 'omotola-arawomo.webp', alt: 'Pastor Omotola Arawomo (placeholder photo)', bio: bioPlaceholder },
+  { name: 'Pastor Adepeju Sijuwade', role: 'Associate Pastor', image: 'adepeju-sijuwade.webp', alt: 'Pastor Adepeju Sijuwade (placeholder photo)', bio: bioPlaceholder },
+  { name: 'Pastor Omotola Arawomo', role: 'Associate Pastor', image: 'omotola-arawomo.webp', alt: 'Pastor Omotola Arawomo (placeholder photo)', bio: [
+    'Mr. Omotola Arawomo is a legal professional with a career of nearly two decades in both the Nigerian Judiciary and private legal practice. He is Chairman of the Judicial Research Officers of Ogun State and Vice Chairman of the Ogun State Judiciary Sports Committee, and he is a chartered Mediator with the Institute of Chartered Mediators and Conciliators (ICMC).',
+    'He is an ordained Associate Pastor of City Harvest Church International, Abeokuta. He is married with children, and he loves reading, writing, self-development, quality relationships, healthy synergy and strategic networking.',
+  ] },
 ];
