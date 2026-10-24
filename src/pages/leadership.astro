@@ -51,8 +51,8 @@ const img = (n: string) => imgs[`../assets/pastors/${n}`]?.default;
   .profile { background: var(--color-surface); color: var(--color-text); padding: var(--space-6) 0; }
   .profile--alt { background: var(--color-white); }
   .profile__in { display: grid; gap: var(--space-5); align-items: center; }
-  .profile__pic { border-radius: 14px; overflow: hidden; background: var(--color-primary-dark); }
-  .profile__pic :global(.pic) { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; display: block; }
+  .profile__pic { border-radius: 14px; overflow: hidden; background: radial-gradient(120% 90% at 50% 100%, var(--color-primary-bright) 0%, var(--color-primary) 45%, var(--color-green-deep) 100%); }
+  .profile__pic :global(.pic) { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 100%; display: block; }
   .profile__t { display: grid; gap: var(--space-3); align-content: center; }
   .role { color: var(--color-primary); }
   .name { font-size: clamp(2rem, 6vw, 3.2rem); line-height: 0.98; }
