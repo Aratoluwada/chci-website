@@ -26,6 +26,7 @@ const desc = description ?? `${site.name} (${site.short}) in ${site.city}, ${sit
     <meta property="og:type" content="website" />
     {/* TODO: add og:image once an approved social share image exists; add canonical once the domain is known */}
     <script is:inline>document.documentElement.classList.add('js');</script>
+  {site.analytics.src && site.analytics.siteId && <script is:inline async src={site.analytics.src} data-site={site.analytics.siteId} data-domain={site.analytics.domain ?? undefined}></script>}
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

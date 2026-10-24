@@ -22,6 +22,8 @@ export const site = {
   // Contact form: paste the form link from a form service such as Formspree (https://formspree.io), which sends each
   // message to the church's inbox. Leave null until then: the form shows but tells visitors it cannot send yet.
   contactFormUrl: null as string | null,
+  // Sabilytics analytics. Copy the three values from your Sabilytics dashboard (Install). While `src` or `siteId` is empty, nothing is loaded.
+  analytics: { src: null as string | null, siteId: null as string | null, domain: null as string | null },
   serviceTimes: [
     { day: 'Sunday', name: 'Sunday Service', time: '9:00 AM – 11:30 AM' },
     { day: 'Wednesday', name: 'Building Capacity Service', time: '5:30 PM – 7:00 PM' },
