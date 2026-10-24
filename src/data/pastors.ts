@@ -19,11 +19,17 @@ export const pastors: Pastor[] = [
     'Rev. Peace Toluwade is the Senior Pastor of City Harvest Church International, Abeokuta. He has been in ministry for over 27 years.',
     'He has a passion for reaching out to young people and guiding them. He has been married to Pastor Joy Toluwade for 24 years, and they have three children.',
   ] },
-  { name: 'Pastor Joy Toluwade', role: 'Associate Pastor', image: 'joy-toluwade.webp', alt: 'Pastor Joy Toluwade', bio: bioPlaceholder },
-  { name: 'Pastor Adeyinka Akinsanya', role: 'Associate Pastor', image: 'adeyinka-akinsanya.webp', alt: 'Pastor Adeyinka Akinsanya (placeholder photo)', bio: bioPlaceholder },
+  { name: 'Pastor Joy Toluwade', role: 'Associate Pastor', image: 'joy-toluwade.webp', alt: 'Pastor Joy Toluwade', bio: [
+    'Pastor Joy Toluwade is an Associate Pastor at City Harvest Church International, Abeokuta, and has served since the inception of the church in 2003.',
+    'She worked in the financial sector for over 15 years before voluntarily retiring to go into ministry full-time. She has been married to Rev. Peace Toluwade for 24 years, and they have three children.',
+  ] },
+  { name: 'Pastor Adeyinka Akinsanya', role: 'Associate Pastor', image: 'adeyinka-akinsanya.webp', alt: 'Pastor Adeyinka Akinsanya (placeholder photo)', bio: [
+    'Pastor Adeyinka Akinsanya is an Associate Pastor at City Harvest Church International, Abeokuta. He is a minister of the gospel and also a businessman.',
+    'He has served as a minister in the church for several years and is also a drama minister. He was ordained into the office of Pastor in 2025.',
+  ] },
   { name: 'Pastor Adepeju Sijuwade', role: 'Associate Pastor', image: 'adepeju-sijuwade.webp', alt: 'Pastor Adepeju Sijuwade (placeholder photo)', bio: bioPlaceholder },
   { name: 'Pastor Omotola Arawomo', role: 'Associate Pastor', image: 'omotola-arawomo.webp', alt: 'Pastor Omotola Arawomo (placeholder photo)', bio: [
-    'Mr. Omotola Arawomo is a legal professional with a career of nearly two decades in both the Nigerian Judiciary and private legal practice. He is Chairman of the Judicial Research Officers of Ogun State and Vice Chairman of the Ogun State Judiciary Sports Committee, and he is a chartered Mediator with the Institute of Chartered Mediators and Conciliators (ICMC).',
+    'Pastor Omotola Arawomo is a legal professional with a career of nearly two decades in both the Nigerian Judiciary and private legal practice.',
     'He is an ordained Associate Pastor of City Harvest Church International, Abeokuta. He is married with children, and he loves reading, writing, self-development, quality relationships, healthy synergy and strategic networking.',
   ] },
 ];
