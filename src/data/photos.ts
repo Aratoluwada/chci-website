@@ -5,8 +5,8 @@
  * TODO: confirm the church has permission to publish each photo before launch.
  */
 export const musicPhoto: { image: string | null; alt: string } = {
-  image: 'music-keys.jpg',
-  alt: 'A keyboardist playing during a worship service',
+  image: 'choir.jpg',
+  alt: 'A singer leading worship on stage',
 };
 
 // Leadership page. Names and roles are NOT filled in: the owner must supply them.
@@ -17,8 +17,8 @@ export const leadershipPhoto: { image: string | null; alt: string } = {
 
 // Visit Us page.
 export const visitPhoto: { image: string | null; alt: string } = {
-  image: 'visit-congregation.jpg',
-  alt: 'Members of the congregation seated and listening during a service',
+  image: 'building.jpg',
+  alt: 'The Transformation Centre building in Abeokuta',
 };
 
 // Services & Events page: header photo and one background per regular service (Sunday first, then Wednesday).
@@ -37,4 +37,11 @@ export const servicesPhotos: { image: string | null; alt: string }[] = [
 export const visitHeaderPhoto: { image: string | null; alt: string } = {
   image: 'visit-building.jpg',
   alt: 'The church building, Transformation Center, Abeokuta',
+};
+
+// Leadership page header. `position` is where the photo is centred inside the wide header band (x% y%).
+export const leadershipHeaderPhoto: { image: string | null; alt: string; position: string } = {
+  image: 'rev3.jpg',
+  alt: 'A pastor ministering during a service',
+  position: '50% 15%',
 };

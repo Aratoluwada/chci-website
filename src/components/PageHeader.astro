@@ -1,13 +1,13 @@
 ---
 import { Image } from 'astro:assets';
-const { eyebrow, title, intro, image, alt = '' } = Astro.props;
+const { eyebrow, title, intro, image, alt = '', position = '50% 40%' } = Astro.props;
 const found = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.{jpg,jpeg,png,webp,avif}', { eager: true });
 const photo = image ? found[`../assets/photos/${image}`]?.default : undefined;
 ---
 <section class:list={['ph', photo && 'has-photo']}>
   {photo && (
     <div class="bg" aria-hidden="true">
-      <Image src={photo} alt={alt} widths={[640, 1070]} sizes="100vw" loading="eager" />
+      <Image src={photo} alt={alt} widths={[640, 1070]} sizes="100vw" loading="eager" style={`object-position:${position}`} />
     </div>
   )}
   <div class="container">
