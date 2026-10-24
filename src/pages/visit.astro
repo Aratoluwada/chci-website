@@ -8,9 +8,9 @@ const imgs = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.{j
 const img = (n?: string | null) => (n ? imgs[`../assets/photos/${n}`]?.default : undefined);
 // Photo boxes: file names live in src/assets/photos/. Captions are general, not church facts.
 const tiles = [
-  { file: 'visit-congregation.jpg', alt: 'The congregation seated and listening during a service', cap: 'Come as you are' },
-  { file: 'events-header.jpg', alt: 'Young people gathered around a worship leader', cap: 'Worship together' },
-  { file: 'services-sunday.jpg', alt: 'Worshippers standing in prayer', cap: 'Pray with us' },
+  { file: 'tola.jpg', alt: 'A member listening attentively during a service', cap: 'Come as you are' },
+  { file: 'akin.jpg', alt: 'A minister lifting a hand while speaking', cap: 'Worship together' },
+  { file: 'rev.jpg', alt: 'A pastor speaking during a service', cap: 'Pray with us' },
 ];
 const wa = site.whatsapp ? `https://wa.me/${String(site.whatsapp).replace(/\D/g, '')}` : null;
 const directions = site.mapLink ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address ?? '')}`;

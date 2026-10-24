@@ -3,12 +3,12 @@ import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { Image } from 'astro:assets';
 import { pastors } from '../data/pastors';
-import { leadershipPhoto } from '../data/photos';
+import { leadershipHeaderPhoto } from '../data/photos';
 const imgs = import.meta.glob<{ default: ImageMetadata }>('../assets/pastors/*.{jpg,jpeg,png,webp,avif}', { eager: true });
 const img = (n: string) => imgs[`../assets/pastors/${n}`]?.default;
 ---
 <Base title="Leadership" description="Meet the pastors of City Harvest Church International in Abeokuta.">
-  <PageHeader eyebrow="Our leadership" title="Meet our pastors" intro="The pastors who care for our church family." image={leadershipPhoto.image} alt={leadershipPhoto.alt} />
+  <PageHeader eyebrow="Our leadership" title="Meet our pastors" intro="The pastors who care for our church family." image={leadershipHeaderPhoto.image} alt={leadershipHeaderPhoto.alt} position={leadershipHeaderPhoto.position} />
 
   <section class="intro" aria-labelledby="intro-h">
     <div class="container intro__in">

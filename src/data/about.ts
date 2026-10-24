@@ -19,9 +19,9 @@ export const story = [
 ];
 
 export const tools = [
-  { name: 'The Word of God', ref: 'Acts 19:20; 20:32', text: 'We put emphasis on teaching God’s Word because it can transform lives, and because that is the example our Lord Jesus laid down. We believe the Word of God is the final authority in all things.', image: 'visit-congregation.jpg', alt: 'The congregation seated and listening during a service' },
-  { name: 'Worship', ref: 'Acts 16:25-26; Psalm 67:3-7', text: 'We do not take congregational singing of praise and worship for granted. We believe, and have seen, that God transforms lives and gives victory in the midst of it.', image: 'events-header.jpg', alt: 'Young people gathered around a worship leader' },
-  { name: 'Prayer', ref: 'Acts 4:20-31; 1 John 5:14', text: 'We believe in a God who answers prayer. We pray in tongues and with understanding, in our closets and in the congregation, for the government and for the saints.', image: 'services-wednesday.jpg', alt: 'A minister praying into a microphone' },
+  { name: 'The Word of God', ref: 'Acts 19:20; 20:32', text: 'We put emphasis on teaching God’s Word because it can transform lives, and because that is the example our Lord Jesus laid down. We believe the Word of God is the final authority in all things.', image: 'joy.jpg', alt: 'A pastor teaching from the podium' },
+  { name: 'Worship', ref: 'Acts 16:25-26; Psalm 67:3-7', text: 'We do not take congregational singing of praise and worship for granted. We believe, and have seen, that God transforms lives and gives victory in the midst of it.', image: 'img.jpg', alt: 'A minister with a hand raised in worship' },
+  { name: 'Prayer', ref: 'Acts 4:20-31; 1 John 5:14', text: 'We believe in a God who answers prayer. We pray in tongues and with understanding, in our closets and in the congregation, for the government and for the saints.', image: 'rev4.jpg', alt: 'A pastor standing on the platform during a service' },
 ];
 
 export const leadership =
@@ -61,11 +61,11 @@ export const sow = [
 // PHOTOS: each value has its own background photo. To change one, put the picture in `src/assets/photos/`
 // and set its file name in `image` below. These are stand-ins taken from the photo library.
 export const flavour = [
-  { letter: 'F', word: 'Faith', image: 'services-sunday.jpg', alt: 'Worshippers standing in prayer' },
-  { letter: 'L', word: 'Love', image: 'visit-congregation.jpg', alt: 'The congregation seated during a service' },
+  { letter: 'F', word: 'Faith', image: 'joy1.jpg', alt: 'A pastor speaking at the podium' },
+  { letter: 'L', word: 'Love', image: 'tola.jpg', alt: 'A member listening attentively' },
   { letter: 'A', word: 'Abilities', image: 'music-keys.jpg', alt: 'A keyboardist playing during worship' },
   { letter: 'V', word: 'Virtue', image: 'leadership-five.jpg', alt: 'Five church members standing together' },
-  { letter: 'O', word: 'Optimism', image: 'events-header.jpg', alt: 'Young people gathered around a worship leader' },
-  { letter: 'U', word: 'Unity', image: 'services-sunday.jpg', alt: 'Worshippers standing in prayer' },
-  { letter: 'R', word: 'Righteousness', image: 'services-wednesday.jpg', alt: 'A minister praying into a microphone' },
+  { letter: 'O', word: 'Optimism', image: 'choir.jpg', alt: 'A singer leading worship on stage' },
+  { letter: 'U', word: 'Unity', image: 'akin.jpg', alt: 'A minister lifting a hand while speaking' },
+  { letter: 'R', word: 'Righteousness', image: 'rev3.jpg', alt: 'A pastor ministering during a service' },
 ];
