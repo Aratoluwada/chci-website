@@ -43,5 +43,5 @@ export const visitHeaderPhoto: { image: string | null; alt: string } = {
 export const leadershipHeaderPhoto: { image: string | null; alt: string; position: string } = {
   image: 'rev3.jpg',
   alt: 'A pastor ministering during a service',
-  position: '50% 15%',
+  position: '50% 23%',
 };
