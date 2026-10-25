@@ -18,6 +18,8 @@ export const site = {
   // Confirmed by the owner (Oct 2026)
   // Google Maps: the church's own link (opens the app or site) and the embedded map for the Visit Us page.
   mapLink: 'https://maps.app.goo.gl/xjAxmCw4TM96L3Li8',
+  // Street View embed from Google Maps (Share > Embed a map > Street View).
+  streetViewEmbed: 'https://www.google.com/maps/embed?pb=!4v1792933613186!6m8!1m7!1sF4SudchH-2GzQxITFK40kw!2m2!1d7.173406357980367!2d3.401417903861507!3f41.65026376596515!4f1.0700921954994556!5f0.7820865974627469' as string | null,
   mapEmbed: 'https://www.google.com/maps?q=7.173406,3.401418&z=18&output=embed',
   // Contact form: paste the form link from a form service such as Formspree (https://formspree.io), which sends each
   // message to the church's inbox. Leave null until then: the form shows but tells visitors it cannot send yet.
