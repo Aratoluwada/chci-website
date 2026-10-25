@@ -18,7 +18,7 @@ export const site = {
   // Confirmed by the owner (Oct 2026)
   // Google Maps: the church's own link (opens the app or site) and the embedded map for the Visit Us page.
   mapLink: 'https://maps.app.goo.gl/xjAxmCw4TM96L3Li8',
-  mapEmbed: 'https://www.google.com/maps?q=City+Harvest+Church+International,+Transformation+Centre,+Shomorin+Street,+Abeokuta,+Ogun+State&output=embed',
+  mapEmbed: 'https://www.google.com/maps?q=7.173406,3.401418&z=18&output=embed',
   // Contact form: paste the form link from a form service such as Formspree (https://formspree.io), which sends each
   // message to the church's inbox. Leave null until then: the form shows but tells visitors it cannot send yet.
   contactFormUrl: null as string | null,
