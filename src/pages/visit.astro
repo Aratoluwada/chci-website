@@ -31,6 +31,7 @@ const directions = site.mapLink ?? `https://www.google.com/maps/search/?api=1&qu
               <button type="button" class="view is-on" data-t="m" aria-pressed="true">Map</button>
               <button type="button" class="view" data-t="k" aria-pressed="false">Satellite</button>
               <button type="button" class="view" data-t="p" aria-pressed="false">Terrain</button>
+              {site.streetViewEmbed && <button type="button" class="view" data-t="s" aria-pressed="false">Street view</button>}
             </div>
           )}
         </div>
@@ -38,7 +39,7 @@ const directions = site.mapLink ?? `https://www.google.com/maps/search/?api=1&qu
       {site.mapEmbed && (
         <div class="container mapwrap" data-reveal style="--d:2">
         <div class="map">
-          <iframe id="map-frame" title={`Map showing ${site.venue ?? 'the church'}`} src={site.mapEmbed} data-base={site.mapEmbed} loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          <iframe id="map-frame" title={`Map showing ${site.venue ?? 'the church'}`} src={site.mapEmbed} data-base={site.mapEmbed} data-street={site.streetViewEmbed ?? undefined} loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
         </div>
         </div>
       )}
@@ -105,9 +106,13 @@ const directions = site.mapLink ?? `https://www.google.com/maps/search/?api=1&qu
   const views = document.querySelectorAll<HTMLButtonElement>('.view');
   views.forEach((v) => v.addEventListener('click', () => {
     if (!frame) return;
-    const u = new URL(frame.dataset.base!);
-    u.searchParams.set('t', v.dataset.t!);
-    frame.src = u.toString();
+    if (v.dataset.t === 's' && frame.dataset.street) {
+      frame.src = frame.dataset.street;
+    } else {
+      const u = new URL(frame.dataset.base!);
+      u.searchParams.set('t', v.dataset.t!);
+      frame.src = u.toString();
+    }
     views.forEach((o) => { const on = o === v; o.classList.toggle('is-on', on); o.setAttribute('aria-pressed', String(on)); });
   }));
 </script>
