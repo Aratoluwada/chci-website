@@ -154,6 +154,14 @@ const directions = site.mapLink ?? `https://www.google.com/maps/search/?api=1&qu
   .view { font: inherit; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 16px; background: var(--color-white); color: var(--color-primary); border: 0; cursor: pointer; }
   .view + .view { border-left: 2px solid var(--color-primary-bright); }
   .view.is-on { background: var(--color-primary-bright); color: var(--color-white); }
+  @media (max-width: 599px) {
+    .where__actions > .btn { width: 100%; justify-content: center; }
+    .views { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+    .view { padding: 14px 8px; text-align: center; }
+    .view:nth-child(n + 3) { border-top: 2px solid var(--color-primary-bright); }
+    .view:nth-child(odd) { border-left: 0; }
+    .view:nth-child(even) { border-left: 2px solid var(--color-primary-bright); }
+  }
   .view:focus-visible { outline: 3px solid var(--color-accent-orange); outline-offset: -3px; }
   .w-title { font-size: clamp(2rem, 7vw, 3.4rem); }
   .addr { font-style: normal; font-size: 1.25rem; font-weight: 600; max-width: 30ch; line-height: 1.4; }
