@@ -29,7 +29,7 @@ export const pastors: Pastor[] = [
   ] },
   { name: 'Pastor Adepeju Sijuwade', role: 'Associate Pastor', image: 'adepeju-sijuwade.webp', alt: 'Pastor Adepeju Sijuwade (placeholder photo)', bio: [
     'Pastor Adepeju Sijuwade is an Associate Pastor at City Harvest Church International, Abeokuta. She is a worship leader, music director, songwriter, instrumentalist and trainer who has coached and discipled many people over the years.',
-    'She believes worship is a lifestyle, and she is passionate about leading others into it. She is a graduate of Rhema Bible School, convener of the yearly worship encounter “The Stirring of the Waters”, and she conducts trainings, seminars and retreats for choir and worker groups.',
+    'She believes worship is a lifestyle, and she is passionate about leading others into it. She is the convener of the yearly worship encounter “The Stirring of the Waters”, and she conducts trainings, seminars and retreats for choir and worker groups.',
   ] },
   { name: 'Pastor Omotola Arawomo', role: 'Associate Pastor', image: 'omotola-arawomo.webp', alt: 'Pastor Omotola Arawomo (placeholder photo)', bio: [
     'Pastor Omotola Arawomo is a legal professional with a career of nearly two decades in both the Nigerian Judiciary and private legal practice.',
